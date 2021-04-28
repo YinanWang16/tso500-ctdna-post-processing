@@ -32,7 +32,7 @@ fi
 
 # get options
 while getopts ":d:hv" opt; do
-	case ${opt} in 
+	case ${opt} in
 		h) HELP
 		;;
 		v) echo $VERSION
@@ -119,7 +119,7 @@ for sample in ${SAMPLES[@]}; do
         	PCT250 = $6/LEN*100;
 	        split($4, a, "_");
         	gsub(/[[:alpha:]]/, "", a[2]);
-	        if (PCT100 < 50 && a[3] ~ /^NM/) 
+	        if (PCT100 < 50 && a[3] ~ /^NM/)
         		{printf "%d\t%s\t%s\t%d\t%.1f\t%.1f\n", FNR-1, a[1], a[3], a[2], PCT100, PCT250}
 	    }' >> $output
 #=cut
@@ -162,7 +162,7 @@ for sample in ${SAMPLES[@]}; do
 	tmb_json=$TSO500_OUTDIR/Logs_Intermediates/Tmb/${sample}/${sample}.tmb.json
 	bak_tmb_json=$TSO500_OUTDIR/Results/${sample}/${sample}.tmb.json
 	cp $tmb_json $bak_tmb_json
-	
+
 	msi_json=$TSO500_OUTDIR/Logs_Intermediates/Msi/${sample}/${sample}.msi.json
 	bak_msi_json=$TSO500_OUTDIR/Results/${sample}/${sample}.msi.json
 	cp $msi_json $bak_msi_json
