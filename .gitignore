@@ -2,3 +2,10 @@ example_data/
 
 # deprecated scripts
 backup/
+
+# job yaml file
+cwl/tools/*.yml
+cwl/test_data/
+
+# backup cwl scripts
+cwl/tools/bak/
