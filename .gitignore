@@ -5,6 +5,8 @@ backup/
 
 # job yaml file
 cwl/tools/*.yml
+cwl/tools/*.txt
+cwl/tools/*.bed
 cwl/test_data/
 
 # backup cwl scripts
