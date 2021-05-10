@@ -9,7 +9,7 @@
 ## =============== Settings =============== ##
 DOCKER_IMG_LIFTOVER=yinanwang16/tso500-liftover:1.0.3
 DOCKER_IMG_MOSDEPTH=quay.io/biocontainers/mosdepth:0.3.1--ha7ba039_0
-DOCKER_IMG_HTSLIB=miguelpmachado/htslib:1.9
+DOCKER_IMG_TABIX=quay.io/biocontainers/tabix:1.11--hdfd78af_0
 CHAIN_RESOURCES=/staging/yinan/chain_resources/hg19_to_hg38
 TSO500_MANIFEST_BED=/staging/illumina/DRAGEN_TSO500_ctDNA/resources/TST500C_manifest.bed
 ## ======================================== ##
@@ -32,7 +32,7 @@ fi
 
 # get options
 while getopts ":d:hv" opt; do
-	case ${opt} in
+	case ${opt} in 
 		h) HELP
 		;;
 		v) echo $VERSION
@@ -74,7 +74,7 @@ eval $CMD
 for sample in ${SAMPLES[@]}; do
 	docker run --rm -u $UID \
 		--mount type=bind,source=$LIFTOVER_OUTDIR/${sample}_liftover,target=/mount/Results/sample \
-		miguelpmachado/htslib:1.9 \
+		$DOCKER_IMG_TABIX \
 		bash -c 'cd /mount/Results/sample; for vcf in `find ./ -name "*vcf"`; do bgzip $vcf ; tabix -f ${vcf}.gz; done'
 done
 #=cut
@@ -119,7 +119,7 @@ for sample in ${SAMPLES[@]}; do
         	PCT250 = $6/LEN*100;
 	        split($4, a, "_");
         	gsub(/[[:alpha:]]/, "", a[2]);
-	        if (PCT100 < 50 && a[3] ~ /^NM/)
+	        if (PCT100 < 50 && a[3] ~ /^NM/) 
         		{printf "%d\t%s\t%s\t%d\t%.1f\t%.1f\n", FNR-1, a[1], a[3], a[2], PCT100, PCT250}
 	    }' >> $output
 #=cut
@@ -127,8 +127,6 @@ done
 ## ------------- 3. backup intermediate file to Resules ---------------- ##
 ## step 0. back up run.log to Results
 cp $TSO500_OUTDIR/run.log $TSO500_OUTDIR/Results/run.log
-# make Tmb and Msi folder in Results
-mkdir -p $TSO500_OUTDIR/Results/Tmb $TSO500_OUTDIR/Results/Msi
 # back up each sample
 for sample in ${SAMPLES[@]}; do
 	echo "@`$NOW`	backup intermediate file of $sample" | tee -a $log_file
@@ -155,17 +153,21 @@ for sample in ${SAMPLES[@]}; do
 ## step 4. bgzip and tabix VCF files
 	docker run --rm -u $UID \
 		--mount type=bind,source=$TSO500_OUTDIR/Results/${sample},target=/mount/Results/sample \
-		miguelpmachado/htslib:1.9 \
+		$DOCKER_IMG_TABIX \
 		bash -c 'cd /mount/Results/sample; for vcf in `find ./ -name "*vcf"`; do bgzip -c $vcf >${vcf}.gz; tabix -f ${vcf}.gz; done; rm '${sample}'_MergedSmallVariants.genome.vcf'
 
 ## step 4. back up TMB and MSI json to Results
 	tmb_json=$TSO500_OUTDIR/Logs_Intermediates/Tmb/${sample}/${sample}.tmb.json
 	bak_tmb_json=$TSO500_OUTDIR/Results/${sample}/${sample}.tmb.json
 	cp $tmb_json $bak_tmb_json
-
+	
 	msi_json=$TSO500_OUTDIR/Logs_Intermediates/Msi/${sample}/${sample}.msi.json
 	bak_msi_json=$TSO500_OUTDIR/Results/${sample}/${sample}.msi.json
 	cp $msi_json $bak_msi_json
+## step 5. back up SampleAnalysisResults.json to Results
+        analysis_results_json=$TSO500_OUTDIR/Logs_Intermediates/SampleAnalysisResults/${sample}_SampleAnalysisResults.json
+        bak_analysis_results_json=$TSO500_OUTDIR/Results/${sample}/${sample}_SampleAnalysisResults.json
+        cp $analysis_results_json $bak_analysis_results_json
 done
 ## ----------------- 4. generate conbined DRAGEN QC metrics ---------------------- ##
 COMBINE=/staging/yinan/script/combine_AlignCollapseFusionCaller_metrics.sh
