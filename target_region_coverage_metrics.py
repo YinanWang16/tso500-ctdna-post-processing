@@ -11,6 +11,7 @@ import os.path
 
 def usage():
 	print(sys.argv[0] + ' -i <input_file> -o <output_file>')
+	sys.exit(2)
 
 def main():
 	inputfile = ''
@@ -21,11 +22,9 @@ def main():
 	except getopt.GetoptError as err:
 		print(err)
 		usage()
-		sys.exit(2)
 	for opt, arg in opts:
 		if opt in ('-h', '--help'):
 			usage()
-			sys.exit(2)
 		elif opt in ('-i', '--input'):
 			inputfile = arg
 		elif opt in ('-o', '--output'):
@@ -40,12 +39,10 @@ def main():
 	elif not os.path.isfile(inputfile):
 		print(inputfile + ' not exist')
 		sys.exit(2)
-	# bed_file = '/staging/201221_A01052_0029_BHVTTNDMXX_DRAGEN_TSO500_ctDNA/Results_coverage_QC/PRJ200625_L2001084.thresholds.bed.gz'
 
 	# open threshold.bed.gz file and load to data frame
 	with gzip.open(inputfile) as i:
 		data = pd.read_csv(i, sep='\t', header=0)
-	#pd. DataFrame.head(data)
 
 	# Calculate total length of targeted region
 	length_sum = pd.DataFrame.sum(data['end'] - data['start'])
@@ -60,6 +57,3 @@ def main():
 
 if __name__ == "__main__":
    main()
-
-
-
