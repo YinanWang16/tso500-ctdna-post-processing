@@ -100,7 +100,7 @@ def main():
         sample_dic = make_metrics_json(MY_TSO500_OUTPUT_FOLDER, sample)
         output_json = OUTPUT_DIR + '/' + sample + '/' + sample + '.AlignCollapseFusionCaller_metrics.json'
         with open(output_json, 'w') as json_file:
-            json_file.writelines(json.dumps(sample_dic))
+            json.dumps(sample_dic, json_file)
 
 if __name__ == "__main__":
    main()
