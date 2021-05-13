@@ -52,12 +52,11 @@ fi
 
 ## ============= Executionn =============== ##
 log_file=$TSO500_OUTDIR/Results/post_process.log
-touch $log_file
+# touch $log_file
 NOW="date --iso-8601=seconds"
 # get sample list
 SAMPLES=(`jq -r '.samples[].identifier' $TSO500_OUTDIR/Results/dsdm.json`)
 EXECUTION_DIR=$(dirname $0)
-#: <<'=cut'
 ## ---------- 1. Liftover -------------- ##
 LIFTOVER_OUTDIR=$TSO500_OUTDIR/Results_VCF_hg38
 if [ ! -f $LIFTOVER_OUTDIR ]; then
@@ -77,7 +76,6 @@ for sample in ${SAMPLES[@]}; do
 		$DOCKER_IMG_TABIX \
 		bash -c 'cd /mount/Results/sample; for vcf in `find ./ -name "*vcf"`; do bgzip $vcf ; tabix -f ${vcf}.gz; done'
 done
-#=cut
 ## ---------- 2. Generate coverage QC file -------- ##
 COVERAGE_OUTDIR=$TSO500_OUTDIR/Results_coverage_QC_intermediates
 if [ ! -f $COVERAGE_OUTDIR ]; then
@@ -86,7 +84,6 @@ fi
 
 # step 1. make coverage file using mosdepth
 for sample in ${SAMPLES[@]}; do
-#: <<'=cut'
 	bam=$TSO500_OUTDIR/Logs_Intermediates/AlignCollapseFusionCaller/${sample}/${sample}.bam	# raw alignment is used here
 	CMD="docker run --rm -u $UID \
         --mount type=bind,source=$bam,target=/mount/bam/${sample}.bam \
@@ -98,14 +95,12 @@ for sample in ${SAMPLES[@]}; do
         echo "@`$NOW`	$CMD" | tee -a $log_file
         eval $CMD
 	cat $COVERAGE_OUTDIR/mosdepth.log >>$log_file
-#=cut
+
 	# make the target region coverage metrics
-	bed=$COVERAGE_OUTDIR/${sample}.thresholds.bed.gz
 	tsv=$TSO500_OUTDIR/Results/${sample}/${sample}_TargetRegionCoverage.metrics.tsv
-	CMD="EXECUTION_DIR/target_region_coverage_metrics.py -i $bed -o $tsv"
+	CMD="$EXECUTION_DIR/target_region_coverage_metrics.py -i $bed -o $tsv"
 	echo "@`$NOW`	$CMD" | tee -a $log_file
 	eval $CMD
-#: <<'=cut'
 # step 2. process mosdepth output threshold.bed.gz to generate Failed_Exon_coverage_QC.txt
 	output=$TSO500_OUTDIR/Results/${sample}/${sample}_Failed_Exon_coverage_QC.txt
 	# print header to the coverage QC file
@@ -120,10 +115,10 @@ for sample in ${SAMPLES[@]}; do
 	        split($4, a, "_");
         	gsub(/[[:alpha:]]/, "", a[2]);
 	        if (PCT100 < 50 && a[3] ~ /^NM/) 
-        		{printf "%d\t%s\t%s\t%d\t%.1f\t%.1f\n", FNR-1, a[1], a[3], a[2], PCT100, PCT250}
+        		{printf "%s\t%s\t%s\t%d\t%.1f\t%.1f\n", $4, a[1], a[3], a[2], PCT100, PCT250}
 	    }' >> $output
-#=cut
 done
+# : <<'=cut'
 ## ------------- 3. backup intermediate file to Resules ---------------- ##
 ## step 0. back up run.log to Results
 cp $TSO500_OUTDIR/run.log $TSO500_OUTDIR/Results/run.log
@@ -180,3 +175,4 @@ echo "@`$NOW`  Splitting MetricsOutput.tsv" | tee -a $log_file
 eval $CMD
 echo "@`$NOW`	Finished" | tee -a $log_file
 ## ======================= END of Execution ============================ ##
+=cut

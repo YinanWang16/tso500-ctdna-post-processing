@@ -9,8 +9,8 @@ import re
 import sys
 
 def usage():
-    print(sys.argv[0] + ' <Full_Path_to/TSO500_Output_Folder')
-    sys.exist(2)
+    print(sys.argv[0] + ' <Full_Path/TSO500_Output_Folder>')
+    sys.exit(2)
 
 def get_sample_list(TSO500_OUTPUT_FOLDER):
     dsdm_json = TSO500_OUTPUT_FOLDER + "/Results/dsdm.json"
@@ -98,8 +98,8 @@ def main():
     OUTPUT_DIR = MY_TSO500_OUTPUT_FOLDER + '/Results'
     for sample in SAMPLES:
         sample_dic = make_metrics_json(MY_TSO500_OUTPUT_FOLDER, sample)
-        output_json = OUTPUT_DIR + '/' + sample + '/' + sample + '.AlignCollapseFusionCaller_metrics.json'
+        output_json = OUTPUT_DIR + '/' + sample + '/' + sample + '_AlignCollapseFusionCaller_metrics.json'
         with open(output_json, 'w') as json_file:
-            json.dumps(sample_dic, json_file)
+            json.dump(sample_dic, json_file)
 
 main()
