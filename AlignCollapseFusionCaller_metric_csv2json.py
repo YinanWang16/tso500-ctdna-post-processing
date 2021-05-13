@@ -6,7 +6,7 @@ import pandas as pd
 import json
 import csv
 import re
-import sys, getopt
+import sys
 
 def usage():
     print(sys.argv[0] + ' <Full_Path_to/TSO500_Output_Folder')
@@ -89,11 +89,11 @@ def make_metrics_json(TSO500_OUTPUT_FOLDER, sample_id):
 
 def main():
     MY_TSO500_OUTPUT_FOLDER = ''
-    try:
-        MY_TSO500_OUTPUT_FOLDER = sys.argv[1]
-    except getopt.GetoptError as err:
-        print(err)
+    if len(sys.argv) == 1:
         usage()
+    else:
+        MY_TSO500_OUTPUT_FOLDER = sys.argv[1]
+
     SAMPLES = get_sample_list(MY_TSO500_OUTPUT_FOLDER)
     OUTPUT_DIR = MY_TSO500_OUTPUT_FOLDER + '/Results'
     for sample in SAMPLES:
@@ -102,5 +102,4 @@ def main():
         with open(output_json, 'w') as json_file:
             json.dumps(sample_dic, json_file)
 
-if __name__ == "__main__":
-   main()
+main()
