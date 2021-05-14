@@ -12,11 +12,11 @@ def usage():
     sys.exit(2)
 
 def tsv2json(tsv_file, skip_rows):
-    df = pd.read_csv(tsv_file, sep='\t', header=0, comment='#', skiprows = skip_rows)
+    df = pd.read_csv(tsv_file, sep='\t', header=0, comment='#', skiprows=skip_rows)
     variants = []
     for i in range(len(df)):
         variants.append(dict(df.iloc[i,]))
-    return(variants)
+    return variants
 
 def convert(o):
     if isinstance(o, np.generic): return o.item()
