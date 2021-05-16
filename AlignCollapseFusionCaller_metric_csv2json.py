@@ -32,14 +32,16 @@ def string_or_list(value):
 
 def append_row_to_metrics_data(row, metrics_data):
     if len(row) == 5:
-        metrics_data.append({'name': row[2],
-                            'value': string_or_list(row[3]),
-                            'percent': float(row[4]),
-                            })
+        metrics_data.append({
+            'name': row[2],
+            'value': string_or_list(row[3]),
+            'percent': float(row[4]),
+        })
     else:
-        metrics_data.append({'name': row[2],
-                            'value': string_or_list(row[3]),
-                            })
+        metrics_data.append({
+            'name': row[2],
+            'value': string_or_list(row[3]),
+        })
     return(metrics_data)
 
 def make_metrics_dic(file):
@@ -74,13 +76,14 @@ def make_metrics_json(TSO500_OUTPUT_FOLDER, sample_id):
     wgs_coverage_metrics = prefix + '.wgs_coverage_metrics.csv'
     sv_metrics = prefix + '.sv_metrics.csv'
     time_metrics = prefix + '.time_metrics.csv'
-    metrics_csv_list = [trimmer_metrics,
-                        mapping_metrics,
-                        umi_metrics,
-                        wgs_coverage_metrics,
-                        sv_metrics,
-                        time_metrics,
-                        ]
+    metrics_csv_list = [
+        trimmer_metrics,
+        mapping_metrics,
+        umi_metrics,
+        wgs_coverage_metrics,
+        sv_metrics,
+        time_metrics,
+    ]
     # make the metrics dictonary.
     metrics_dic = {}
     for csv_file in metrics_csv_list:
