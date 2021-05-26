@@ -4,7 +4,7 @@ example_data/
 backup/
 
 # job yaml file
-cwl/tools/*.yml
+cwl/tools/*.yaml
 cwl/tools/*.txt
 cwl/tools/*.bed
 cwl/test_data/
