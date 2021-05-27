@@ -55,7 +55,7 @@ requirements:
           def main():
               args = get_args()
               tsv_file = args.input
-              json_file = os.rmdir(tsv_file.rsplit('.', 1)[0] + '.json')
+              json_file = os.path.basename(tsv_file.rsplit('.', 1)[0] + '.json')
               variant_df = tsv2json(tsv_file, args.skip_rows)
               with open(json_file, 'w') as jf:
                   json.dump(variant_df, jf, default=convert)

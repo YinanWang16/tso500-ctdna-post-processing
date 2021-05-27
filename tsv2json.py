@@ -5,7 +5,7 @@
 import pandas as pd
 import numpy as np
 import json
-import sys, getopt
+import os
 import logging
 import argparse
 
