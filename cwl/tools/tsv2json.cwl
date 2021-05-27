@@ -21,6 +21,7 @@ requirements:
           import json
           import sys, getopt
           import logging
+          import argparse
 
           # Set logging level
           logging.basicConfig(level=logging.DUBUG)
