@@ -19,12 +19,12 @@ requirements:
           import pandas as pd
           import numpy as np
           import json
-          import sys, getopt
+          import os
           import logging
           import argparse
 
           # Set logging level
-          logging.basicConfig(level=logging.DUBUG)
+          logging.basicConfig(level=logging.DEBUG)
 
           # Get arguments
           def get_args():
@@ -55,7 +55,7 @@ requirements:
           def main():
               args = get_args()
               tsv_file = args.input
-              json_file = tsv_file.rsplit('.', 1)[0] + '.json'
+              json_file = os.rmdir(tsv_file.rsplit('.', 1)[0] + '.json')
               variant_df = tsv2json(tsv_file, args.skip_rows)
               with open(json_file, 'w') as jf:
                   json.dump(variant_df, jf, default=convert)
