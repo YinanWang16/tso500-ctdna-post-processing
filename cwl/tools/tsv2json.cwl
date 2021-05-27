@@ -71,7 +71,7 @@ inputs:
       prefix: "--input"
       position: 0
   skiprows:
-    type: int
+    type: int?
     inputBinding:
       prefix: "--skiprows"
       position: 1
