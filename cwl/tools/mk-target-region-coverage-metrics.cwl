@@ -42,19 +42,20 @@ requirements:
               # add arguments
               parser.add_argument('-i', '--input-bed', required=True,
                                   help='Mosdepth output file "threshold.bed", ungzipped')
+              return parser.parse_args()
 
           def main():
               """ Calculate consensus reads coverage metrics """
               args = get_args()
-              threshold_bed = args.input_bed
-              sample_id = path.basname(threshold_bed).split('.')[0]
+              thresholds_bed = args.input_bed
+              sample_id = path.basename(thresholds_bed).split('.')[0]
               output_csv = sample_id + '_TargetRegionCoverage.csv'
 
               # open threshold.bed file and load to dataframe
-              with open(threshold_bed, 'rt') as i:
+              with open(thresholds_bed, 'rt') as i:
                   data = pd.read_csv(i, sep='\t', header=0)
               # calculate total legnth of targeted region
-              lenth_sum = pd.DataFrame.sum(data['end'] = data['start'])
+              length_sum = pd.DataFrame.sum(data['end'] - data['start'])
               # write results to file
               with open(output_csv, 'w') as o:
                   o.write('ConsensusReadDepth\tBasePair\tPercentage\n')

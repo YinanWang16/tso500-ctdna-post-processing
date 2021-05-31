@@ -1,59 +1,39 @@
-#!/staging/yinan/bin/python3.9
+#!/usr/bin/env python3
 # This script is to make coverage metrics from mosdepth output {sample}.thresholds.bed.gz
 # Author: Yinan Wang (ywang16@illumina.com)
 # Date: Tue Feb  9 13:05:21 AEDT 2021
 
 import pandas as pd
-import gzip
-import csv
-import sys, getopt
-import os.path
+from os import path
+import argparse
 
-def usage():
-	print(sys.argv[0] + ' -i <input_file> -o <output_file>')
-	sys.exit(2)
+def get_args():
+    """ Get arguments for the command """
+    parser = argparse.ArgumentParser(description='From mosdepth threshold.bed to make target_region_coverage_metrics.csv')
+
+    # add arguments
+    parser.add_argument('-i', '--input-bed', required=True,
+                        help='Mosdepth output file "threshold.bed", ungzipped')
+    return parser.parse_args()
 
 def main():
-	inputfile = ''
-	outputfile = ''
-	mean_family_size = ''
-	try:
-		opts, args = getopt.getopt(sys.argv[1:], "hi:o:", ["help", "input=","output="])
-	except getopt.GetoptError as err:
-		print(err)
-		usage()
-	for opt, arg in opts:
-		if opt in ('-h', '--help'):
-			usage()
-		elif opt in ('-i', '--input'):
-			inputfile = arg
-		elif opt in ('-o', '--output'):
-			outputfile = arg
-		else:
-			assert False, usage()
-			# sys.exit(2)
-	# input file doesn't exist
-	if not inputfile:
-		usage()
-		sys.exit(2)
-	elif not os.path.isfile(inputfile):
-		print(inputfile + ' not exist')
-		sys.exit(2)
+    """ Calculate consensus reads coverage metrics """
+    args = get_args()
+    thresholds_bed = args.input_bed
+    sample_id = path.basename(thresholds_bed).split('.')[0]
+    output_csv = sample_id + '_TargetRegionCoverage.csv'
 
-	# open threshold.bed.gz file and load to data frame
-	with gzip.open(inputfile) as i:
-		data = pd.read_csv(i, sep='\t', header=0)
-
-	# Calculate total length of targeted region
-	length_sum = pd.DataFrame.sum(data['end'] - data['start'])
-
-	with open(outputfile, 'w') as o:
-		o.write('ConsensusReadDepth\tBasePair\tPercentage\n')
-		o.write('TargetRegion\t' + str(length_sum) + '\t100%\n')
-		for col in data.columns[4:]:
-			threshold_pass_nt = pd.DataFrame.sum(data[col])
-			percentage = format(threshold_pass_nt * 100 / length_sum, '.2f')
-			o.write(col + '\t' + str(threshold_pass_nt) + '\t' +  str(percentage) + '%' + '\n')
-
-if __name__ == "__main__":
-   main()
+    # open threshold.bed file and load to dataframe
+    with open(thresholds_bed, 'rt') as i:
+        data = pd.read_csv(i, sep='\t', header=0)
+    # calculate total legnth of targeted region
+    length_sum = pd.DataFrame.sum(data['end'] - data['start'])
+    # write results to file
+    with open(output_csv, 'w') as o:
+        o.write('ConsensusReadDepth\tBasePair\tPercentage\n')
+        o.write('TargetRegion\t' + str(length_sum) + '\t100%\n')
+        for col in data.columns[4:]:
+            threshold_pass_nt = pd.DataFrame.sum(data[col])
+            percentage = format(threshold_pass_nt * 100 / length_sum, '.2f')
+            o.write(col + '\t' + str(threshold_pass_nt) + '\t' +  str(percentage) + '%' + '\n')
+main()
