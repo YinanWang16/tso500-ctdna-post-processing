@@ -78,7 +78,7 @@ inputs:
     inputBinding:
       prefix: -i
       position: 0
-  prefix:
+  sample_id:
     type: string
     inputBinding:
       prefix: -p

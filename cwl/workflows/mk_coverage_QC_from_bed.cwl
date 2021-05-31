@@ -94,5 +94,5 @@ steps:
     run: ../tools/mk-target-region-coverage-metrics.cwl
     in:
       thresholds_bed: gunzip/unzipped_file
-      prefix: sample
+      sample_id: sample
     out: [target_region_coverage_metrics]
