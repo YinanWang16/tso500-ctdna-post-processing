@@ -9,7 +9,7 @@ inputs:
     type: string
     inputBinding:
       position: 0
-stdout: header.txt
+stdout: output.txt
 outputs:
   output_file:
     type: stdout

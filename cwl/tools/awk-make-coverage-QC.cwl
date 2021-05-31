@@ -25,8 +25,7 @@ inputs:
   sample_id:
     type: string
 stdout:
-  $(inputs.sample_id)_Failed_Exon_coverage_QC.txt
+  $(inputs.sample_id).coverage_QC
 outputs:
   coverage_QC:
     type: stdout
-   
