@@ -1,0 +1,4 @@
+threshold_bed_gz:
+  class: File
+  path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/MDX200144_L2100176_rerun.thresholds.bed.gz
+sample: MDX200144_L2100176_rerun

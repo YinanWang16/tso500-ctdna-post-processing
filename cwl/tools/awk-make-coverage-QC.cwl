@@ -14,7 +14,7 @@ baseCommand:
                 split($4, a, "_");
                 gsub(/[[:alpha:]]/, "", a[2]);
                 if (PCT100 < 50 && a[3] ~ /^NM/) {
-                    printf "%d\t%s\t%s\t%d\t%.1f\t%.1f\n", FNR-1, a[1], a[3], a[2], PCT100, PCT250
+                    printf "%s\t%s\t%s\t%d\t%.1f\t%.1f\n", $4, a[1], a[3], a[2], PCT100, PCT250
                 }
             }'
 inputs:

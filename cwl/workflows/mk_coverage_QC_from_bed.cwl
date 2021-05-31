@@ -1,6 +1,10 @@
 #!/usr/bin/env cwl-runner
-cwlVonersion: v1.0
-class: workflow
+cwlVersion: v1.0
+class: Workflow
+
+# Extensions
+$namespaces:
+    s: https://schema.org/
 
 # Metadata
 s:author:
@@ -42,15 +46,14 @@ steps:
           listing:
             - entryname: header.sh
               entry: |
-                echo -e "Level 2: 100x coverage for > 50% of positions was not achieved for the targeted exon regions listed below:\n"
-                echo -e "index\tgene\ttranscript_acc\texon_id\tGE100\tGE250\n"
+                echo -e "Level 2: 100x coverage for > 50% of positions was not achieved for the targeted exon regions listed below:"
+                echo -e "index\tgene\ttranscript_acc\texon_id\tGE100\tGE250"
       inputs: []
-      baseCommand: [bs,  -c]
+      baseCommand: [bash, header.sh]
       stdout: header.txt
       outputs:
         header_file:
-          type: File
-          outputBinding: stdout
+          type: stdout
 
   gunzip:
     run: ../tools/gunzip.cwl
@@ -63,12 +66,12 @@ steps:
     in:
       thresholds_bed: gunzip/unzipped_file
       sample_id: sample
-    out: [coverage]
+    out: [coverage_QC]
 
   cat:
     in:
       header_txt: echo/header_file
-      coverage_QC_data: coverage_QC/coverage
+      coverage_QC_data: coverage_QC/coverage_QC
     out: [coverage_QC_txt]
     run:
       class: CommandLineTool
@@ -76,10 +79,12 @@ steps:
       inputs:
         header_txt:
           type: File
-          inputBinding: 0
+          inputBinding: 
+            position: 0
         coverage_QC_data:
           type: File
-          inputBinding: 1
+          inputBinding: 
+            position: 1
       stdout: $(inputs.coverage_QC_data.nameroot)_Failed_Exon_coverage_QC.txt
       outputs:
           coverage_QC_txt:
