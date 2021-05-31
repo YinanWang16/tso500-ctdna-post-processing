@@ -87,4 +87,4 @@ outputs:
   target_region_coverage_metrics:
     type: File
     outputBinding:
-      glob: "$(inputs.prefix)_TargetRegionCoverage.tsv" 
+      glob: "$(inputs.sample_id)_TargetRegionCoverage.tsv" 
