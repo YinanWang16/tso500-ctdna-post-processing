@@ -4,7 +4,7 @@ class: Workflow
 
 # Extensions
 $namespaces:
-    s: https://schema.org/
+  s: https://schema.org/
 
 # Metadata
 s:author:
@@ -31,9 +31,9 @@ outputs:
   exon_coverage_qc:
     type: File
     outputSource: cat/coverage_QC_txt
-  # target_region_coverage_metrics:
-  #   type: File
-  #   ourputSource:
+  target_region_coverage_metrics:
+     type: File
+     ourputSource: coverage_metrics/
 
 steps:
   echo:
@@ -62,7 +62,7 @@ steps:
     out: [unzipped_file]
 
   coverage_QC:
-    run: ../tools/awk-make-coverage-QC.cwl
+    run: ../tools/mk-awk-bed2coverage-QC.cwl
     in:
       thresholds_bed: gunzip/unzipped_file
       sample_id: sample
@@ -79,16 +79,16 @@ steps:
       inputs:
         header_txt:
           type: File
-          inputBinding: 
+          inputBinding:
             position: 0
         coverage_QC_data:
           type: File
-          inputBinding: 
+          inputBinding:
             position: 1
       stdout: $(inputs.coverage_QC_data.nameroot)_Failed_Exon_coverage_QC.txt
       outputs:
           coverage_QC_txt:
             type: stdout
 
-  # coverage_metrics:
-  #   run: ../tools/mk-target-region-coverage-metrics.cwl
+  coverage_metrics:
+    run: ../tools/mk-target-region-coverage-metrics.cwl
