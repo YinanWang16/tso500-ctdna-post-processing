@@ -33,7 +33,7 @@ outputs:
     outputSource: cat/coverage_QC_txt
   target_region_coverage_metrics:
      type: File
-     ourputSource: coverage_metrics/
+     outputSource: coverage_metrics/target_region_coverage_metrics
 
 steps:
   echo:
@@ -92,3 +92,7 @@ steps:
 
   coverage_metrics:
     run: ../tools/mk-target-region-coverage-metrics.cwl
+    in:
+      thresholds_bed: gunzip/unzipped_file
+      prefix: sample
+    out: [target_region_coverage_metrics]
