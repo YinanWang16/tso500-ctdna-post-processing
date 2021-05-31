@@ -20,7 +20,7 @@ doc: |
   Outputs are 'Failed_Exon_coverage_QC.txt' and 'target_region_coverage_metrics'.
 
 # about the code
-s:dateCreated: 2021-05-30
+# s:dateCreated: 2021-05-30
 s:codeRepository: https://github.com/YinanWang16/tso500-ctdna-post-processing
 
 inputs:
