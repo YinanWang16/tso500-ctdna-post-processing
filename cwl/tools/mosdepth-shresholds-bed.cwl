@@ -15,6 +15,7 @@ inputs:
     type: int
     doc: |
       number of BAM decompression threads [default: 0]
+    default: 4
     inputBinding:
       prefix: -t
       position: 0
@@ -29,6 +30,7 @@ inputs:
     doc: |
       for each interval in --by, write number of bases covered by at
       least threshold bases.
+    default: [100, 250, 500, 750, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 8000, 10000]
     inputBinding:
         prefix: -T
         itemSeparator: ","
@@ -38,6 +40,7 @@ inputs:
     doc: |
       don't output per-base depth. skipping this output will speed execution
       substantially. prefer quantized or thresholded values if possible.
+    default: true
     inputBinding:
       prefix: -n
       position: 3
@@ -53,7 +56,7 @@ inputs:
     secondaryFiles: .bai
 
 outputs:
-  thresholds_bed:
+  thresholds_bed_gz:
     type: File
     outputBinding:
       glob: $(inputs.bam_or_cram.nameroot).thresholds.bed.gz
