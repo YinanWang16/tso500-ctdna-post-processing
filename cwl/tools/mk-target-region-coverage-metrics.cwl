@@ -13,7 +13,7 @@ s:author:
 
 # label/doc
 id: make_target_region_coverage_metrics
-label: parse 'threshold.bed' to make target region coverage metrics
+label: target_region_coverage_metrics.py
 doc: |
   from mosdepth output 'thresholds.bed.gz' to make consensus reads coverage metrics
   on target regions.
@@ -87,4 +87,4 @@ outputs:
   target_region_coverage_metrics:
     type: File
     outputBinding:
-      glob: "$(inputs.sample_id)_TargetRegionCoverage.tsv" 
+      glob: "$(inputs.sample_id)_TargetRegionCoverage.tsv"

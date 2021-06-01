@@ -2,8 +2,10 @@
 
 cwlVersion: v1.0
 class: CommandLineTool
-id: awk parse thresholds.bed to make {sample}_Failed_Exon_coverage_QC.txt
-doc: awk parse thresholds.bed to make {sample}_Failed_Exon_coverage_QC.txt
+id: awk
+label: awk
+doc: |
+    awk parse thresholds.bed to make {sample}_Failed_Exon_coverage_QC.txt
 
 baseCommand:
   - awk

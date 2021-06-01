@@ -14,7 +14,7 @@ s:author:
 
 # label/doc
 id: make_coverage_QC
-label: make Failed_Exon_coverage_QC.txt for pierianDx CGW
+label: mosdepth_to_coverage_QC
 doc: |
   Input is mosdepth output 'threshold.bed.gz'.
   Outputs are 'Failed_Exon_coverage_QC.txt' and 'target_region_coverage_metrics'.
@@ -52,6 +52,7 @@ outputs:
 steps:
   mosdepth:
     run: ../tools/mosdepth-thresholds-bed.cwl
+    label: mosdepth
     in:
       target_region_bed: tso_manifest_bed
       output_prefix: sample_id
@@ -79,12 +80,14 @@ steps:
 
   gunzip:
     run: ../tools/gunzip.cwl
+    label: gunzip
     in:
       gz_file: mosdepth/thresholds_bed_gz
     out: [unzipped_file]
 
   coverage_QC:
     run: ../tools/mk-awk-bed2coverage-QC.cwl
+    label: awk_coverage_QC
     in:
       thresholds_bed: gunzip/unzipped_file
       sample_id: sample_id
@@ -95,6 +98,7 @@ steps:
       header_txt: echo/header_file
       coverage_QC_data: coverage_QC/coverage_QC
     out: [coverage_QC_txt]
+    label: cat
     run:
       class: CommandLineTool
       baseCommand: [cat]
@@ -114,6 +118,7 @@ steps:
 
   coverage_metrics:
     run: ../tools/mk-target-region-coverage-metrics.cwl
+    label: target_region_coverage_metrics.py
     in:
       thresholds_bed: gunzip/unzipped_file
       sample_id: sample_id
