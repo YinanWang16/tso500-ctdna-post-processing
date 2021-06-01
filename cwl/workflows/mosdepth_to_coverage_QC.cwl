@@ -5,6 +5,7 @@ class: Workflow
 # Extensions
 $namespaces:
   s: https://schema.org/
+s:license: "https://www.apache.org/licenses/LICENSE-2.0"
 
 # Metadata
 s:author:
