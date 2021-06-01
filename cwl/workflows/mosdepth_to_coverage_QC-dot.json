@@ -1,0 +1,48 @@
+digraph G {
+bgcolor="#eeeeee";
+clusterrank=local;
+labeljust=right;
+labelloc=bottom;
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/mosdepth" [fillcolor=lightgoldenrodyellow, label="make_coverage_QC/mosdepth", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/gunzip" [fillcolor=lightgoldenrodyellow, label="make_coverage_QC/gunzip", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/mosdepth" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/gunzip";
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/gunzip" [fillcolor=lightgoldenrodyellow, label="make_coverage_QC/gunzip", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/coverage_QC" [fillcolor=lightgoldenrodyellow, label=awk, shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/gunzip" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/coverage_QC";
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/coverage_QC" [fillcolor=lightgoldenrodyellow, label=awk, shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/cat" [fillcolor=lightgoldenrodyellow, label="make_coverage_QC/cat", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/coverage_QC" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/cat";
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/echo" [fillcolor=lightgoldenrodyellow, label="make_coverage_QC/echo", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/cat" [fillcolor=lightgoldenrodyellow, label="make_coverage_QC/cat", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/echo" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/cat";
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/gunzip" [fillcolor=lightgoldenrodyellow, label="make_coverage_QC/gunzip", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/coverage_metrics" [fillcolor=lightgoldenrodyellow, label="target_region_coverage_metrics.py", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/gunzip" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/coverage_metrics";
+subgraph cluster_inputs {
+label="Workflow Inputs";
+rank=same;
+style=dashed;
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/tso_manifest_bed" [fillcolor="#94DDF4", label="make_coverage_QC/tso_manifest_bed", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/sample_id" [fillcolor="#94DDF4", label="make_coverage_QC/sample_id", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/bam_file" [fillcolor="#94DDF4", label="make_coverage_QC/bam_file", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/sample_id" [fillcolor="#94DDF4", label="make_coverage_QC/sample_id", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/sample_id" [fillcolor="#94DDF4", label="make_coverage_QC/sample_id", shape=record, style=filled];
+}
+
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/tso_manifest_bed" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/mosdepth";
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/sample_id" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/coverage_QC";
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/bam_file" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/mosdepth";
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/sample_id" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/coverage_metrics";
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/sample_id" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/mosdepth";
+subgraph cluster_outputs {
+label="Workflow Outputs";
+labelloc=b;
+rank=same;
+style=dashed;
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/exon_coverage_qc" [fillcolor="#94DDF4", label="make_coverage_QC/exon_coverage_qc", shape=record, style=filled];
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/target_region_coverage_metrics" [fillcolor="#94DDF4", label="make_coverage_QC/target_region_coverage_metrics", shape=record, style=filled];
+}
+
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/cat" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/exon_coverage_qc";
+"file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/coverage_metrics" -> "file:///data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/target_region_coverage_metrics";
+}
