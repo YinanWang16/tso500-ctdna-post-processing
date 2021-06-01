@@ -1,0 +1,6 @@
+files:
+  - class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/tools/echo_output.txt
+  - class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/tools/echo_output.txt
+outfile_name: "double_echo_output.txt"

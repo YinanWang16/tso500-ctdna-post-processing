@@ -1,6 +1,6 @@
 #!/usr/bin/env cwl-runner
 cwlVersion: v1.0
-class:
+class: CommandLineTool
 
 # Extentions
 $namespaces:
@@ -24,10 +24,10 @@ inputs:
   files:
     type: File[]
     inputBinding:
-      itemSeparator: " "
       position: 0
   outfile_name:
     type: string
+
 stdout: $(inputs.outfile_name)
 outputs:
   type: stdout
