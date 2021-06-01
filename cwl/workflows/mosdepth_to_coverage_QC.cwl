@@ -28,9 +28,9 @@ inputs:
     label: raw bam
     doc: The path to the raw alignment bam file
     type: File
-    secondaryFiles:
-      - pattern: .bai
-        required: true
+    secondaryFiles: .bai
+#      - pattern: .bai
+ #       required: true
   tso_manifest_bed:
     label: target region bed file
     doc: TSO manifest bed file
@@ -51,7 +51,7 @@ outputs:
 
 steps:
   mosdepth:
-    run: ../tools/mosdepth-shresholds-bed.cwl
+    run: ../tools/mosdepth-thresholds-bed.cwl
     in:
       target_region_bed: tso_manifest_bed
       output_prefix: sample_id
@@ -80,7 +80,7 @@ steps:
   gunzip:
     run: ../tools/gunzip.cwl
     in:
-      gz_file: mosdepth/threshold_bed_gz
+      gz_file: mosdepth/thresholds_bed_gz
     out: [unzipped_file]
 
   coverage_QC:
