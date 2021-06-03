@@ -52,7 +52,7 @@ outputs:
 
 steps:
   mosdepth:
-    run: ../tools/mosdepth-thresholds-bed.cwl
+    run: ../tools/mosdepth-make-thresholds-bed.cwl
     label: mosdepth
     in:
       target_region_bed: tso_manifest_bed
@@ -87,7 +87,7 @@ steps:
     out: [unzipped_file]
 
   coverage_QC:
-    run: ../tools/mk-awk-bed2coverage-QC.cwl
+    run: ../tools/mosdepth-awk-thresholds-bed-to-coverage-QC.cwl
     label: awk_coverage_QC
     in:
       thresholds_bed: gunzip/unzipped_file
@@ -118,7 +118,7 @@ steps:
             type: stdout
 
   coverage_metrics:
-    run: ../tools/mk-target-region-coverage-metrics.cwl
+    run: ../tools/mosdepth-thresholds-bed-to-target-region-coverage.cwl
     label: target_region_coverage_metrics.py
     in:
       thresholds_bed: gunzip/unzipped_file

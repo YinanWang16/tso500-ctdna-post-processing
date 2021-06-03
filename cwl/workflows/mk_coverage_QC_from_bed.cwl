@@ -62,7 +62,7 @@ steps:
     out: [unzipped_file]
 
   coverage_QC:
-    run: ../tools/mk-awk-bed2coverage-QC.cwl
+    run: ../tools/mosdepth-awk-thresholds-bed-to-coverage-QC.cwl
     in:
       thresholds_bed: gunzip/unzipped_file
       sample_id: sample
@@ -91,7 +91,7 @@ steps:
             type: stdout
 
   coverage_metrics:
-    run: ../tools/mk-target-region-coverage-metrics.cwl
+    run: ../tools/mosdepth-thresholds-bed-to-target-region-coverage.cwl
     in:
       thresholds_bed: gunzip/unzipped_file
       sample_id: sample

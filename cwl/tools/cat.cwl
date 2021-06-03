@@ -30,7 +30,8 @@ inputs:
 
 stdout: $(inputs.outfile_name)
 outputs:
-  type: stdout
+  output_file:
+    type: stdout
 
 # about the code
 s:dateCreated: 2021-06-01

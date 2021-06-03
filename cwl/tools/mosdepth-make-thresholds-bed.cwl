@@ -8,7 +8,24 @@ doc: use mosdepth to make threshold.bed file for calculating Failed_Exon_coverag
 hints:
   DockerRequirement:
     dockerPull: quay.io/biocontainers/mosdepth:0.3.1--ha7ba039_0
-baseCommand: mosdepth
+
+requirements:
+  InlineJavascriptRequirement:
+    expressionLib:
+      - var get_output_prefix(){
+              /*
+              Get inputs.output_prefix value, fall back to inputs.bam_or_cram nameroot
+              */
+              if (input.output_prefix == null){
+                return inputs.output_prefix
+              }
+            }
+
+baseCommand: [mosdepth]
+arguments:
+  # output_prefix
+  - valueFrom: "$(get_output_prefix())"
+    position: 4
 
 inputs:
   threads:
@@ -45,15 +62,15 @@ inputs:
       prefix: -n
       position: 3
   output_prefix:
-    type: string
-    inputBinding:
-      position: 4
+    type: string?
   bam_or_cram:
     type: File
     doc: the alignment file for which to calculate depth.
     inputBinding:
       position: 5
-    secondaryFiles: .bai
+    secondaryFiles:
+      - pattern: .bai
+        required: true
 
 outputs:
   thresholds_bed_gz:
