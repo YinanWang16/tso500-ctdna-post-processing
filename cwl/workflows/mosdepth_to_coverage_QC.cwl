@@ -36,7 +36,6 @@ inputs:
     label: target region bed file
     doc: TSO manifest bed file
     type: File
-  sample_id: string
 
 outputs:
   exon_coverage_qc:
@@ -56,7 +55,6 @@ steps:
     label: mosdepth
     in:
       target_region_bed: tso_manifest_bed
-      output_prefix: sample_id
       bam_or_cram: bam_file
     out: [thresholds_bed_gz]
 
@@ -91,7 +89,6 @@ steps:
     label: awk_coverage_QC
     in:
       thresholds_bed: gunzip/unzipped_file
-      sample_id: sample_id
     out: [coverage_QC]
 
   cat:
@@ -122,5 +119,4 @@ steps:
     label: target_region_coverage_metrics.py
     in:
       thresholds_bed: gunzip/unzipped_file
-      sample_id: sample_id
     out: [target_region_coverage_metrics]
