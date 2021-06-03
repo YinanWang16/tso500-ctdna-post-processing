@@ -3,31 +3,31 @@ cwlVersion: v1.2
 class: Workflow
 
 # Extensions
-$namespaces:
-  s: https://schema.org/
-s:license: "https://www.apache.org/licenses/LICENSE-2.0"
+# $namespaces:
+#   s: https://schema.org/
+# s:license: "https://www.apache.org/licenses/LICENSE-2.0"
 
-# Metadata
-s:author:
-  - class: s:Person
-    s:name: Yinan Wang
-    s:email: mailto:ywang16@illumina.com
+# # Metadata
+# s:author:
+#   - class: s:Person
+#     s:name: Yinan Wang
+#     s:email: mailto:ywang16@illumina.com
 
-# label/doc
-id: make_coverage_QC
-label: mosdepth_to_coverage_QC
-doc: |
-  Input is mosdepth output 'threshold.bed.gz'.
-  Outputs are 'Failed_Exon_coverage_QC.txt' and 'target_region_coverage_metrics'.
+# # label/doc
+# id: make_coverage_QC
+# label: mosdepth_to_coverage_QC
+# doc: |
+#   Input is mosdepth output 'threshold.bed.gz'.
+#   Outputs are 'Failed_Exon_coverage_QC.txt' and 'target_region_coverage_metrics'.
 
-# about the code
-# s:dateCreated: 2021-05-30
-s:codeRepository: https://github.com/YinanWang16/tso500-ctdna-post-processing
+# # about the code
+# # s:dateCreated: 2021-05-30
+# s:codeRepository: https://github.com/YinanWang16/tso500-ctdna-post-processing
 
 requirements:
-  StepInputExpressionRequirement: {}
-  InlineJavascriptRequirement: {}
-  MultipleInputFeatureRequirement: {}
+  - class: StepInputExpressionRequirement
+  - class: InlineJavascriptRequirement
+  - class: MultipleInputFeatureRequirement
 
 inputs:
   bam_file:
