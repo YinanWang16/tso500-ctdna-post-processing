@@ -6,6 +6,8 @@ id: awk
 label: awk
 doc: |
     awk parse thresholds.bed to make {sample}_Failed_Exon_coverage_QC.txt
+requirements:
+  InlineJavascriptRequirement: {}
 
 baseCommand:
   - awk
