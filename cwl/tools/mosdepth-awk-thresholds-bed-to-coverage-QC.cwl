@@ -24,10 +24,9 @@ inputs:
     type: File
     inputBinding:
       position: 0
-  sample_id:
-    type: string
+
 stdout:
-  $(inputs.sample_id).coverage_QC
+  $(inputs.thresholds_bed.nameroot.split('.')[0]).coverage_QC
 outputs:
   coverage_QC:
     type: stdout
