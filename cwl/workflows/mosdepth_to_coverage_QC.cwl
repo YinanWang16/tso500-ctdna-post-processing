@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.2
 class: Workflow
 
 # Extensions
@@ -29,9 +29,9 @@ inputs:
     label: raw bam
     doc: The path to the raw alignment bam file
     type: File
-    secondaryFiles: .bai
-#      - pattern: .bai
- #       required: true
+    secondaryFiles:
+      - pattern: .bai
+        required: true
   tso_manifest_bed:
     label: target region bed file
     doc: TSO manifest bed file

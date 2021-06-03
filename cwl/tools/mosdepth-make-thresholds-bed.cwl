@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.2
 class: CommandLineTool
 
 id: mosdepth-thresholds-bed
@@ -12,15 +12,15 @@ hints:
 requirements:
   InlineJavascriptRequirement:
     expressionLib:
-      - var get_output_prefix(){
+      - var get_output_prefix = function(){
               /*
               Get inputs.output_prefix value, fall back to inputs.bam_or_cram nameroot
               */
-              if (input.output_prefix == null){
-                return inputs.output_prefix
+              if (inputs.output_prefix !== null) {
+                return inputs.output_prefix;
               }
+              return inputs.bam_or_cram.nameroot;
             }
-
 baseCommand: [mosdepth]
 arguments:
   # output_prefix
