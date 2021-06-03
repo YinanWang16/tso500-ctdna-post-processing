@@ -24,6 +24,11 @@ doc: |
 # s:dateCreated: 2021-05-30
 s:codeRepository: https://github.com/YinanWang16/tso500-ctdna-post-processing
 
+requirements:
+  StepInputExpressionRequirement: {}
+  InlineJavascriptRequirement: {}
+  MultipleInputFeatureRequirement: {}
+
 inputs:
   bam_file:
     label: raw bam
@@ -57,7 +62,7 @@ steps:
       target_region_bed: tso_manifest_bed
       bam_or_cram: bam_file
       output_prefix: 
-        valueFrom: $(inputs.bam_file.nameroot)
+        valueFrom: $(inputs.bam_or_cram.nameroot)
     out: [thresholds_bed_gz]
 
   echo:
@@ -99,7 +104,7 @@ steps:
         - echo/header_file
         - coverage_QC/coverage_QC
       outfile_name: 
-        valueFrom: $(inputs.bam_file.nameroot)_Failed_Exon_coverage_QC.txt
+        valueFrom: $(inputs.files[1].nameroot)_Failed_Exon_coverage_QC.txt
     out: [output_file]
     label: cat
     run: ../tools/cat.cwl

@@ -44,7 +44,7 @@ requirements:
               parser.add_argument('-i', '--input-bed', required=True,
                                   help='Mosdepth output file "threshold.bed", ungzipped')
 
-              parser.add_argument('-p', '--prefix', required=false,
+              parser.add_argument('-p', '--prefix', required=False,
                                   help='prefix of output TargetRegionCoverage.tsv')
               return parser.parse_args()
 
@@ -56,8 +56,7 @@ requirements:
               if args.prefix:
                 output_tsv = args.prefix + '.TargetRegionCoverage.tsv'
               else:
-                output_tsv = path.basename(args.input_bed).split('.')[0] +
-                            '.TargetRegionCoverage.tsv'
+                output_tsv = path.basename(args.input_bed).split('.')[0] + '.TargetRegionCoverage.tsv'
 
               # open threshold.bed file and load to dataframe
               with open(args.input_bed, 'rt') as i:
