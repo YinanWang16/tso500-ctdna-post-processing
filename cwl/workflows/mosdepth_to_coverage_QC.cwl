@@ -61,7 +61,7 @@ steps:
     in:
       target_region_bed: tso_manifest_bed
       bam_or_cram: bam_file
-      output_prefix: 
+      output_prefix:
         valueFrom: $(inputs.bam_or_cram.nameroot)
     out: [thresholds_bed_gz]
 
@@ -99,15 +99,15 @@ steps:
     out: [coverage_QC]
 
   cat:
+    run: ../tools/cat.cwl
     in:
-      files: 
+      files:
         - echo/header_file
         - coverage_QC/coverage_QC
-      outfile_name: 
+      outfile_name:
         valueFrom: $(inputs.files[1].nameroot)_Failed_Exon_coverage_QC.txt
     out: [output_file]
     label: cat
-    run: ../tools/cat.cwl
 
   coverage_metrics:
     run: ../tools/mosdepth-thresholds-bed-to-target-region-coverage.cwl
