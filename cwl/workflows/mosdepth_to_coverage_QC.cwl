@@ -42,7 +42,7 @@ outputs:
     label: Failed_Exon_coverage_QC.txt
     doc: For PierianDx CGW
     type: File
-    outputSource: cat/coverage_QC_txt
+    outputSource: cat/output_file
   target_region_coverage_metrics:
     label: TargetRegionCoverage.tsv
     doc: Consensus reads converage on TSO targeted regions.
@@ -56,6 +56,8 @@ steps:
     in:
       target_region_bed: tso_manifest_bed
       bam_or_cram: bam_file
+      output_prefix: 
+        valueFrom: $(inputs.bam_file.nameroot)
     out: [thresholds_bed_gz]
 
   echo:
@@ -93,26 +95,14 @@ steps:
 
   cat:
     in:
-      header_txt: echo/header_file
-      coverage_QC_data: coverage_QC/coverage_QC
-    out: [coverage_QC_txt]
+      files: 
+        - echo/header_file
+        - coverage_QC/coverage_QC
+      outfile_name: 
+        valueFrom: $(inputs.bam_file.nameroot)_Failed_Exon_coverage_QC.txt
+    out: [output_file]
     label: cat
-    run:
-      class: CommandLineTool
-      baseCommand: [cat]
-      inputs:
-        header_txt:
-          type: File
-          inputBinding:
-            position: 0
-        coverage_QC_data:
-          type: File
-          inputBinding:
-            position: 1
-      stdout: $(inputs.coverage_QC_data.nameroot)_Failed_Exon_coverage_QC.txt
-      outputs:
-          coverage_QC_txt:
-            type: stdout
+    run: ../tools/cat.cwl
 
   coverage_metrics:
     run: ../tools/mosdepth-thresholds-bed-to-target-region-coverage.cwl
