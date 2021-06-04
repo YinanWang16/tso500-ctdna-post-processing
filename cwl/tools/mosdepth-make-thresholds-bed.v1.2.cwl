@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.2
 class: CommandLineTool
 
 id: mosdepth-thresholds-bed
@@ -68,7 +68,9 @@ inputs:
     doc: the alignment file for which to calculate depth.
     inputBinding:
       position: 5
-    secondaryFiles: .bai
+    secondaryFiles:
+      - pattern: .bai
+        required: true
 
 outputs:
   thresholds_bed_gz:

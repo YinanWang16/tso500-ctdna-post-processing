@@ -30,23 +30,23 @@ requirements:
 
 inputs:
   bam_file:
-    label: raw bam
+    label: Sample_ID.bam
     doc: The path to the raw alignment bam file
     type: File
     secondaryFiles: .bai
   tso_manifest_bed:
-    label: target region bed file
+    label: TST500C_manifest.bed
     doc: TSO manifest bed file
     type: File
 
 outputs:
   exon_coverage_qc:
-    label: Failed_Exon_coverage_QC.txt
+    label: Sample_ID_Failed_Exon_coverage_QC.txt
     doc: make Failed_Exon_coverage_QC.txt for PierianDx CGW
     type: File
     outputSource: coverage_QC/coverage_QC
   target_region_coverage_metrics:
-    label: TargetRegionCoverage.tsv
+    label: Sample_ID.TargetRegionCoverage.tsv
     doc: Consensus reads converage on TSO targeted regions.
     type: File
     outputSource: coverage_metrics/target_region_coverage_metrics
