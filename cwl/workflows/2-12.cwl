@@ -15,4 +15,3 @@ outputs:
   cp4:
     type: stdout
 stdout: cp4.txt 
-  
