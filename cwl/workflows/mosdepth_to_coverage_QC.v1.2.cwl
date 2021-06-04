@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.2
 class: Workflow
 
 # Extensions
@@ -33,7 +33,9 @@ inputs:
     label: raw bam
     doc: The path to the raw alignment bam file
     type: File
-    secondaryFiles: .bai
+    secondaryFiles:
+      - pattern: .bai
+        required: true
   tso_manifest_bed:
     label: target region bed file
     doc: TSO manifest bed file
@@ -53,7 +55,7 @@ outputs:
 
 steps:
   mosdepth:
-    run: ../tools/mosdepth-make-thresholds-bed.cwl
+    run: ../tools/mosdepth-make-thresholds-bed.v1.2.cwl
     label: mosdepth
     in:
       target_region_bed: tso_manifest_bed
