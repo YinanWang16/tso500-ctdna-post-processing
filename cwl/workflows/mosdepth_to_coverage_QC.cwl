@@ -2,7 +2,7 @@
 cwlVersion: v1.2
 class: Workflow
 
-Extensions
+# Extensions
 $namespaces:
   s: https://schema.org/
 s:license: "https://www.apache.org/licenses/LICENSE-2.0"
