@@ -44,9 +44,9 @@ inputs:
 outputs:
   exon_coverage_qc:
     label: Failed_Exon_coverage_QC.txt
-    doc: For PierianDx CGW
+    doc: make Failed_Exon_coverage_QC.txt for PierianDx CGW
     type: File
-    outputSource: cat/output_file
+    outputSource: coverage_QC/coverage_QC
   target_region_coverage_metrics:
     label: TargetRegionCoverage.tsv
     doc: Consensus reads converage on TSO targeted regions.
