@@ -69,7 +69,7 @@ steps:
     out: [unzipped_file]
   coverage_QC:
     run: ../tools/mosdepth-thresholds-bed-to-coverage-QC-step.cwl
-    label: awk_coverage_QC
+    label: make_coverage_QC.py
     in:
       thresholds_bed: gunzip/unzipped_file
     out: [coverage_QC]

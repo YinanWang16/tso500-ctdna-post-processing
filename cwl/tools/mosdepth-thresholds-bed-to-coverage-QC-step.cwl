@@ -3,6 +3,8 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
+label: make_coverage_QC.py
+
 hints:
   DockerRequirement:
     dockerPull: umccr/alpine_pandas:latest-cwl

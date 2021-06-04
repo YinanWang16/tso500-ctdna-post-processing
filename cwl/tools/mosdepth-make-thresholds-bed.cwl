@@ -3,6 +3,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 
 id: mosdepth-thresholds-bed
+label: mosdepth
 doc: use mosdepth to make threshold.bed file for calculating Failed_Exon_coverage_QC.txt
 
 hints:

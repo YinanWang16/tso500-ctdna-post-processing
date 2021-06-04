@@ -2,6 +2,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 id: gunzip files
+label: gunzip
 doc: gunzip files
 
 baseCommand: ["gunzip"]
