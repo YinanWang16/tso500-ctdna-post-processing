@@ -5,7 +5,6 @@ class: Workflow
 # Extensions
 $namespaces:
   s: https://schema.org/
-s:license: "https://www.apache.org/licenses/LICENSE-2.0"
 
 # Metadata
 s:author:
@@ -64,47 +63,18 @@ steps:
       output_prefix:
         valueFrom: $(inputs.bam_or_cram.nameroot)
     out: [thresholds_bed_gz]
-  echo:
-    in: []
-    out: [header_file]
-    run:
-      class: CommandLineTool
-      requirements:
-        InitialWorkDirRequirement:
-          listing:
-            - entryname: header.sh
-              entry: |
-                echo -e "Level 2: 100x coverage for > 50% of positions was not achieved for the targeted exon regions listed below:"
-                echo -e "index\tgene\ttranscript_acc\texon_id\tGE100\tGE250"
-      inputs: []
-      baseCommand: [bash, header.sh]
-      stdout: header.txt
-      outputs:
-        header_file:
-          type: stdout
   gunzip:
     run: ../tools/gunzip.cwl
     label: gunzip
     in:
       gz_file: mosdepth/thresholds_bed_gz
     out: [unzipped_file]
-
   coverage_QC:
-    run: ../tools/mosdepth-awk-thresholds-bed-to-coverage-QC.cwl
+    run: ../tools/mosdepth-thresholds-bed-to-coverage-QC-step.cwl
     label: awk_coverage_QC
     in:
       thresholds_bed: gunzip/unzipped_file
     out: [coverage_QC]
-  cat:
-    in:
-      files:
-        - echo/header_file
-        - coverage_QC/coverage_QC
-      outfile_name:
-        valueFrom: $(inputs.files[1].nameroot)_Failed_Exon_coverage_QC.txt
-    out: [output_file]
-    label: cat
-    run: ../tools/cat.cwl
   coverage_metrics:
     run: ../tools/mosdepth-thresholds-bed-to-target-region-coverage.cwl
     label: target_region_coverage_metrics.py
