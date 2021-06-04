@@ -64,7 +64,6 @@ steps:
       output_prefix:
         valueFrom: $(inputs.bam_or_cram.nameroot)
     out: [thresholds_bed_gz]
-
   echo:
     in: []
     out: [header_file]
@@ -83,7 +82,6 @@ steps:
       outputs:
         header_file:
           type: stdout
-
   gunzip:
     run: ../tools/gunzip.cwl
     label: gunzip
@@ -97,7 +95,6 @@ steps:
     in:
       thresholds_bed: gunzip/unzipped_file
     out: [coverage_QC]
-
   cat:
     in:
       files:
@@ -108,7 +105,6 @@ steps:
     out: [output_file]
     label: cat
     run: ../tools/cat.cwl
-
   coverage_metrics:
     run: ../tools/mosdepth-thresholds-bed-to-target-region-coverage.cwl
     label: target_region_coverage_metrics.py
