@@ -2,27 +2,27 @@
 cwlVersion: v1.2
 class: Workflow
 
-# Extensions
-# $namespaces:
-#   s: https://schema.org/
-# s:license: "https://www.apache.org/licenses/LICENSE-2.0"
+Extensions
+$namespaces:
+  s: https://schema.org/
+s:license: "https://www.apache.org/licenses/LICENSE-2.0"
 
-# # Metadata
-# s:author:
-#   - class: s:Person
-#     s:name: Yinan Wang
-#     s:email: mailto:ywang16@illumina.com
+# Metadata
+s:author:
+  - class: s:Person
+    s:name: Yinan Wang
+    s:email: mailto:ywang16@illumina.com
 
-# # label/doc
-# id: make_coverage_QC
-# label: mosdepth_to_coverage_QC
-# doc: |
-#   Input is mosdepth output 'threshold.bed.gz'.
-#   Outputs are 'Failed_Exon_coverage_QC.txt' and 'target_region_coverage_metrics'.
+# label/doc
+id: make_coverage_QC
+label: mosdepth_to_coverage_QC
+doc: |
+  Input is mosdepth output 'threshold.bed.gz'.
+  Outputs are 'Failed_Exon_coverage_QC.txt' and 'target_region_coverage_metrics'.
 
-# # about the code
-# # s:dateCreated: 2021-05-30
-# s:codeRepository: https://github.com/YinanWang16/tso500-ctdna-post-processing
+# about the code
+# s:dateCreated: 2021-05-30
+s:codeRepository: https://github.com/YinanWang16/tso500-ctdna-post-processing
 
 requirements:
   - class: StepInputExpressionRequirement
@@ -61,7 +61,7 @@ steps:
     in:
       target_region_bed: tso_manifest_bed
       bam_or_cram: bam_file
-      output_prefix: 
+      output_prefix:
         valueFrom: $(inputs.bam_or_cram.nameroot)
     out: [thresholds_bed_gz]
 
@@ -100,10 +100,10 @@ steps:
 
   cat:
     in:
-      files: 
+      files:
         - echo/header_file
         - coverage_QC/coverage_QC
-      outfile_name: 
+      outfile_name:
         valueFrom: $(inputs.files[1].nameroot)_Failed_Exon_coverage_QC.txt
     out: [output_file]
     label: cat
