@@ -21,12 +21,12 @@ hints:
   DockerRequirement:
     dockerPull: amazoncorretto:8
 requirements:
-  InitialWorkDirReurirement:
+  InitialWorkDirRequirement:
     listing:
       - $(inputs.pieriandx_run_uploader)
       - $(inputs.s3_credential)
 baseCommand: [java, -jar]
-parameters:
+arguments:
   - -Dloader.main=com.pdx.commandLine.ApplicationCommandLine
 
 inputs:
@@ -50,13 +50,13 @@ inputs:
   run_id:
     type: string
     inputBinding:
-      prefix: --runId
+      prefix: --runId=
       separate: false
       position: 3
   sample_sheet:
     type: File
     inputBinding:
-      prefix: --sampleSheet
+      prefix: --sampleSheet=
       separate: false
       position: 4
   sequencer:
@@ -73,12 +73,12 @@ inputs:
       separate: false
       position: 6
   s3_credential:
-    tyep: File
+    type: File
 
 outputs:
   cgw_run_uploader_log:
     type: File
-    outputBinding;
+    outputBinding:
       glob: "cgwRunUploader.log"
 
 
