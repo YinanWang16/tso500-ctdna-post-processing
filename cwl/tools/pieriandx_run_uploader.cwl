@@ -5,6 +5,7 @@ class: CommandLineTool
 # Extentions
 $namespaces:
   s: https://schema.org/
+  ilmn-tes: https://platform.illumina/rdf/ica/
 # Metadata
 s:author:
   - class: s:Person
@@ -20,6 +21,14 @@ doc: |
 hints:
   DockerRequirement:
     dockerPull: amazoncorretto:8
+  ResourceRequirement:
+    ilmn-tes:resources:
+      tier: standard
+      type: standard
+      size: medium
+      coreMin: 4
+      ramMin: 2048
+      
 requirements:
   InitialWorkDirRequirement:
     listing:
@@ -83,5 +92,5 @@ outputs:
 
 
 # about the code
-s:dateCreated: 2021-06-07
+#s:dateCreated: 2021-06-07
 s:codeRepository: https://github.com/YinanWang16/TSO500-Liftover

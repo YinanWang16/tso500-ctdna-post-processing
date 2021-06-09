@@ -5,6 +5,7 @@ class: CommandLineTool
 # Extentions
 $namespaces:
   s: https://schema.org/
+  ilmn-tes: https://platform.illumina/rdf/ica/
 # Metadata
 s:author:
   - class: s:Person
@@ -22,10 +23,17 @@ doc: |
 # s:dateCreated: 2021-05-31
 s:codeRepository: https://github.com/YinanWang16/tso500-ctdna-post-processing
 
-requirements:
-  InlineJavascriptRequirement: {}
+hints:
+  ResourceRequirement:
+    ilmn-tes:resources:
+      tier: standard
+      type: standard
+      size: medium
   DockerRequirement:
     dockerPull: umccr/alpine_pandas:latest-cwl
+
+requirements:
+  InlineJavascriptRequirement: {}
   InitialWorkDirRequirement:
     listing:
       - entryname: target_region_coverage_metrics.py

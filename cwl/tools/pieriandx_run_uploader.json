@@ -1,0 +1,129 @@
+{
+    "class": "CommandLineTool",
+    "id": "#main",
+    "label": "PierianDx_Run_Uploader",
+    "doc": "This is a PierianDx Run Uploader for TSO\n",
+    "hints": [
+        {
+            "dockerPull": "amazoncorretto:8",
+            "class": "DockerRequirement"
+        },
+        {
+            "class": "ResourceRequirement",
+            "https://platform.illumina/rdf/ica/resources": {
+                "tier": "standard",
+                "type": "standard",
+                "size": "medium",
+                "coreMin": 4,
+                "ramMin": 2048
+            }
+        }
+    ],
+    "requirements": [
+        {
+            "listing": [
+                "$(inputs.pieriandx_run_uploader)",
+                "$(inputs.s3_credential)"
+            ],
+            "class": "InitialWorkDirRequirement"
+        }
+    ],
+    "baseCommand": [
+        "java",
+        "-jar"
+    ],
+    "arguments": [
+        "-Dloader.main=com.pdx.commandLine.ApplicationCommandLine"
+    ],
+    "inputs": [
+        {
+            "type": "boolean",
+            "default": true,
+            "inputBinding": {
+                "prefix": "--commandLine",
+                "position": 1
+            },
+            "id": "#command_line"
+        },
+        {
+            "type": "File",
+            "inputBinding": {
+                "position": 0,
+                "valueFrom": "$(self.basename)"
+            },
+            "id": "#pieriandx_run_uploader"
+        },
+        {
+            "type": "Directory",
+            "inputBinding": {
+                "prefix": "--runFolder=",
+                "separate": false,
+                "position": 2
+            },
+            "id": "#run_folder"
+        },
+        {
+            "type": "string",
+            "inputBinding": {
+                "prefix": "--runId=",
+                "separate": false,
+                "position": 3
+            },
+            "id": "#run_id"
+        },
+        {
+            "type": "File",
+            "id": "#s3_credential"
+        },
+        {
+            "type": "File",
+            "inputBinding": {
+                "prefix": "--sampleSheet=",
+                "separate": false,
+                "position": 4
+            },
+            "id": "#sample_sheet"
+        },
+        {
+            "type": "string",
+            "default": "Illumina",
+            "inputBinding": {
+                "prefix": "--sequencer=",
+                "separate": false,
+                "position": 5
+            },
+            "id": "#sequencer"
+        },
+        {
+            "type": "string",
+            "inputBinding": {
+                "prefix": "--sequencerFileType=",
+                "separate": false,
+                "position": 6
+            },
+            "id": "#sequencer_file_type"
+        }
+    ],
+    "outputs": [
+        {
+            "type": "File",
+            "outputBinding": {
+                "glob": "cgwRunUploader.log"
+            },
+            "id": "#cgw_run_uploader_log"
+        }
+    ],
+    "https://schema.org/author": [
+        {
+            "class": "https://schema.org/Person",
+            "https://schema.org/name": "Yinan Wang",
+            "https://schema.org/email": "mailto:ywang16@illumina.com"
+        }
+    ],
+    "https://schema.org/codeRepository": "https://github.com/YinanWang16/TSO500-Liftover",
+    "cwlVersion": "v1.0",
+    "$namespaces": {
+        "s": "https://schema.org/",
+        "ilmn-tes": "https://platform.illumina/rdf/ica/"
+    }
+}
