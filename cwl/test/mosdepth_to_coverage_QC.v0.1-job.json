@@ -6,7 +6,7 @@
   "bam_file": {
     "class": "File",
     "path": "gds://yncttsopostprocessing/test-mosdepth-to-coverage-qc/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.bam"
-  }
+  },
   "engineParameters": {
     "outputDirectory": "gds://yncttsopostprocessing/test-mosdepth-to-coverage-qc/output",
     "workDirectory": "gds://yncttsopostprocessing/test-mosdepth-to-coverage-qc/output"
