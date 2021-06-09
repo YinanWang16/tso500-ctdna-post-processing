@@ -2,6 +2,28 @@
     "$graph": [
         {
             "class": "CommandLineTool",
+            "hints": [
+                {
+                    "dockerPull": "ubuntu:latest",
+                    "class": "DockerRequirement"
+                },
+                {
+                    "class": "ResourceRequirement",
+                    "https://platform.illumina/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "small"
+                    }
+                }
+            ],
+            "requirements": [
+                {
+                    "class": "InlineJavascriptRequirement"
+                },
+                {
+                    "class": "ShellCommandRequirement"
+                }
+            ],
             "id": "#gunzip.cwl",
             "label": "gunzip",
             "doc": "gunzip files",
@@ -9,7 +31,12 @@
                 "gunzip"
             ],
             "arguments": [
-                "-c"
+                "-c",
+                {
+                    "valueFrom": "$(\"> \" + inputs.gz_file.nameroot)",
+                    "shellQuote": false,
+                    "position": 1
+                }
             ],
             "inputs": [
                 {
@@ -23,13 +50,19 @@
             "outputs": [
                 {
                     "type": "File",
-                    "id": "#gunzip.cwl/unzipped_file",
                     "outputBinding": {
                         "glob": "$(inputs.gz_file.nameroot)"
-                    }
+                    },
+                    "id": "#gunzip.cwl/unzipped_file"
                 }
             ],
-            "stdout": "$(inputs.gz_file.nameroot)",
+            "https://schema.org/author": [
+                {
+                    "class": "https://schema.org/Person",
+                    "https://schema.org/name": "Yinan Wang",
+                    "https://schema.org/email": "mailto:ywang16@illumina.com"
+                }
+            ],
             "$namespaces": {
                 "s": "https://schema.org/"
             }

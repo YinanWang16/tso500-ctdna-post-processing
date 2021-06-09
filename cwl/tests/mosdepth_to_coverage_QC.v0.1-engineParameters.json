@@ -1,0 +1,6 @@
+{
+  "engineParameters": {
+    "outputDirectory": "gds://yncttsopostprocessing/test-mosdepth-to-coverage-qc/output",
+    "workDirectory": "gds://yncttsopostprocessing/test-mosdepth-to-coverage-qc/output"
+  }
+}
