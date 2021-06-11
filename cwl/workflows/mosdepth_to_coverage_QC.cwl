@@ -58,6 +58,8 @@ steps:
     in:
       target_region_bed: tso_manifest_bed
       bam_or_cram: bam_file
+      threshold_bases: {default: [100, 250, 500, 750, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 8000, 10000]}
+      no_per_base: {default: true}
       output_prefix:
         valueFrom: $(inputs.bam_or_cram.nameroot)
     out: [thresholds_bed_gz]

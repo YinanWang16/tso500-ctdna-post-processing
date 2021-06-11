@@ -50,25 +50,25 @@
 <polygon fill="black" stroke="black" points="469.33,-154.58 478.04,-148.55 467.47,-147.83 469.33,-154.58"/>
 </g>
 <!-- file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/target_region_coverage_metrics -->
-<g id="node6" class="node">
+<g id="node7" class="node">
 <title>file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/target_region_coverage_metrics</title>
 <polygon fill="#94ddf4" stroke="black" points="16.5,-39.5 16.5,-75.5 411.5,-75.5 411.5,-39.5 16.5,-39.5"/>
 <text text-anchor="middle" x="214" y="-53.8" font-family="Times-Roman" font-size="14.00">make_coverage_QC/target_region_coverage_metrics</text>
 </g>
 <!-- file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/make_coverage_metrics&#45;&gt;file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/target_region_coverage_metrics -->
-<g id="edge5" class="edge">
+<g id="edge6" class="edge">
 <title>file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/make_coverage_metrics&#45;&gt;file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/target_region_coverage_metrics</title>
 <path fill="none" stroke="black" d="M248.11,-112.31C242.75,-103.85 236.17,-93.48 230.23,-84.11"/>
 <polygon fill="black" stroke="black" points="233.1,-82.1 224.79,-75.53 227.19,-85.85 233.1,-82.1"/>
 </g>
 <!-- file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/exon_coverage_qc -->
-<g id="node7" class="node">
+<g id="node6" class="node">
 <title>file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/exon_coverage_qc</title>
 <polygon fill="#94ddf4" stroke="black" points="430,-39.5 430,-75.5 726,-75.5 726,-39.5 430,-39.5"/>
 <text text-anchor="middle" x="578" y="-53.8" font-family="Times-Roman" font-size="14.00">make_coverage_QC/exon_coverage_qc</text>
 </g>
 <!-- file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/make_coverage_QC&#45;&gt;file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/exon_coverage_qc -->
-<g id="edge6" class="edge">
+<g id="edge5" class="edge">
 <title>file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/make_coverage_QC&#45;&gt;file:///data/staging/ywang16_test/Projects/tso500&#45;ctdna&#45;post&#45;processing/cwl/workflows/mosdepth_to_coverage_QC.cwl#make_coverage_QC/exon_coverage_qc</title>
 <path fill="none" stroke="black" d="M549.2,-112.31C553.68,-103.94 559.16,-93.7 564.14,-84.4"/>
 <polygon fill="black" stroke="black" points="567.25,-86 568.89,-75.53 561.08,-82.69 567.25,-86"/>
