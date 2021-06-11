@@ -1,0 +1,4 @@
+tso500_output_dir:
+  class: Directory
+  path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/MetricsOutput
+  #  path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis

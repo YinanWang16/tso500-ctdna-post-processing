@@ -25,18 +25,24 @@ hints:
   ResourceRequirement:
     ilmn-tes:resources:
       tier: standard
-      type: stardard
-      size: small
-      # coreMin:
-      # ramMin:
+#      type: stardard
+#      size: small
 
 requirements:
   InlineJavascriptRequirement:
-    experssionLib:
+    expressionLib:
       - var get_dsdm_json_path = function() {
-        return inputs.tso500_output_dir + "/" + "Results" + "/" + "dsdm.json"
-      }
+          return inputs.tso500_output_dir.path + "/" + "Results" + "/" + "dsdm.json";
+        }
+  InitialWorkDirRequirement:
+    listing:
+      - $(inputs.tso500_output_dir)
 
+#baseCommand: [ls]
+
+#arguments:
+#  - -LRl
+#  - $(runtime.outdir)
 
 inputs:
   tso500_output_dir:
@@ -49,16 +55,21 @@ inputs:
 outputs:
   sample_id_list:
     label: Sample_ID list
-    doc: | List of succeeded Sample_ID
-    type: string[]
+    doc: |
+      List of succeeded Sample_ID
+    type: Directory
     outputBinding:
-      loadContents: true
       glob: "$(get_dsdm_json_path())"
-      outputEval: |-
-        ${
-          var dsdm = JSON.parse(self[0].contents)
-          return dsdm.samples[].identifier
-        }
+#    type: string[]
+#    outputBinding:
+#      loadContents: true
+#      glob: "$(get_dsdm_json_path())"
+#      outputEval: |-
+#        ${
+#          var dsdmObj = JSON.parse(self[0].contents)
+#          console.log(dsdmObj);
+#          return dsdmObj;
+#        }
 
 # about the code
 s:dateCreated: 2021-06-10

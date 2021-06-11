@@ -35,6 +35,7 @@ requirements:
           import pandas as pd
           import re
           import argparse
+          import gzip
           from os import path
   
           def get_args():
@@ -42,15 +43,20 @@ requirements:
               parser = argparse.ArgumentParser(description='From mosdepth output "shreshold.bed" to generate "Failed_Exon_coverage_QC.txt" for PierianDx CGW')
   
               parser.add_argument('-i', '--input-bed', required=True,
-                                  help='Mosdepth output file "threshold.bed", ungzipped')
+                                  help='Mosdepth output file "threshold.bed.gz"')
+              parser.add_argument('-s', '--sample-id', required=False,
+                                  help='Sample_ID')
               return parser.parse_args()
   
           def main():
               """ Generate Failed_Exon_coverage_QC.txt """
               args = get_args()
-              sample_id = path.basename(args.input_bed).split('.')[0]
+              if not args.sample_id:
+                  sample_id = path.basename(args.input_bed).split('.')[0]
+              else:
+                  sample_id = args.sample_id
               coverage_csv = sample_id + '_Failed_Exon_coverage_QC.txt'
-              with open(args.input_bed) as b:
+              with gzip.open(args.input_bed) as b:
                   data = pd.read_csv(b, sep='\t', header=0)
               # define header of the file
               header = 'Level 2: 100x coverage for > 50% of positions was not achieved for the targeted exon regions listed below:\n'
@@ -78,11 +84,17 @@ baseCommand: ["python3", "thresholds-bed-to-coverage-QC.py"]
 inputs:
   thresholds_bed:
     type: File
-    label: thresholds.bed
-    doc: mosdepth output thresholds.bed, ungzipped
+    label: thresholds.bed.gz
+    doc: mosdepth output thresholds.bed.gz
     inputBinding:
       prefix: -i
       position: 0
+  sample_id:
+    type: string?
+    label: Sample_ID
+    inputBinding:
+      prefix: -s
+      position: 1
 outputs:
   coverage_QC:
     type: File

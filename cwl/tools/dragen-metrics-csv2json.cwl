@@ -21,6 +21,7 @@ requirements:
           import re
           import sys
           import argparse
+          import gzip
 
           def get_args():
               """ Get arguments for the command """
@@ -29,6 +30,7 @@ requirements:
               # add Arguments
               parser.add_argument('-d', '--tso500-output-dir', required=True,
                                   help='TSO500/ctTSO500 analysis output directory')
+              
               return parser.parse_args()
 
           def get_sample_list(TSO500_OUTPUT_FOLDER):
@@ -74,28 +76,26 @@ requirements:
                   metrics_data = []
                   metrics_name = ''
                   metrics_dic = {}
-              for row in csv_reader:
-                  if row[0] == metrics_name:     # the same metrics data type
-                      metrics_data = append_row_to_metrics_data(row, metrics_data)
-                  elif not metrics_name:         # first line, metrics data is empty
-                      metrics_name = row[0]
-                      metrics_data = append_row_to_metrics_data(row, metrics_data)
-                  elif metrics_name != row[0]:   # a new metrics data type
-                      metrics_name_formatted = re.sub(' |/', '', metrics_name.title())
-                      metrics_dic[metrics_name_formatted] = metrics_data
-                      # initiate a new metrics data type
-                      metrics_name = row[0]
-                      metrics_data = []
-              metrics_name_formatted = re.sub(' |/', '', metrics_name.title())
-              metrics_dic[metrics_name_formatted] = metrics_data
-              return metrics_dic
+                  for row in csv_reader:
+                      if row[0] == metrics_name:     # the same metrics data type
+                          metrics_data = append_row_to_metrics_data(row, metrics_data)
+                      elif not metrics_name:         # first line, metrics data is empty
+                          metrics_name = row[0]
+                          metrics_data = append_row_to_metrics_data(row, metrics_data)
+                      elif metrics_name != row[0]:   # a new metrics data type
+                          metrics_name_formatted = re.sub(' |/', '', metrics_name.title())
+                          metrics_dic[metrics_name_formatted] = metrics_data
+                          # initiate a new metrics data type
+                          metrics_name = row[0]
+                          metrics_data = []
+                  metrics_name_formatted = re.sub(' |/', '', metrics_name.title())
+                  metrics_dic[metrics_name_formatted] = metrics_data
+                  return metrics_dic
 
           def make_metrics_json(TSO500_OUTPUT_FOLDER, sample_id):
               """ output json file """
               # locat metrics_csv_file
-              prefix = TSO500_OUTPUT_FOLDER +
-                      '/Logs_Intermediates/AlignCollapseFusionCaller/' +
-                      sample_id + '/' + sample_id
+              prefix = TSO500_OUTPUT_FOLDER + '/Logs_Intermediates/AlignCollapseFusionCaller/' + sample_id + '/' + sample_id
               trimmer_metrics = prefix + '.trimmer_metrics.csv'
               mapping_metrics = prefix + '.mapping_metrics.csv'
               umi_metrics = prefix + '.umi_metrics.csv'
@@ -120,13 +120,12 @@ requirements:
               args = get_args()
               tso500_output_dir = args.tso500_output_dir
               sample_list = get_sample_list(tso500_output_dir)
-              output_dir = tso500_output_dir + '/Results'
               for sample in sample_list:
                   sample_dic = make_metrics_json(tso500_output_dir, sample)
-                  output_json = output_dir + '/' + sample + '/' + sample +
-                                '_AlignCollapseFusionCaller_metrics.json'
-                  with open(output_json, 'w') as json_file:
-                    json.dump(sample_dic, json_file)
+                  output_json = sample + '_AlignCollapseFusionCaller_metrics.json'
+                  output_gz = output_json + '.gz'
+                  with gzip.open(output_gz, 'wt', encoding='ascii') as zipfile:
+                      json.dump(sample_dic, zipfile)
 
           main()
 
@@ -134,7 +133,13 @@ baseCommand: ["python3", "AlignCollapseFusionCaller_metrics.csv2json.py"]
 
 inputs:
   tso500_output_dir:
-    type: Folder
+    type: Directory
     inputBinding:
       prefix: "--tso500-output-dir"
       position: 0
+  
+outputs:
+  metrics_json:
+    type: File
+    outputBinding:
+      glob: "*_AlignCollapseFusionCaller_metrics.json.gz"

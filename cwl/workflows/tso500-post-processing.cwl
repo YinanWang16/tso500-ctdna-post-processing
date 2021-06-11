@@ -2,40 +2,87 @@
 cwlVersion: v1.0
 class: Workflow
 
-# Extentions
-$namespaces:
-  s: https://schema.org/
-  ilmn-tes: https://platform.illumina/rdf/ica/
-# Metadata
-s:author:
-  - class: s:Person
-    s:name: Yinan Wang
-    s:email: mailto:ywang16@illumina.com
-
-# label/doc
-id: TSO500-post-processing
-label: TSO500-post-processing
-doc: |
-  This workflow is designed according UMCCR's requirements to
-  1. Convert file format;
-  2. Backup files for archive;
-  3. Upload files to PierianDx S3 (optional);
-  4. Summarize DRAGEN metrics;
-  5. Compress and index VCFs.
+requirements:
+  - class: InlineJavascriptRequirement
+  - class: ScatterFeatureRequirement
+  - class: StepInputExpressionRquirement
+  - class: SubworkflowFeatureRequirement
 
 inputs:
-  tso500-output-dir:
-    label: tso500-output-dir:
-    doc: Path to tso500 analysis output directory, in which 'Log_intermediates'
-    and 'Results' are located.
-    In ICA, it should be gds://path/to/tso500-analysis-output/wrn.xxx/GatheredResults
-    type: Directory
-
+  - id sample_id
+    type: string
+  - id: raw_bam
+    doc: |
+      Raw alignment bam file
+      Logs_Intermediates/AlignCollapseFusionCaller/{Sample_ID}/{Sample_ID}.bam
+    type: File
+  - id: tso_manifest_bed
+    doc: |
+      illumina/resources/TSTC500_manifest.bed
+    type: File
+  - id: vcf_files
+    doc: |
+      vcf files in Results/{Sample_ID} directory
+      - {Sample_ID}_CopyNumberVariants.vcf
+      - {Sample_ID}_MergedSmallVariants.genome.vcf
+      - {Sample_ID}_MergedSmallVariants.vcf
+    type: File[]
+  - id: dragen_metrics_csv
+    doc: |
+      DRAGEN AlignCollapseFusionCaller metrics csv files
+      Under "Logs_Intermediates/AlignCollapseFusionCaller", including:
+      - {Sample_ID}.mapping_metrics.csv
+      - {Sample_ID}.trimmer_metrics.csv
+      - {Sample_ID}.umi_metrics.csv
+      - {Sample_ID}.wgs_coverage_metrics.csv
+      - {Sample_ID}.sv_metrics.csv
+      - {Sample_ID}.time_metrics.csv
+    type: File[]
+  - id: tmb_trace_tsv
+    doc: Results/{Sample_ID}/{Sample_ID}TMB_Trace.tsv
+  - id: fragment_length_hist_csv
+    doc: |
+      Logs_Intermediates/AlignCollapseFusionCaller/{Sample_ID}/{Sample_ID}.fragment_length_hist.csv
+    type: File
+#  - id: backup_file_list
+#    doc: | 
+#      Files to backup, including
+#      TSO500_Analysis_Output_Folder
+#      ├── Logs_Intermediates
+#      │  ├── AlignCollapseFusionCaller
+#      │  │   └── {sample}
+#      │  │      ├── evidence.{sample}.bam
+#      │  │      ├── evidence.{sample}.bam.bai
+#      │  │      ├── {sample}.bam
+#      │  │      ├── {sample}.bam.bai
+#      │  │      └── {sample}.bam.md5sum
+#      │  ├── Msi
+#      │  │   └── {sample}
+#      │  │      └── {sample}.msi.json
+#      │  ├── SampleAnalysisResults
+#      │  │   └── {sample}
+#      │  │      └── {sample}.SampleAnalysisResults.json
+#      │  ├── Tmb
+#      │  │   └── {sample}
+#      │  │      └──{sample}.tmb.json
+#      │  └── VariantCaller
+#      │      └── {sample}
+#      │         ├── {sample}.cleaned.stitched.bam
+#      │         └── {sample}.cleaned.stitched.bam.bai
+#      └── Results
+#         ├── dsdm.json
+#         ├── MetricsOutput.tsv
+#         └── {sample}
+#            ├── {sample}_Fusions.csv
+#            └── {sample}_MergedSmallVariantsAnnotated.json.gz
 outputs:
-  reorginazed-tso500-output:
-    label: reoriganized-tso500-output
-    type: Directory
+  - id: exon_coverage_qc
+    type: File
+    outputSource: mosdepth-thresholds-bed-to-coverage-QC-step/coverage_QC
+  - id: json_gz_file_list
+    type: File[]
+    outputSource: gzip/gzipped_file
+  - id: dragen_metrics_json
+    type: File
+    outputSource: dragen-metrics-csv2json/ 
 
-# about the code
-s:dateCreated: 2021-06-09
-s:codeRepository: https://github.com/YinanWang16/tso500-ctdna-post-processin
