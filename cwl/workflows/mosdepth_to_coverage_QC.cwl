@@ -44,12 +44,12 @@ outputs:
     label: Sample_ID_Failed_Exon_coverage_QC.txt
     doc: make Failed_Exon_coverage_QC.txt for PierianDx CGW
     type: File
-    outputSource: coverage_QC/coverage_QC
+    outputSource: make_coverage_QC/coverage_QC
   target_region_coverage_metrics:
     label: Sample_ID.TargetRegionCoverage.tsv
     doc: Consensus reads converage on TSO targeted regions.
     type: File
-    outputSource: coverage_metrics/target_region_coverage_metrics
+    outputSource: make_coverage_metrics/target_region_coverage_metrics
 
 steps:
   mosdepth:
@@ -61,21 +61,15 @@ steps:
       output_prefix:
         valueFrom: $(inputs.bam_or_cram.nameroot)
     out: [thresholds_bed_gz]
-  gunzip:
-    run: ../tools/gunzip.cwl
-    label: gunzip
-    in:
-      gz_file: mosdepth/thresholds_bed_gz
-    out: [unzipped_file]
-  coverage_QC:
+  make_coverage_QC:
     run: ../tools/mosdepth-thresholds-bed-to-coverage-QC-step.cwl
     label: make_coverage_QC.py
     in:
-      thresholds_bed: gunzip/unzipped_file
+      thresholds_bed: mosdepth/thresholds_bed_gz
     out: [coverage_QC]
-  coverage_metrics:
+  make_coverage_metrics:
     run: ../tools/mosdepth-thresholds-bed-to-target-region-coverage.cwl
     label: target_region_coverage_metrics.py
     in:
-      thresholds_bed: gunzip/unzipped_file
+      thresholds_bed: mosdepth/thresholds_bed_gz
     out: [target_region_coverage_metrics]
