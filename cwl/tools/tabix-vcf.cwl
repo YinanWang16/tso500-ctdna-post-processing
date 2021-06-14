@@ -1,6 +1,7 @@
 #!/usr/bin/env cwl-runner
 cwlVersion: v1.0
 class: CommandLineTool
+
 id: tabix-vcf
 label: tabix-vcf
 
@@ -10,20 +11,20 @@ hints:
 requirements:
   InitialWorkDirRequirement:
     listing:
-      - $(inputs.vcf)
+      - $(inputs.vcf_gz)
 
 baseCommand: [tabix, -p, vcf]
-arguments: 
-  - $(inputs.vcf)
 
 inputs:
-  vcf:
+  vcf_gz:
     type: File
+    inputBinding:
+      position: 0
     
 outputs:
   tbi:
     type: File
     outputBinding:
-      glob: $(inputs.vcf.basename).tbi
+      glob: "$(inputs.vcf_gz.basename).tbi"
     
 

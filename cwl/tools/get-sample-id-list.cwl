@@ -4,13 +4,7 @@ class: CommandLineTool
 
 # Extentions
 $namespaces:
-  s: https://schema.org/
   ilmn-tes: https://platform.illumina/rdf/ica/
-# Metadata
-s:author:
-  - class: s:Person
-    s:name: Yinan Wang
-    s:email: mailto:ywang16@illumina.com
 
 # label/doc
 id: get_sample_id_list
@@ -34,15 +28,27 @@ requirements:
       - var get_dsdm_json_path = function() {
           return inputs.tso500_output_dir.path + "/" + "Results" + "/" + "dsdm.json";
         }
+      - var load_dsdm_json_content = function() {
+          var dsdm_json_file = get_dsdm_json_path
+          fetch(dsdm
+      - var get_succeeded_sample_id_list = function(dsdm_contents) {
+          var dsdmOjb = JSON.parse(dsdm_contents);
+          console.log(dsdmObj);
+          var jp = require('jsonpath);
+          var sample_id_list = jp.query(dsdmObj, '$.samples[?(@.qualified)].identifier')
+          return sample_id_list
+        }
   InitialWorkDirRequirement:
     listing:
-      - $(inputs.tso500_output_dir)
+      - $(inputs.tso500_output_dir.listing)
+      #- $(inputs.tso500_output_dir)
 
-#baseCommand: [ls]
+baseCommand: [jq]
 
-#arguments:
-#  - -LRl
-#  - $(runtime.outdir)
+arguments:
+  - -r
+  - '.samples[]|select(.qualified).identifier'
+  - $(get_dsdm_json_path())
 
 inputs:
   tso500_output_dir:
@@ -52,14 +58,17 @@ inputs:
       (gds://path/to/wrn.xxx/GatheredResults)
     type: Directory
 
+stdout: list_samples.txt
+
 outputs:
   sample_id_list:
     label: Sample_ID list
     doc: |
       List of succeeded Sample_ID
-    type: Directory
-    outputBinding:
-      glob: "$(get_dsdm_json_path())"
+    type: stdout
+      
+      #glob: "$(get_dsdm_json_path())"
+      # glob: "$(inputs.tso500_output_dir.basename)"
 #    type: string[]
 #    outputBinding:
 #      loadContents: true
@@ -71,6 +80,3 @@ outputs:
 #          return dsdmObj;
 #        }
 
-# about the code
-s:dateCreated: 2021-06-10
-s:codeRepository:

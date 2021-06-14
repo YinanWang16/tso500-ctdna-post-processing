@@ -1,0 +1,3 @@
+vcf_gz:
+  class: File
+  path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/tools/FusionMix_DNA_1pct_rep1_CopyNumberVariants.vcf.gz
