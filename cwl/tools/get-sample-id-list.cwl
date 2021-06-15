@@ -12,36 +12,30 @@ label: get_sample_id_list
 doc: |
   Get successfully analyzed Sample_ID from Results/dsdm.json
 
-# Docker and resources
-hints:
-  # DockerRequirement:
-  #   dockerPull:
-  ResourceRequirement:
-    ilmn-tes:resources:
-      tier: standard
-#      type: stardard
-#      size: small
+#hints:
+#  ResourceRequirement:
+#    ilmn-tes:resources:
+#      tier: standard
 
 requirements:
-  InlineJavascriptRequirement:
+  - class: InlineJavascriptRequirement
     expressionLib:
       - var get_dsdm_json_path = function() {
-          return inputs.tso500_output_dir.path + "/" + "Results" + "/" + "dsdm.json";
+          return inputs.tso500_output_dir.basename + "/" + "Results" + "/" + "dsdm.json";
         }
-      - var load_dsdm_json_content = function() {
-          var dsdm_json_file = get_dsdm_json_path
-          fetch(dsdm
       - var get_succeeded_sample_id_list = function(dsdm_contents) {
-          var dsdmOjb = JSON.parse(dsdm_contents);
-          console.log(dsdmObj);
-          var jp = require('jsonpath);
-          var sample_id_list = jp.query(dsdmObj, '$.samples[?(@.qualified)].identifier')
-          return sample_id_list
+          var dsdmObj = JSON.parse(dsdm_contents);
+          var sample_id_list = [];
+          for (var i = 0; i < dsdmObj.samples.length; i++) {
+            if (dsdmObj.samples[i].qualified) {
+              sample_id_list.push(dsdmObj.samples[i].identifier);
+            }
+          }
+          return sample_id_list;
         }
-  InitialWorkDirRequirement:
+  - class: InitialWorkDirRequirement
     listing:
-      - $(inputs.tso500_output_dir.listing)
-      #- $(inputs.tso500_output_dir)
+      - $(inputs.tso500_output_dir)
 
 baseCommand: [jq]
 
@@ -66,17 +60,11 @@ outputs:
     doc: |
       List of succeeded Sample_ID
     type: stdout
-      
-      #glob: "$(get_dsdm_json_path())"
-      # glob: "$(inputs.tso500_output_dir.basename)"
-#    type: string[]
-#    outputBinding:
-#      loadContents: true
-#      glob: "$(get_dsdm_json_path())"
-#      outputEval: |-
-#        ${
-#          var dsdmObj = JSON.parse(self[0].contents)
-#          console.log(dsdmObj);
-#          return dsdmObj;
-#        }
+
+  sample_id_list2:
+    type: string[]
+    outputBinding:
+      loadContents: true
+      glob: "$(get_dsdm_json_path())"
+      outputEval: $(get_succeeded_sample_id_list(self[0].contents))
 
