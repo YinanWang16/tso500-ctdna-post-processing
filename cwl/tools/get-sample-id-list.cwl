@@ -37,12 +37,12 @@ requirements:
     listing:
       - $(inputs.tso500_output_dir)
 
-baseCommand: [jq]
+baseCommand: [ls]
 
-arguments:
-  - -r
-  - '.samples[]|select(.qualified).identifier'
-  - $(get_dsdm_json_path())
+# arguments:
+#  - -r
+#  - '.samples[]|select(.qualified).identifier'
+#  - $(get_dsdm_json_path())
 
 inputs:
   tso500_output_dir:
@@ -52,14 +52,14 @@ inputs:
       (gds://path/to/wrn.xxx/GatheredResults)
     type: Directory
 
-stdout: list_samples.txt
+# stdout: list_samples.txt
 
 outputs:
-  sample_id_list:
-    label: Sample_ID list
-    doc: |
-      List of succeeded Sample_ID
-    type: stdout
+#  sample_id_list:
+#    label: Sample_ID list
+#    doc: |
+#      List of succeeded Sample_ID
+#    type: stdout
 
   sample_id_list2:
     type: string[]
