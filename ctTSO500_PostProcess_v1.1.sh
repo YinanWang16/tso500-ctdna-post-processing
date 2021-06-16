@@ -151,7 +151,7 @@ for sample in ${SAMPLES[@]}; do
 		$DOCKER_IMG_TABIX \
 		bash -c 'cd /mount/Results/sample; for vcf in `find ./ -name "*vcf"`; do bgzip -c $vcf >${vcf}.gz; tabix -f ${vcf}.gz; done; rm '${sample}'_MergedSmallVariants.genome.vcf'
 
-## step 4. back up TMB and MSI json to Results
+## step 4. backup TMB and MSI json to Results
 	tmb_json=$TSO500_OUTDIR/Logs_Intermediates/Tmb/${sample}/${sample}.tmb.json
 	bak_tmb_json=$TSO500_OUTDIR/Results/${sample}/${sample}.tmb.json
 	cp $tmb_json $bak_tmb_json
@@ -159,10 +159,15 @@ for sample in ${SAMPLES[@]}; do
 	msi_json=$TSO500_OUTDIR/Logs_Intermediates/Msi/${sample}/${sample}.msi.json
 	bak_msi_json=$TSO500_OUTDIR/Results/${sample}/${sample}.msi.json
 	cp $msi_json $bak_msi_json
-## step 5. back up SampleAnalysisResults.json to Results
+## step 5. backup SampleAnalysisResults.json to Results
         analysis_results_json=$TSO500_OUTDIR/Logs_Intermediates/SampleAnalysisResults/${sample}_SampleAnalysisResults.json
         bak_analysis_results_json=$TSO500_OUTDIR/Results/${sample}/${sample}_SampleAnalysisResults.json
         cp $analysis_results_json $bak_analysis_results_json
+
+## step 6. backup fragment_length_hist metrics
+        fragment_length_hist=$TSO500_OUTDIR/Logs_Intermediates/AlignCollapseFusionCaller/${sample}/${sample}.fragment_length_hist.csv
+        bak_fragment_length_hist=$TSO500_OUTDIR/Results/${sample}/${sample}.fragment_length_hist.csv
+        cp $fragment_length_hist $bak_fragment_length_hist
 done
 ## ----------------- 4. generate conbined DRAGEN QC metrics ---------------------- ##
 COMBINE=/staging/yinan/script/combine_AlignCollapseFusionCaller_metrics.sh

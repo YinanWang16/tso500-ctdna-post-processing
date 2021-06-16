@@ -21,8 +21,9 @@ requirements:
   - class: InlineJavascriptRequirement
     expressionLib:
       - var get_dsdm_json_path = function() {
-          return inputs.tso500_output_dir.basename + "/" + "Results" + "/" + "dsdm.json";
+          return "Results/dsdm.json";
         }
+          # return inputs.tso500_output_dir.basename + "/" + "Results" + "/" + "dsdm.json";
       - var get_succeeded_sample_id_list = function(dsdm_contents) {
           var dsdmObj = JSON.parse(dsdm_contents);
           var sample_id_list = [];
@@ -33,16 +34,19 @@ requirements:
           }
           return sample_id_list;
         }
+  - class: ShellCommandRequirement
   - class: InitialWorkDirRequirement
     listing:
-      - $(inputs.tso500_output_dir)
+      - entry: $(inputs.tso500_output_dir.listing)
+#        entryname: $(inputs.tso500_output_dir)
+        writable: true
 
 baseCommand: [ls]
 
-# arguments:
-#  - -r
-#  - '.samples[]|select(.qualified).identifier'
-#  - $(get_dsdm_json_path())
+arguments:
+  - -Rl
+  - valueFrom: $("> Results/ls.txt")
+    shellQuote: false
 
 inputs:
   tso500_output_dir:
@@ -52,19 +56,16 @@ inputs:
       (gds://path/to/wrn.xxx/GatheredResults)
     type: Directory
 
-# stdout: list_samples.txt
-
 outputs:
-#  sample_id_list:
-#    label: Sample_ID list
-#    doc: |
-#      List of succeeded Sample_ID
-#    type: stdout
-
-  sample_id_list2:
+  sample_id_list:
     type: string[]
+    doc: |
+      List of succeeded Sample_ID
     outputBinding:
       loadContents: true
       glob: "$(get_dsdm_json_path())"
       outputEval: $(get_succeeded_sample_id_list(self[0].contents))
-
+  results_folder:
+    type: Directory
+    outputBinding:
+      glob: "Results"
