@@ -22,6 +22,7 @@ requirements:
           import os
           import logging
           import argparse
+          import gzip
 
           # Set logging level
           logging.basicConfig(level=logging.DEBUG)
@@ -55,10 +56,12 @@ requirements:
           def main():
               args = get_args()
               tsv_file = args.input
-              json_file = os.path.basename(tsv_file.rsplit('.', 1)[0] + '.json')
+              json_file = os.path.basename(tsv_file.rsplit('.', 1)[0] + '.json.gz')
               variant_df = tsv2json(tsv_file, args.skip_rows)
-              with open(json_file, 'w') as jf:
-                  json.dump(variant_df, jf, default=convert)
+              # with open(json_file, 'w') as jf:
+              #    json.dump(variant_df, jf, default=convert)
+              with gzip.open(json_file, 'wt', encoding='ascii') as zipfile:
+                  json.dump(variant_df, zipfile, default=convert)
 
           main()
 
@@ -80,4 +83,4 @@ outputs:
   json_file:
     type: File
     outputBinding:
-      glob: "$(inputs.tsv_file.nameroot).json"
+      glob: "$(inputs.tsv_file.nameroot).json.gz"
