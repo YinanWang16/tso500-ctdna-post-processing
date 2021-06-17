@@ -38,15 +38,15 @@ requirements:
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.tso500_output_dir.listing)
-#        entryname: $(inputs.tso500_output_dir)
         writable: true
 
-baseCommand: [ls]
+#baseCommand: [ls]
+baseCommand: []
 
-arguments:
-  - -Rl
-  - valueFrom: $("> Results/ls.txt")
-    shellQuote: false
+#arguments:
+#  - -Rl
+#  - valueFrom: $("> Results/ls.txt")
+#    shellQuote: false
 
 inputs:
   tso500_output_dir:

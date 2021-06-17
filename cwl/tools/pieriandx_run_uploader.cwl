@@ -16,7 +16,7 @@ s:author:
 id: PierianDx_Run_Uploader
 label: PierianDx_Run_Uploader
 doc: |
-  This is a PierianDx Run Uploader for TSO
+  This is a PierianDx Run Uploader for TSO500
 
 hints:
   DockerRequirement:
@@ -25,9 +25,7 @@ hints:
     ilmn-tes:resources:
       tier: standard
       type: standard
-      size: medium
-      coreMin: 4
-      ramMin: 2048
+      size: small
       
 requirements:
   InitialWorkDirRequirement:
@@ -90,7 +88,6 @@ outputs:
     outputBinding:
       glob: "cgwRunUploader.log"
 
-
 # about the code
 #s:dateCreated: 2021-06-07
-s:codeRepository: https://github.com/YinanWang16/TSO500-Liftover
+s:codeRepository: https://github.com/YinanWang16/tso500-ctdna-post-processing

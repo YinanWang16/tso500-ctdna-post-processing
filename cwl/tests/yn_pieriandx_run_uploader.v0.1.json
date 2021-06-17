@@ -2,7 +2,7 @@
     "class": "CommandLineTool",
     "id": "#main",
     "label": "PierianDx_Run_Uploader",
-    "doc": "This is a PierianDx Run Uploader for TSO\n",
+    "doc": "This is a PierianDx Run Uploader for TSO500\n",
     "hints": [
         {
             "dockerPull": "amazoncorretto:8",
@@ -13,9 +13,7 @@
             "https://platform.illumina/rdf/ica/resources": {
                 "tier": "standard",
                 "type": "standard",
-                "size": "medium",
-                "coreMin": 4,
-                "ramMin": 2048
+                "size": "small"
             }
         }
     ],
@@ -120,7 +118,7 @@
             "https://schema.org/email": "mailto:ywang16@illumina.com"
         }
     ],
-    "https://schema.org/codeRepository": "https://github.com/YinanWang16/TSO500-Liftover",
+    "https://schema.org/codeRepository": "https://github.com/YinanWang16/tso500-ctdna-post-processing",
     "cwlVersion": "v1.0",
     "$namespaces": {
         "s": "https://schema.org/",
