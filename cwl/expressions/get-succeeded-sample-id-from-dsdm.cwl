@@ -1,6 +1,6 @@
 #!/usr/bin/env cwlrunner
 
-cwlVersion: v1.0
+cwlVersion: v1.1
 class: ExpressionTool
 
 doc: |
@@ -8,23 +8,11 @@ doc: |
 
 requirements:
   - class: InlineJavascriptRequirement
-#    expressionLib:
-#      - var get_succeeded_sample_id_list = function(dsdm_contents) {
-#          var dsdmObj = JSON.parse(dsdm_contents);
-#          var sample_id_list = [];
-#          for (var i = 0; i < dsdmObj.samples.length; i++) {
-#            if (dsdmObj.samples[i].qualified) {
-#              sample_id_list.push(dsdmObj.samples[i].identifier);
-#            }
-#          }
-#          return sample_id_list;
-#        }
 
 inputs:
   dsdm_json:
     type: File
-    inputBinding:
-      loadContents: true
+    loadContents: true
 
 expression: >
   ${
@@ -48,8 +36,4 @@ outputs:
     type: string[]
     doc: |
       List of succeeded Sample_ID
-#    outputBinding:
-#      loadContents: true
-#      glob: "$inputs.dsdm_json.basename"
-#      outputEval: $(get_succeeded_sample_id_list(self[0].contents))
 
