@@ -20,6 +20,10 @@ doc: |
 requirements:
   - class: InlineJavascriptRequirement
     expressionLib:
+      - var get_dsdm_json_path = function() {
+          return "Results/dsdm.json";
+        }
+          # return inputs.tso500_output_dir.basename + "/" + "Results" + "/" + "dsdm.json";
       - var get_succeeded_sample_id_list = function(dsdm_contents) {
           var dsdmObj = JSON.parse(dsdm_contents);
           var sample_id_list = [];
@@ -30,18 +34,27 @@ requirements:
           }
           return sample_id_list;
         }
+  - class: ShellCommandRequirement
   - class: InitialWorkDirRequirement
     listing:
-      - entry: $(inputs.dsdm_json)
+      - entry: $(inputs.tso500_output_dir.listing)
+        writable: true
 
-baseCommand: [ls]
+#baseCommand: [ls]
+baseCommand: []
+
+#arguments:
+#  - -Rl
+#  - valueFrom: $("> Results/ls.txt")
+#    shellQuote: false
 
 inputs:
-  dsdm_json:
-    label: dsdm.json
-    doc: | 
-      dsdm.json under Results/ directory
-    type: File
+  tso500_output_dir:
+    label: tso500-output-dir
+    doc: |
+      The output directory of TSO500 analysis
+      (gds://path/to/wrn.xxx/GatheredResults)
+    type: Directory
 
 outputs:
   sample_id_list:
@@ -50,5 +63,9 @@ outputs:
       List of succeeded Sample_ID
     outputBinding:
       loadContents: true
-      glob: $(inputs.dsdm_json.basename)
+      glob: "$(get_dsdm_json_path())"
       outputEval: $(get_succeeded_sample_id_list(self[0].contents))
+  results_folder:
+    type: Directory
+    outputBinding:
+      glob: "Results"

@@ -1,0 +1,3 @@
+dsdm_json:
+  class: File
+  path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/expressions/dsdm.json
