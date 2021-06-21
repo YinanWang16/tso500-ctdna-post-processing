@@ -19,27 +19,31 @@ requirements:
           import json
           import csv
           import re
-          import sys
+          from os import path
           import argparse
           import gzip
 
           def get_args():
               """ Get arguments for the command """
-              parser = argparse.ArgumentParser(description='Covnert AlignCollapseFusionCaller/*metrics.csv to json')
+              parser = argparse.ArgumentParser(description='Convert AlignCollapseFusionCaller/*metrics.csv to json')
 
               # add Arguments
-              parser.add_argument('-d', '--tso500-output-dir', required=True,
-                                  help='TSO500/ctTSO500 analysis output directory')
+              parser.add_argument('--mapping-metrics', required=True,
+                                  help='Sample_ID.mapping_metrics.csv')
+              parser.add_argument('--trimmer-metrics', required=True,
+                                  help='Sample_ID.trimmer_metrics.csv')
+              parser.add_argument('--umi-metrics', required=True,
+                                  help='Sample_ID.umi_metrics.csv')
+              parser.add_argument('--sv-metrics', required=True,
+                                  help='Sample_ID.sv_metrics.csv')
+              parser.add_argument('--wgs-coverage-metrics', required=True,
+                                  help='Sample_ID.wgs_metrics.csv')
+              parser.add_argument('--time-metrics', required=True,
+                                  help='Sample_ID.time_metrics.csv')
+              parser.add_argument('--sample-id', required=False,
+                                  help='Sample_ID')
               
               return parser.parse_args()
-
-          def get_sample_list(TSO500_OUTPUT_FOLDER):
-              """ get sample list from dsdm.json """
-              dsdm_json = TSO500_OUTPUT_FOLDER + "/Results/dsdm.json"
-              with open(dsdm_json, "rt") as f:
-                  data = json.load(f)
-              sample_list = [d['identifier'] for d in data['samples']]
-              return sample_list
 
           def string_or_list(value):
               """ return a string or list of a value"""
@@ -92,54 +96,69 @@ requirements:
                   metrics_dic[metrics_name_formatted] = metrics_data
                   return metrics_dic
 
-          def make_metrics_json(TSO500_OUTPUT_FOLDER, sample_id):
+          def make_metrics_json(file_list, sample_id):
               """ output json file """
-              # locat metrics_csv_file
-              prefix = TSO500_OUTPUT_FOLDER + '/Logs_Intermediates/AlignCollapseFusionCaller/' + sample_id + '/' + sample_id
-              trimmer_metrics = prefix + '.trimmer_metrics.csv'
-              mapping_metrics = prefix + '.mapping_metrics.csv'
-              umi_metrics = prefix + '.umi_metrics.csv'
-              wgs_coverage_metrics = prefix + '.wgs_coverage_metrics.csv'
-              sv_metrics = prefix + '.sv_metrics.csv'
-              time_metrics = prefix + '.time_metrics.csv'
-              metrics_csv_list = [
-                                  trimmer_metrics,
-                                  mapping_metrics,
-                                  umi_metrics,
-                                  wgs_coverage_metrics,
-                                  sv_metrics,
-                                  time_metrics,
-                                  ]
               # make the metrics dictonary.
               metrics_dic = {}
-              for csv_file in metrics_csv_list:
-                  metrics_dic.update(make_metrics_dic(csv_file))
+              for file in file_list:
+                  metrics_dic.update(make_metrics_dic(file))
               return metrics_dic
 
           def main():
               args = get_args()
-              tso500_output_dir = args.tso500_output_dir
-              sample_list = get_sample_list(tso500_output_dir)
-              for sample in sample_list:
-                  sample_dic = make_metrics_json(tso500_output_dir, sample)
-                  output_json = sample + '_AlignCollapseFusionCaller_metrics.json'
-                  output_gz = output_json + '.gz'
-                  with gzip.open(output_gz, 'wt', encoding='ascii') as zipfile:
-                      json.dump(sample_dic, zipfile)
+              metrics_file_list = [
+                                    args.mapping_metrics,
+                                    args.trimmer_metrics,
+                                    args.umi_metrics,
+                                    args.wgs_coverage_metrics,
+                                    args.sv_metrics,
+                                    args.time_metrics,
+                                  ]
+              
+              # define output file prefix
+              if not args.sample_id:
+                  sample_id = path.basename(args.mapping_metrics).split('.')[0]
+              else:
+                  sample_id = args.sample_id
+
+              sample_dic = make_metrics_json(metrics_file_list, sample_id)
+              output_json = sample_id + '.AlignCollapseFusionCaller_metrics.json'
+              output_gz = output_json + '.gz'
+              with gzip.open(output_gz, 'wt', encoding='ascii') as zipfile:
+                  json.dump(sample_dic, zipfile)
 
           main()
 
 baseCommand: ["python3", "AlignCollapseFusionCaller_metrics.csv2json.py"]
 
 inputs:
-  tso500_output_dir:
-    type: Directory
+  mapping_metrics_csv:
+    type: File
     inputBinding:
-      prefix: "--tso500-output-dir"
-      position: 0
+      prefix: "--mapping-metrics"
+  trimmer_metrics_csv:
+    type: File
+    inputBinding:
+      prefix: "--trimmer-metrics"
+  umi_metrics_csv:
+    type: File
+    inputBinding:
+      prefix: "--umi-metrics"
+  wgs_coverage_metrics_csv:
+    type: File
+    inputBinding:
+      prefix: "--wgs-coverage-metrics"
+  sv_metrics_csv:
+    type: File
+    inputBinding:
+      prefix: "--sv-metrics"
+  time_metrics_csv:
+    type: File
+    inputBinding:
+      prefix: "--time-metrics"
   
 outputs:
   metrics_json:
     type: File
     outputBinding:
-      glob: "*_AlignCollapseFusionCaller_metrics.json.gz"
+      glob: "*.AlignCollapseFusionCaller_metrics.json.gz"

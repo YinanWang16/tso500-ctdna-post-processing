@@ -1,4 +1,18 @@
-tso500_output_dir:
-  class: Directory
-  path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis
-
+wgs_coverage_metrics_csv:  # type "File"
+    class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.wgs_coverage_metrics.csv
+umi_metrics_csv:  # type "File"
+    class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.umi_metrics.csv
+trimmer_metrics_csv:  # type "File"
+    class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.trimmer_metrics.csv
+time_metrics_csv:  # type "File"
+    class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.time_metrics.csv
+sv_metrics_csv:  # type "File"
+    class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.sv_metrics.csv
+mapping_metrics_csv:  # type "File"
+    class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.mapping_metrics.csv

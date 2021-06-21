@@ -4,7 +4,7 @@ cwlVersion: v1.1
 class: ExpressionTool
 
 doc: |
-  Locate "Results/dsdm.json" and output succeeded Sample_ID list
+  From "Results/dsdm.json" output succeeded Sample_ID list
 
 requirements:
   - class: InlineJavascriptRequirement
