@@ -42,7 +42,7 @@ requirements:
                                   help='Sample_ID.time_metrics.csv')
               parser.add_argument('--sample-id', required=False,
                                   help='Sample_ID')
-              
+
               return parser.parse_args()
 
           def string_or_list(value):
@@ -114,7 +114,7 @@ requirements:
                                     args.sv_metrics,
                                     args.time_metrics,
                                   ]
-              
+
               # define output file prefix
               if not args.sample_id:
                   sample_id = path.basename(args.mapping_metrics).split('.')[0]
@@ -156,9 +156,9 @@ inputs:
     type: File
     inputBinding:
       prefix: "--time-metrics"
-  
+
 outputs:
-  metrics_json:
+  metrics_json_gz:
     type: File
     outputBinding:
       glob: "*.AlignCollapseFusionCaller_metrics.json.gz"

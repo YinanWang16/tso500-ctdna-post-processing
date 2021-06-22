@@ -29,7 +29,7 @@ hints:
       ramMin: 2048
 
 requirements:
-  InlineJavascriptRequirement:
+  - class: InlineJavascriptRequirement
     expressionLib:
       - var get_output_prefix = function(){
               /*
@@ -40,6 +40,10 @@ requirements:
               }
               return inputs.bam_or_cram.nameroot;
             }
+  - class: InitialWorkDirRequirement
+    listing:
+      - $(inputs.bai)
+
 baseCommand: [mosdepth]
 arguments:
   # output_prefix
@@ -88,7 +92,8 @@ inputs:
     inputBinding:
       position: 5
     secondaryFiles: .bai
-
+  bai:
+    type: File
 outputs:
   thresholds_bed_gz:
     type: File
