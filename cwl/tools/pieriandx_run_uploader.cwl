@@ -28,7 +28,7 @@ hints:
       size: small
       
 requirements:
-  InitialWorkDirRequirement:
+  - class:InitialWorkDirRequirement
     listing:
       - $(inputs.pieriandx_run_uploader)
       - $(inputs.s3_credential)

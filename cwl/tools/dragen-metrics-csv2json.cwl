@@ -66,7 +66,7 @@ requirements:
                                       'percent': float(row[4]),
                                       })
               else:
-                  # Doesn't have persontage
+                  # Doesn't have percentage
                   metrics_data.append({
                                       'name': row[2],
                                       'value': string_or_list(row[3]),

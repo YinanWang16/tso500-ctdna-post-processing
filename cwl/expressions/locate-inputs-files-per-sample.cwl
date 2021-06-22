@@ -1,6 +1,6 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: v1.1
+cwlVersion: v1.0
 class: ExpressionTool
 
 doc:
@@ -9,10 +9,6 @@ doc:
 
 requirements:
   - class: InlineJavascriptRequirement
-    expressionLib:
-      - var raw_bam_file = function() {
-          return inputs.tso500_ctdna_output_dir.basename + "/Logs_Intermediates/AlignCollapseFusionCaller/" + inputs.sample_id + "/" + inputs.sample_id + ".bam";
-        }
 
 inputs:
   tso500_ctdna_output_dir:
@@ -20,29 +16,62 @@ inputs:
   sample_id:
     type: string
 
-expression: |
+expression: >-
   ${
-    file_list = inputs.tso500_ctdna_output_dir.listing;
-    var IntermediatesDir = inputs.tso500_ctdna_output_dir.basename + "/Logs_Intermediates/";
-    var ACFCPrefix = IntermediatesDir + "AlignCollapseFusionCaller/" + inputs.sample_id + "/" + inputs.sample_id;
-    var MsiPrefix = IntermediatesDir + "Msi/" + inputs.sample_id + "/" + inputs.sample_id;
-    var TmbPrefix = IntermediatesDir + "Tmb/" + inputs.sample_id + "/" + inputs.sample_id;
-    var SARPrefix = IntermediatesDir + "SampleAnalysisResults/" + inputs.sample_id + "/" + inputs.sample_id;
-    var VCPrefix = IntermediatesDir + "VariantCaller/" + inputs.sample_id + "/" + inputs.sample_id;
-    var ResultsPrefix = inputs.tso500_ctdna_output_dir.basename + "/Results/" + inputs.sample_id + "/" + inputs.sample_id;
-    var raw_bam_file = ACFCPrefix + ".bam";
-    var raw_bam_md5sum_file = ACFCPrefix + ".bam.md5sum";
-    var evidence_bam_file = IntermediatesDir + "AlignCollapseFusionCaller/" + inputs.sample_id + "/evidence." + inputs.sample_id + ".bam";
-    var evidence_bai_file = IntermediatesDir + "AlignCollapseFusionCaller/" + inputs.sample_id + "/evidence." + inputs.sample_id + ".bam.bai";
-    var mapping_metrics_csv_file = ACFCPrefix + ".mapping_metrics.csv";
-    var trimmer_metrics_csv_file = ACFCPrefix + ".trimmer_metrics.csv";
-    var umi_metrics_csv_file = ACFCPrefix + ".umi_metrics.csv";
-    var wgs_coverage_metrics_csv_file = ACFCPrefix + ".wgs_coverage_metrics.csv";
-    var sv_metrics_csv_file = ACFCPrefix + ".sv_metrics.csv";
-    var time_metrics_csv_file = ACFCPrefix + ".time_metrics.csv";
-    var fragment_length_hist_csv_file = ACFCPrefix + ".fragment_length_hist.csv";
+    var raw_bam_file = '';
+    var raw_bai_file = '';
+    var raw_bam_md5sum_file = '';
+    var evidence_bam_file = '';
+    var evidence_bai_file = '';
+    var mapping_metrics_csv_file = '';
+    var trimmer_metrics_csv_file = '';
+    var umi_metrics_csv_file = '';
+    var wgs_coverage_metrics_csv_file = '';
+    var sv_metrics_csv_file = '';
+    var time_metrics_csv_file = '';
+    var fragment_length_hist_csv_file = '';
+    inputs.tso500_ctdna_output_dir.listing.forEach(function (item) {
+      if (item.class == "Directory" && item.basename === "Logs_Intermediates") {
+        item.listing.forEach(function (item2) {
+          if (item2.class == "Directory" && item2.basename === "AlignCollapseFusionCaller") {
+            item2.listing.forEach(function (item3) {
+              if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
+                item3.listing.forEach(function (item4) {
+                  if (item4.basename === inputs.sample_id + ".bam") {
+                    raw_bam_file = item4;
+                  } else if (item4.basename === inputs.sample_id + ".bam.bai") {
+                    raw_bai_file = item4;
+                  } else if (item4.basename === inputs.sample_id + ".bam.md5sum") {
+                    raw_bam_md5sum_file = item4;
+                  } else if (item4.basename === "evidence." + inputs.sample_id + ".bam") {
+                    evidence_bam_file = item4;
+                  } else if (item4.basename === "evidence." + inputs.sample_id + ".bam.bai") {
+                    evidence_bai_file = item4;
+                  } else if (item4.basename === inputs.sample_id + ".mapping_metrics.csv") {
+                    mapping_metrics_csv_file = item4;
+                  } else if (item4.basename === inputs.sample_id + ".trimmer_metrics.csv") {
+                    trimmer_metrics_csv_file = item4;
+                  } else if (item4.basename === inputs.sample_id + ".umi_metrics.csv") {
+                    umi_metrics_csv_file = item4;
+                  } else if (item4.basename === inputs.sample_id + ".wgs_coverage_metrics.csv") {
+                    wgs_coverage_metrics_csv_file = item4;
+                  } else if (item4.basename === inputs.sample_id + ".sv_metrics.csv") {
+                    sv_metrics_csv_file = item4;
+                  } else if (item4.basename === inputs.sample_id + ".time_metrics.csv") {
+                    time_metrics_csv_file = item4;
+                  } else if (item4.basename === inputs.sample_id + ".fragment_length_hist.csv") {
+                    fragment_length_hist_csv_file = item4;
+                  };
+                });
+              };
+            });
+          };
+        });
+      };
+    });
     return {
-      "raw_bam": 
+      "raw_bam": raw_bam_file,
+      "raw_bai": raw_bai_file,
       "raw_bam_md5sum": raw_bam_md5sum_file,
       "evidence_bam": evidence_bam_file,
       "evidence_bai": evidence_bai_file,
