@@ -35,12 +35,16 @@ expression: >-
     var tmb_json_file = '';
     var cleaned_stitched_bam_file = '';
     var cleaned_stitched_bai_file = '';
+    var vcf_files = [];
+    var fusion_csv_file = '';
+    var mergedsmallvariantsannotated_json_gz_file = '';
+    var tmb_trace_tsv_file = '';
     inputs.tso500_ctdna_output_dir.listing.forEach(function (item) {
-      if (item.basename === "Logs_Intermediates") {
+      if (item.class == "Directory" && item.basename === "Logs_Intermediates") {
         item.listing.forEach(function (item2) {
-          if (item2.basename === "AlignCollapseFusionCaller") {
+          if (item2.class == "Directory" && item2.basename === "AlignCollapseFusionCaller") {
             item2.listing.forEach(function (item3) {
-              if (item3.basename === inputs.sample_id) {
+              if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
                   if (item4.basename === inputs.sample_id + ".bam") {
                     raw_bam_file = item4;
@@ -70,9 +74,9 @@ expression: >-
                 })
               }
             })
-          } else if (item2.basename === "Msi") {
+          } else if (item2.class == "Directory" && item2.basename === "Msi") {
             item2.listing.forEach(function (item3) {
-              if (item3.basename === inputs.sample_id) {
+              if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
                   if (item4.basename === inputs.sample_id + ".msi.json") {
                     msi_json_file = item4;
@@ -80,9 +84,9 @@ expression: >-
                 })
               }
             })
-          } else if (item2.basename === "SampleAnalysisResults") {
+          } else if (item2.class == "Directory" && item2.basename === "SampleAnalysisResults") {
             item2.listing.forEach(function (item3) {
-              if (item3.basename === inputs.sample_id) {
+              if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
                   if (item4.basename === inputs.sample_id + "SampleAnalysisResults.json") {
                     sampleanalysisresults_json_file = item4;
@@ -90,9 +94,9 @@ expression: >-
                 })
               }
             })
-          } else if (item2.basename === "Tmb") {
+          } else if (item2.class == "Directory" && item2.basename === "Tmb") {
             item2.listing.forEach(function (item3) {
-              if (item3.basename === inputs.sample_id) {
+              if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
                   if (item4.basename === inputs.sample_id + "tmb.json") {
                     tmb_json_file = item4;
@@ -100,9 +104,9 @@ expression: >-
                 })
               }
             })
-          } else if (item2.basename === "VariantCaller") {
+          } else if (item2.class == "Directory" && item2.basename === "VariantCaller") {
             item2.listing.forEach(function (item3) {
-              if (item3.basename === inputs.sample_id) {
+              if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
                   if (item4.basename === inputs.sample_id + "cleaned.stitched.bam") {
                     cleaned_stitched_bam_file = item4;
@@ -110,6 +114,22 @@ expression: >-
                     cleaned_stitched_bai_file = item4;
                   }
                 })
+              }
+            })
+          }
+        })
+      } else if (item.class == "Directory" && item.basename === "Results") {
+        item.listing.forEach(function (item2) {
+          if (item2.class == "Directory" && item2.basename === inputs.sample_id) {
+            item2.listing.forEach(function (item3) {
+              if (item3.basename.endsWith(".vcf")) {
+                vcf_files.push(item3);
+              } else if (item3.basename === inputs.sample_id + "_Fusion.csv"){
+                fusion_csv_file = item3;
+              } else if (item3.basename === inputs.sample_id + "_MergedSmallVariantsAnnotated.json.gz") {
+                mergedsmallvariantsannotated_json_gz_file = item3;
+              } else if (item3.basename === inputs.sample_id + "_TMB_Trace.tsv") {
+                tmb_trace_tsv_file = item3;
               }
             })
           }
@@ -133,7 +153,11 @@ expression: >-
       "sampleanalysisresults_json": sampleanalysisresults_json_file,
       "tmb_json": tmb_json_file,
       "cleaned_stitched_bam": cleaned_stitched_bam_file,
-      "cleaned_stitched_bai": cleaned_stitched_bai_file
+      "cleaned_stitched_bai": cleaned_stitched_bai_file,
+      "vcfs" = vcf_files,
+      "fusion_csv" = fusion_csv_file,
+      "mergedsmallvariantsannotated_json_gz" = mergedsmallvariantsannotated_json_gz_file,
+      "tmb_trace_tsv" = tmb_trace_tsv_file
     }
   }
 
@@ -170,4 +194,12 @@ outputs:
   cleaned_stitched_bam:
     type: File
   cleaned_stitched_bai:
+    type: File
+  vcfs:
+    type: File[]
+  fusion_vcf:
+    type: File
+  mergedsmallvariantsannotated_json_gz:
+    type: File
+  tmb_trace_tsv:
     type: File
