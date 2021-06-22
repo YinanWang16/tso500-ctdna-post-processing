@@ -30,12 +30,17 @@ expression: >-
     var sv_metrics_csv_file = '';
     var time_metrics_csv_file = '';
     var fragment_length_hist_csv_file = '';
+    var msi_json_file = '';
+    var sampleanalysisresults_json_file = '';
+    var tmb_json_file = '';
+    var cleaned_stitched_bam_file = '';
+    var cleaned_stitched_bai_file = '';
     inputs.tso500_ctdna_output_dir.listing.forEach(function (item) {
-      if (item.class == "Directory" && item.basename === "Logs_Intermediates") {
+      if (item.basename === "Logs_Intermediates") {
         item.listing.forEach(function (item2) {
-          if (item2.class == "Directory" && item2.basename === "AlignCollapseFusionCaller") {
+          if (item2.basename === "AlignCollapseFusionCaller") {
             item2.listing.forEach(function (item3) {
-              if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
+              if (item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
                   if (item4.basename === inputs.sample_id + ".bam") {
                     raw_bam_file = item4;
@@ -61,14 +66,56 @@ expression: >-
                     time_metrics_csv_file = item4;
                   } else if (item4.basename === inputs.sample_id + ".fragment_length_hist.csv") {
                     fragment_length_hist_csv_file = item4;
-                  };
-                });
-              };
-            });
-          };
-        });
-      };
-    });
+                  }
+                })
+              }
+            })
+          } else if (item2.basename === "Msi") {
+            item2.listing.forEach(function (item3) {
+              if (item3.basename === inputs.sample_id) {
+                item3.listing.forEach(function (item4) {
+                  if (item4.basename === inputs.sample_id + ".msi.json") {
+                    msi_json_file = item4;
+                  }
+                })
+              }
+            })
+          } else if (item2.basename === "SampleAnalysisResults") {
+            item2.listing.forEach(function (item3) {
+              if (item3.basename === inputs.sample_id) {
+                item3.listing.forEach(function (item4) {
+                  if (item4.basename === inputs.sample_id + "SampleAnalysisResults.json") {
+                    sampleanalysisresults_json_file = item4;
+                  }
+                })
+              }
+            })
+          } else if (item2.basename === "Tmb") {
+            item2.listing.forEach(function (item3) {
+              if (item3.basename === inputs.sample_id) {
+                item3.listing.forEach(function (item4) {
+                  if (item4.basename === inputs.sample_id + "tmb.json") {
+                    tmb_json_file = item4;
+                  }
+                })
+              }
+            })
+          } else if (item2.basename === "VariantCaller") {
+            item2.listing.forEach(function (item3) {
+              if (item3.basename === inputs.sample_id) {
+                item3.listing.forEach(function (item4) {
+                  if (item4.basename === inputs.sample_id + "cleaned.stitched.bam") {
+                    cleaned_stitched_bam_file = item4;
+                  } else if (item4.basename === inputs.sample_id + "cleaned.stitched.bam.bai") {
+                    cleaned_stitched_bai_file = item4;
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    })
     return {
       "raw_bam": raw_bam_file,
       "raw_bai": raw_bai_file,
@@ -81,7 +128,12 @@ expression: >-
       "wgs_coverage_metrics_csv": wgs_coverage_metrics_csv_file,
       "sv_metrics_csv": sv_metrics_csv_file,
       "time_metrics_csv": time_metrics_csv_file,
-      "fragment_length_hist_csv": fragment_length_hist_csv_file
+      "fragment_length_hist_csv": fragment_length_hist_csv_file,
+      "msi_json": msi_json_file,
+      "sampleanalysisresults_json": sampleanalysisresults_json_file,
+      "tmb_json": tmb_json_file,
+      "cleaned_stitched_bam": cleaned_stitched_bam_file,
+      "cleaned_stitched_bai": cleaned_stitched_bai_file
     }
   }
 
@@ -110,4 +162,12 @@ outputs:
   time_metrics_csv:
     type: File
   fragment_length_hist_csv:
+    type: File
+  msi_json:
+    type: File
+  sampleanalysisresults_json:
+    type: File
+  cleaned_stitched_bam:
+    type: File
+  cleaned_stitched_bai:
     type: File
