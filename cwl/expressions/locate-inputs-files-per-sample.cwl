@@ -86,19 +86,15 @@ expression: >-
             })
           } else if (item2.class == "Directory" && item2.basename === "SampleAnalysisResults") {
             item2.listing.forEach(function (item3) {
-              if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
-                item3.listing.forEach(function (item4) {
-                  if (item4.basename === inputs.sample_id + "SampleAnalysisResults.json") {
-                    sampleanalysisresults_json_file = item4;
-                  }
-                })
+              if (item3.basename === inputs.sample_id + ".SampleAnalysisResults.json") {
+                sampleanalysisresults_json_file = item3;
               }
             })
           } else if (item2.class == "Directory" && item2.basename === "Tmb") {
             item2.listing.forEach(function (item3) {
               if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
-                  if (item4.basename === inputs.sample_id + "tmb.json") {
+                  if (item4.basename === inputs.sample_id + ".tmb.json") {
                     tmb_json_file = item4;
                   }
                 })
@@ -108,9 +104,9 @@ expression: >-
             item2.listing.forEach(function (item3) {
               if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
-                  if (item4.basename === inputs.sample_id + "cleaned.stitched.bam") {
+                  if (item4.basename === inputs.sample_id + ".cleaned.stitched.bam") {
                     cleaned_stitched_bam_file = item4;
-                  } else if (item4.basename === inputs.sample_id + "cleaned.stitched.bam.bai") {
+                  } else if (item4.basename === inputs.sample_id + ".cleaned.stitched.bam.bai") {
                     cleaned_stitched_bai_file = item4;
                   }
                 })
@@ -124,7 +120,7 @@ expression: >-
             item2.listing.forEach(function (item3) {
               if (item3.basename.endsWith(".vcf")) {
                 vcf_files.push(item3);
-              } else if (item3.basename === inputs.sample_id + "_Fusion.csv"){
+              } else if (item3.basename === inputs.sample_id + "_Fusions.csv"){
                 fusion_csv_file = item3;
               } else if (item3.basename === inputs.sample_id + "_MergedSmallVariantsAnnotated.json.gz") {
                 mergedsmallvariantsannotated_json_gz_file = item3;
@@ -154,10 +150,10 @@ expression: >-
       "tmb_json": tmb_json_file,
       "cleaned_stitched_bam": cleaned_stitched_bam_file,
       "cleaned_stitched_bai": cleaned_stitched_bai_file,
-      "vcfs" = vcf_files,
-      "fusion_csv" = fusion_csv_file,
-      "mergedsmallvariantsannotated_json_gz" = mergedsmallvariantsannotated_json_gz_file,
-      "tmb_trace_tsv" = tmb_trace_tsv_file
+      "vcfs": vcf_files,
+      "fusion_csv": fusion_csv_file,
+      "mergedsmallvariantsannotated_json_gz": mergedsmallvariantsannotated_json_gz_file,
+      "tmb_trace_tsv": tmb_trace_tsv_file
     }
   }
 
