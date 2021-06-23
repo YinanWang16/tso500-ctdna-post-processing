@@ -5,7 +5,7 @@ class: ExpressionTool
 doc: |
   Transforms sample specific outputs to match the desired output
 
-requirements: 
+requirements:
   - class: InlineJavascriptRequirement
 inputs:
   evidence_bam:
@@ -60,7 +60,7 @@ inputs:
     type: string
 
 expression: |
-  ${ 
+  ${
     var r = {
       "outputs":
         { "class": "Directory",
@@ -94,4 +94,4 @@ expression: |
   }
 
 outputs:
-  results: Directory 
+  sample_results: Directory 

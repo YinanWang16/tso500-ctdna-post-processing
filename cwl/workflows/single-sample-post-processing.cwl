@@ -42,6 +42,7 @@ steps:
       - fragment_length_hist_csv
       - msi_json
       - sampleanalysisresults_json
+      - tmb_json
       - cleaned_stitched_bam
       - cleaned_stitched_bai
       - vcfs
@@ -88,7 +89,7 @@ steps:
       sv_metrics_csv: get_inputs_files_per_sample/sv_metrics_csv
       time_metrics_csv: get_inputs_files_per_sample/time_metrics_csv
     out: [metrics_json_gz]
-  tsv_to_json:
+  tsv_to_json_gz:
     run: ../tools/tsv2json/tsv2json.cwl
     label: tsv2json
     in:
@@ -99,6 +100,12 @@ steps:
     label: gzip
     in:
       file_list:
-        -
-        -
-    out: gzipped_file_list
+        - get_inputs_files_per_sample/msi_json
+        - get_inputs_files_per_sample/sampleanalysisresults_json
+        - get_inputs_files_per_sample/tmb_json
+    out: [gzipped_file_list]
+  per_sample_subdir_layout:
+    run: ../expressions/per_sample_subdir_layout.cwl
+    label: sample_subdir_layout
+    in: 
+    out: [sample_results]

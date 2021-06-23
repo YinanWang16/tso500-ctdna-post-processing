@@ -187,13 +187,15 @@ outputs:
     type: File
   sampleanalysisresults_json:
     type: File
+  tmb_json:
+    type: File
   cleaned_stitched_bam:
     type: File
   cleaned_stitched_bai:
     type: File
   vcfs:
     type: File[]
-  fusion_vcf:
+  fusion_csv:
     type: File
   mergedsmallvariantsannotated_json_gz:
     type: File
