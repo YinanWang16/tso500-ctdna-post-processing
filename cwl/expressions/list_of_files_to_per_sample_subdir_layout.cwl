@@ -5,14 +5,14 @@ class: ExpressionTool
 doc: |
   Transforms sample specific outputs to match the desired output
 
-requirements: 
+requirements:
   - class: InlineJavascriptRequirement
 inputs:
   evidence_bam:
     type: File
   evidence_bai:
     type: File
-  dragen_metrics_json:
+  dragen_metrics_json_gz:
     type: File
   raw_bam:
     type: File
@@ -28,13 +28,13 @@ inputs:
     type: File
   copynumbervariants_vcf_tbi:
     type: File
-  coverage_qc_json:
+  coverage_qc_json_gz:
     type: File
-  coverage_qc:
+  coverage_qc_txt:
     type: File
   fusion_csv:
     type: File
-  mergedsmallvariantsannotated_json:
+  mergedsmallvariantsannotated_json_gz:
     type: File
   mergedsmallvariants_genome_vcf_gz:
     type: File
@@ -44,23 +44,23 @@ inputs:
     type: File
   mergedsmallvariants_vcf_tbi:
     type: File
-  msi_json:
+  msi_json_gz:
     type: File
-  sampleanalysisresults_json:
+  sampleanalysisresults_json_gz:
     type: File
-  targetregioncoverage_metrics_json:
+  targetregioncoverage_metrics_json_gz:
     type: File
-  tmb_json:
+  tmb_json_gz:
     type: File
-  tmb_trace_json:
+  tmb_trace_json_gz:
     type: File
-  fragment_length_hist_json:
+  fragment_length_hist_json_gz:
     type: File
   sample_id:
     type: string
 
 expression: |
-  ${ 
+  ${
     var r = {
       "outputs":
         { "class": "Directory",
@@ -68,7 +68,7 @@ expression: |
           "listing": [
             inputs.evidence_bam,
             inputs.evidence_bai,
-            inputs.dragen_metrics_json,
+            inputs.dragen_metrics_json_gz,
             inputs.raw_bam,
             inputs.raw_bai,
             inputs.raw_bam_md5sum,
@@ -76,22 +76,22 @@ expression: |
             inputs.cleaned_stitched_bai,
             inputs.copynumbervariants_vcf_gz,
             inputs.copynumbervariants_vcf_tbi,
-            inputs.coverage_qc_json,
-            inputs.coverage_qc,
+            inputs.coverage_qc_json_gz,
+            inputs.coverage_qc_txt,
             inputs.fusion_csv,
-            inputs.mergedsmallvariantsannotated_json,
+            inputs.mergedsmallvariantsannotated_json_gz,
             inputs.mergedsmallvariants_genome_vcf_gz,
             inputs.mergedsmallvariants_genome_vcf_tbi,
             inputs.mergedsmallvariants_vcf_gz,
             inputs.mergedsmallvariants_vcf_tbi,
-            inputs.msi_json,
-            inputs.sampleanalysisresults_json,
-            inputs.tmb_json,
-            inputs.tmb_trace_json,
-            inputs.fragment_length_hist_json ] }
+            inputs.msi_json_gz,
+            inputs.sampleanalysisresults_json_gz,
+            inputs.tmb_json_gz,
+            inputs.tmb_trace_json_gz,
+            inputs.fragment_length_hist_json_gz ] }
     }
     return r;
   }
 
 outputs:
-  results: Directory 
+  results: Directory

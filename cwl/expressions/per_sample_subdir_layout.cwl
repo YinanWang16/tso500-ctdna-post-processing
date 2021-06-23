@@ -11,7 +11,7 @@ requirements:
 inputs:
   list_of_files:
     type: File[]
-  sample_id: 
+  sample_id:
     type: string
 
 expression: |
@@ -25,6 +25,6 @@ expression: |
     }
     return r;
   }
-# works with inputs.list_of_files[0]
+
 outputs:
-  sample_results: Directory 
+  sample_results: Directory

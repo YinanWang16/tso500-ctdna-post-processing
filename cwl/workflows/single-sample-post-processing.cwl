@@ -17,7 +17,7 @@ inputs:
 outputs:
   results_sample_subdir:
     type: Directory
-    outpurSource: per_sample_subdir_layout/results
+    outpurSource: per_sample_subdir_layout/sample_results
 
 steps:
   get_inputs_files_per_sample:
@@ -46,7 +46,7 @@ steps:
       - cleaned_stitched_bam
       - cleaned_stitched_bai
       - vcfs
-      - fusion_vcf
+      - fusion_csv
       - mergedsmallvariantsannotated_json_gz
       - tmb_trace_tsv
   mosdepth:
@@ -95,11 +95,17 @@ steps:
     in:
       tsv_file: get_inputs_files_per_sample/tmb_trace_tsv
     out: [json_gz_file]
+  csv_to_json_gz:
+    run: ../tools/tsv2json/tsv2json.cwl
+    label: csv2json
+    in:
+      tsv_file: get_inputs_files_per_sample/fragment_length_hist_csv
+    out: [json_gz_file]
   gzip:
     run: ../tools/toolbox/gzip.cwl
     label: gzip
     in:
-      file_list:
+      files:
         - get_inputs_files_per_sample/msi_json
         - get_inputs_files_per_sample/sampleanalysisresults_json
         - get_inputs_files_per_sample/tmb_json
@@ -107,5 +113,25 @@ steps:
   per_sample_subdir_layout:
     run: ../expressions/per_sample_subdir_layout.cwl
     label: sample_subdir_layout
-    in: 
+    in:
+      list_of_files:
+        - get_inputs_files_per_sample/evidence_bam
+        - get_inputs_files_per_sample/evidence_bai
+        - dragen_metrics_csv2json/metrics_json_gz
+        - get_inputs_files_per_sample/raw_bam
+        - get_inputs_files_per_sample/raw_bai
+        - get_inputs_files_per_sample/raw_bam_md5sum
+        - get_inputs_files_per_sample/cleaned_stitched_bam
+        - get_inputs_files_per_sample/cleaned_stitched_bai
+        - bgzip_tabix/vcf_gz
+        - make_coverage_QC/
+        - make_coverage_QC/coverage_QC
+        - get_inputs_files_per_sample/fusion_csv
+        - get_inputs_files_per_sample/mergedsmallvariantsannotated_json_gz
+        - gzip/gzipped_file_list
+        - make_coverage_metrics/target_region_coverage_metrics
+        - tsv_to_json_gz/json_gz_file
+        - csv_to_json_gz/json_gz_file
+      sample_id: sample_id
+
     out: [sample_results]
