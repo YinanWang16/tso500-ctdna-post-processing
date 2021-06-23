@@ -80,7 +80,7 @@ inputs:
       position: 1
 
 outputs:
-  json_file:
+  json_gz_file:
     type: File
     outputBinding:
       glob: "$(inputs.tsv_file.nameroot).json.gz"

@@ -3,45 +3,44 @@ cwlVersion: v1.1
 class: CommandLineTool
 
 # Extentions
-$namespaces:
-  s: https://schema.org/
-  ilmn-tes: https://platform.illumina/rdf/ica/
-# Metadata
-s:author:
-  - class: s:Person
-    s:name: Yinan Wang
-    s:email: mailto:ywang16@illumina.com
+# $namespaces:
+#   ilmn-tes: https://platform.illumina/rdf/ica/
 
 hints:
-  DockerRequirement:
+  - class: DockerRequirement
     dockerPull: ubuntu:latest
-  ResourceRequirement:
-    ilmn-tes:resources:
-      tier: standard
-      type: standard
-      size: small
+  # - class: ResourceRequirement
+  #   ilmn-tes:resources:
+  #     tier: standard
+  #     type: standard
+  #     size: small
 
-id: gzip file
-label: gzip file
+id: gzip list of files
+label: gzip
 
 baseCommand:
-  - gzip
+  - bash
   - -c
+  - gzip_list_of_files.sh
 
 requirements:
-  InlineJavascriptRequirement: {}
-  InitialWorkDirRequirement:
+  - class: InlineJavascriptRequirement
+  - class: InitialWorkDirRequirement
     listing:
-      - $(inputs.file)
+      - entryname: gzip_list_of_files.sh
+        entry: |-
+          #!/usr/bin/bash
+          for f in \${@}; do
+            gzip -c $f >\${f}.gz
+          done
+      - ${inputs.files.self}
 
 inputs:
-  file:
-    type: File
-    inputBinding:
-      position: 0
-
-stdout: $(inputs.file.basename).gz
+  files:
+    type: File[]
 
 outputs:
-  gzipped_file:
-    type: stdout
+  gzipped_files:
+    type: File[]
+    outputBinding:
+      glob: "*.gz"

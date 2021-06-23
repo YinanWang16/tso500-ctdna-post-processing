@@ -74,7 +74,8 @@ steps:
   bgzip_tabix:
     run: ../tools/bgzip_tabix/bgzip_tabix.cwl
     label: bgzip-tabix
-    in: get_inputs_files_per_sample/vcfs
+    in:
+      vcfs: get_inputs_files_per_sample/vcfs
     out: [vcf_gz]
   dragen_metrics_csv2json:
     run: ../tools/dragen_metrics/dragen_metrics_csv2json.cwl
@@ -87,3 +88,17 @@ steps:
       sv_metrics_csv: get_inputs_files_per_sample/sv_metrics_csv
       time_metrics_csv: get_inputs_files_per_sample/time_metrics_csv
     out: [metrics_json_gz]
+  tsv_to_json:
+    run: ../tools/tsv2json/tsv2json.cwl
+    label: tsv2json
+    in:
+      tsv_file: get_inputs_files_per_sample/tmb_trace_tsv
+    out: [json_gz_file]
+  gzip:
+    run: ../tools/toolbox/gzip.cwl
+    label: gzip
+    in:
+      file_list:
+        -
+        -
+    out: gzipped_file_list
