@@ -43,6 +43,7 @@ requirements:
   - class: InitialWorkDirRequirement
     listing:
       - $(inputs.bai)
+      - $(inputs.bam_or_cram)
 
 baseCommand: [mosdepth]
 arguments:
@@ -91,7 +92,6 @@ inputs:
     doc: the alignment file for which to calculate depth.
     inputBinding:
       position: 5
-    secondaryFiles: .bai
   bai:
     type: File
 outputs:
