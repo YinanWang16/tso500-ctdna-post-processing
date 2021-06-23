@@ -20,9 +20,7 @@ expression: |
       "sample_results":
         { "class": "Directory",
           "basename": inputs.sample_id,
-          "listing": [
-            inputs.list_of_files[]
-          ]
+          "listing": inputs.list_of_files
         }
     }
     return r;
