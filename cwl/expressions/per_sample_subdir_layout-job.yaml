@@ -1,73 +1,8 @@
-tmb_trace_json:  # type "File"
-    class: File
+list_of_files:
+  - class: File
     path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1_TMB_Trace.json.gz
-tmb_json:  # type "File"
-    class: File
+  - class: File
     path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/Tmb/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.tmb.json
-targetregioncoverage_metrics_json:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.TargetRegionCoverage.json.gz
-sampleanalysisresults_json:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/SampleAnalysisResults/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1_SampleAnalysisResults.json
-sample_id: Seraseq_Comp_Mut_Mix_AF1_DNA_rep1  # type "string"
-raw_bam_md5sum:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.bam.md5sum
-raw_bam:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.bam
-raw_bai:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.bam.bai
-msi_json:  # type "File"
-    class: File
+  - class: File
     path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/Msi/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.msi.json
-mergedsmallvariantsannotated_json:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Results/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1_MergedSmallVariantsAnnotated.json.gz
-mergedsmallvariants_vcf_tbi:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/FusionMix_DNA_1pct_rep1_MergedSmallVariants.vcf.gz.tbi
-mergedsmallvariants_vcf_gz:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/FusionMix_DNA_1pct_rep1_MergedSmallVariants.vcf.gz
-mergedsmallvariants_genome_vcf_tbi:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/FusionMix_DNA_1pct_rep1_MergedSmallVariants.genome.vcf.gz.tbi
-mergedsmallvariants_genome_vcf_gz:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/FusionMix_DNA_1pct_rep1_MergedSmallVariants.genome.vcf.gz
-fusion_csv:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Results/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1_Fusions.csv
-fragment_length_hist_json:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.fragment_length_hist.csv
-evidence_bam:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/evidence.Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.bam
-evidence_bai:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/evidence.Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.bam.bai
-dragen_metrics_json:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1_AlignCollapseFusionCaller_metrics.json.gz
-coverage_qc_json:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1_Failed_Exon_coverage_QC.json.gz
-coverage_qc:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1_Failed_Exon_coverage_QC.txt
-copynumbervariants_vcf_tbi:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/FusionMix_DNA_1pct_rep1_CopyNumberVariants.vcf.gz.tbi
-copynumbervariants_vcf_gz:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/FusionMix_DNA_1pct_rep1_CopyNumberVariants.vcf.gz
-cleaned_stitched_bam:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/VariantCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.cleaned.stitched.bam
-cleaned_stitched_bai:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/VariantCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.cleaned.stitched.bam
+sample_id: Seraseq_Comp_Mut_Mix_AF1_DNA_rep1
