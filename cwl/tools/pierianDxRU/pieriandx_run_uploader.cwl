@@ -1,9 +1,9 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.1
 class: CommandLineTool
 
 # Extentions
- $namespaces:
+$namespaces:
   ilmn-tes: https://platform.illumina/rdf/ica/
 
 # label/doc
@@ -24,8 +24,8 @@ hints:
 requirements:
   - class: InitialWorkDirRequirement
     listing: 
-      - $(inputs.pieriandx_run_uploader)
-      - $(inputs.s3_credential)
+      - ${inputs.pieriandx_run_uploader}
+      - ${inputs.s3_credential}
 
 baseCommand: [java, -jar]
 arguments:
