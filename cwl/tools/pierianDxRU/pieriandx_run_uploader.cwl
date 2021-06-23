@@ -24,8 +24,8 @@ hints:
 requirements:
   - class: InitialWorkDirRequirement
     listing: 
-      - ${inputs.pieriandx_run_uploader}
-      - ${inputs.s3_credential}
+      - $(inputs.pieriandx_run_uploader)
+      - $(inputs.s3_credential)
 
 baseCommand: [java, -jar]
 arguments:

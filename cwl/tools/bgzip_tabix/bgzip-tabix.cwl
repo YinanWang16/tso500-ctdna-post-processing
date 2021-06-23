@@ -22,7 +22,7 @@ requirements:
               bgzip -c \${vcf} >\${vcf}.gz
               tabix -p vcf \${vcf}.gz 
           done
-      - ${inputs.vcf.self}
+      - $(inputs.vcf)
 
 baseCommand: ["bash", "bgzip-tabix-vcf.sh"]
 

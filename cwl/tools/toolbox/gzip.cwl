@@ -31,9 +31,9 @@ requirements:
         entry: |-
           #!/usr/bin/bash
           for f in \${@}; do
-            gzip -c $f >\${f}.gz
+            gzip -c \$f >\${f}.gz
           done
-      - ${inputs.files.self}
+      - ${inputs.files}
 
 inputs:
   files:
