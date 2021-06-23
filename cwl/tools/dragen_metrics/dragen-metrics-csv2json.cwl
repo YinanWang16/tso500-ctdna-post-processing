@@ -1,7 +1,7 @@
 #!/usr/bin/env cwl-runner
 
 class: CommandLineTool
-cwlVersion: v1.0
+cwlVersion: v1.1
 
 id: AlignCollapseFusionCaller_metrics.csv2json
 label: convert AlignCollapseFusionCaller_metrics.csv to json

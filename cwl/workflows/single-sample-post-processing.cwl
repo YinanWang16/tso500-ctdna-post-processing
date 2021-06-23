@@ -49,7 +49,7 @@ steps:
       - mergedsmallvariantsannotated_json_gz
       - tmb_trace_tsv
   mosdepth:
-    run: ../tools/mosdepth-make-thresholds-bed.cwl
+    run: ../tools/mosdepth/mosdepth-make-thresholds-bed.cwl
     label: mosdepth
     in:
       target_region_bed: tso_manifest_bed
@@ -60,24 +60,24 @@ steps:
       output_prefix: sample_id
     out: [thresholds_bed_gz]
   make_coverage_QC:
-    run: ../tools/mosdepth-thresholds-bed-to-coverage-QC-step.cwl
+    run: ../tools/mosdepth/mosdepth-thresholds-bed-to-coverage-QC-step.cwl
     label: make_coverage_QC.py
     in:
       thresholds_bed: mosdepth/thresholds_bed_gz
     out: [coverage_QC]
   make_coverage_metrics:
-    run: ../tools/mosdepth-thresholds-bed-to-target-region-coverage.cwl
+    run: ../tools/mosdepth/mosdepth-thresholds-bed-to-target-region-coverage.cwl
     label: target_region_coverage_metrics.py
     in:
       thresholds_bed: mosdepth/thresholds_bed_gz
     out: [target_region_coverage_metrics]
   bgzip_tabix:
-    run: ../tools/bgzip_tabix.cwl
+    run: ../tools/bgzip_tabix/bgzip_tabix.cwl
     label: bgzip-tabix
     in: get_inputs_files_per_sample/vcfs
     out: [vcf_gz]
   dragen_metrics_csv2json:
-    run: ../tools/dragen_metrics_csv2json.cwl
+    run: ../tools/dragen_metrics/dragen_metrics_csv2json.cwl
     label: dragen_metrics_csv2json
     in:
       mapping_metrics_csv: get_inputs_files_per_sample/mapping_metrics_csv

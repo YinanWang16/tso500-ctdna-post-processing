@@ -1,6 +1,6 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: v1.0
+cwlVersion: v1.1
 class: CommandLineTool
 
 id: bgzip-vcf
@@ -27,5 +27,3 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.vcf.basename).gz
-
-

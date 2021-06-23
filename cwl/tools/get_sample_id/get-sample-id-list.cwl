@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.1
 class: CommandLineTool
 
 # Extentions
@@ -39,7 +39,7 @@ baseCommand: [ls]
 inputs:
   dsdm_json:
     label: dsdm.json
-    doc: | 
+    doc: |
       dsdm.json under Results/ directory
     type: File
 

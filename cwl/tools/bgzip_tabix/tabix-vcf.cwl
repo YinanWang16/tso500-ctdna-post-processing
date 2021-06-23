@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.1
 class: CommandLineTool
 
 id: tabix-vcf
@@ -20,11 +20,9 @@ inputs:
     type: File
     inputBinding:
       position: 0
-    
+
 outputs:
   tbi:
     type: File
     outputBinding:
       glob: "$(inputs.vcf_gz.basename).tbi"
-    
-

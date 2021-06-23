@@ -1,28 +1,21 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: v1.0
+cwlVersion: v1.1
 class: CommandLineTool
 
-# Extentions
-$namespaces:
-  s: https://schema.org/
-  ilmn-tes: https://platform.illumina/rdf/ica/
-# Metadata
-s:author:
-  - class: s:Person
-    s:name: Yinan Wang
-    s:email: mailto:ywang16@illumina.com
+# $namespaces:
+#   ilmn-tes: https://platform.illumina/rdf/ica/
 
 label: make_coverage_QC.py
 
 hints:
   DockerRequirement:
     dockerPull: umccr/alpine_pandas:latest-cwl
-  ResourceRequirement:
-    ilmn-tes:resources:
-      tier: standard
-      type: standard
-      size: medium
+  # ResourceRequirement:
+  #   ilmn-tes:resources:
+  #     tier: standard
+  #     type: standard
+  #     size: medium
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -31,23 +24,23 @@ requirements:
       - entryname: thresholds-bed-to-coverage-QC.py
         entry: |
           #!/usr/bin/env python3
-          
+
           import pandas as pd
           import re
           import argparse
           import gzip
           from os import path
-  
+
           def get_args():
               """ Get arguments for the command """
               parser = argparse.ArgumentParser(description='From mosdepth output "shreshold.bed" to generate "Failed_Exon_coverage_QC.txt" for PierianDx CGW')
-  
+
               parser.add_argument('-i', '--input-bed', required=True,
                                   help='Mosdepth output file "threshold.bed.gz"')
               parser.add_argument('-s', '--sample-id', required=False,
                                   help='Sample_ID')
               return parser.parse_args()
-  
+
           def main():
               """ Generate Failed_Exon_coverage_QC.txt """
               args = get_args()

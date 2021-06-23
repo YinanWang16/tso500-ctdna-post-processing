@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.1
 class: CommandLineTool
 
 # Extentions
@@ -45,4 +45,3 @@ stdout: $(inputs.file.basename).gz
 outputs:
   gzipped_file:
     type: stdout
-

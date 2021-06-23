@@ -1,16 +1,10 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.1
 class: CommandLineTool
 
 # Extentions
-$namespaces:
-  s: https://schema.org/
-  ilmn-tes: https://platform.illumina/rdf/ica/
-# Metadata
-s:author:
-  - class: s:Person
-    s:name: Yinan Wang
-    s:email: mailto:ywang16@illumina.com
+# $namespaces:
+#   ilmn-tes: https://platform.illumina/rdf/ica/
 
 # label/doc
 id: make_target_region_coverage_metrics
@@ -19,18 +13,14 @@ doc: |
   from mosdepth output 'thresholds.bed.gz' to make consensus reads coverage metrics
   on target regions.
 
-# about the code
-# s:dateCreated: 2021-05-31
-s:codeRepository: https://github.com/YinanWang16/tso500-ctdna-post-processing
-
 hints:
-  ResourceRequirement:
-    ilmn-tes:resources:
-      tier: standard
-      type: standard
-      size: medium
   DockerRequirement:
     dockerPull: umccr/alpine_pandas:latest-cwl
+  # ResourceRequirement:
+  #   ilmn-tes:resources:
+  #     tier: standard
+  #     type: standard
+  #     size: medium
 
 requirements:
   InlineJavascriptRequirement: {}
