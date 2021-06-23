@@ -42,7 +42,10 @@ requirements:
 
           def tsv2json(tsv_file, skip_rows):
               """ make tsv data to dictionary """
-              df = pd.read_csv(tsv_file, sep='\t', header=0, comment='#', skiprows=skip_rows)
+              if tsv_file.endswith(".tsv"): 
+                  df = pd.read_csv(tsv_file, sep='\t', header=0, comment='#', skiprows=skip_rows)
+              elif tsv_file.endswith(".csv"):
+                  df = pd.read_csv(tsv_file, sep=',', header=0, comment='#', skiprows=skip_rows)
               variants = []
               for i in range(len(df)):
                   variants.append(dict(df.iloc[i,]))
