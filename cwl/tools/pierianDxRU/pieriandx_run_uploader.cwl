@@ -1,16 +1,10 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.1
+cwlVersion: v1.0
 class: CommandLineTool
 
 # Extentions
-$namespaces:
-  s: https://schema.org/
+ $namespaces:
   ilmn-tes: https://platform.illumina/rdf/ica/
-# Metadata
-s:author:
-  - class: s:Person
-    s:name: Yinan Wang
-    s:email: mailto:ywang16@illumina.com
 
 # label/doc
 id: PierianDx_Run_Uploader
@@ -28,10 +22,11 @@ hints:
       size: small
 
 requirements:
-  - class:InitialWorkDirRequirement
-    listing:
+  - class: InitialWorkDirRequirement
+    listing: 
       - $(inputs.pieriandx_run_uploader)
       - $(inputs.s3_credential)
+
 baseCommand: [java, -jar]
 arguments:
   - -Dloader.main=com.pdx.commandLine.ApplicationCommandLine
