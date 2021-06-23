@@ -8,6 +8,7 @@ doc: tso500 ctdDNA post-processing for single sample
 
 requirements:
   - class: StepInputExpressionRequirement
+  - class: MultipleInputFeatureRequirement
 
 inputs:
   tso500_ctdna_output: Directory
@@ -17,7 +18,7 @@ inputs:
 outputs:
   results_sample_subdir:
     type: Directory
-    outpurSource: per_sample_subdir_layout/sample_results
+    outputSource: per_sample_subdir_layout/sample_results
 
 steps:
   get_inputs_files_per_sample:
@@ -73,13 +74,13 @@ steps:
       thresholds_bed: mosdepth/thresholds_bed_gz
     out: [target_region_coverage_metrics]
   bgzip_tabix:
-    run: ../tools/bgzip_tabix/bgzip_tabix.cwl
+    run: ../tools/bgzip_tabix/bgzip-tabix.cwl
     label: bgzip-tabix
     in:
-      vcfs: get_inputs_files_per_sample/vcfs
+      vcf: get_inputs_files_per_sample/vcfs
     out: [vcf_gz]
   dragen_metrics_csv2json:
-    run: ../tools/dragen_metrics/dragen_metrics_csv2json.cwl
+    run: ../tools/dragen_metrics/dragen-metrics-csv2json.cwl
     label: dragen_metrics_csv2json
     in:
       mapping_metrics_csv: get_inputs_files_per_sample/mapping_metrics_csv
@@ -109,29 +110,30 @@ steps:
         - get_inputs_files_per_sample/msi_json
         - get_inputs_files_per_sample/sampleanalysisresults_json
         - get_inputs_files_per_sample/tmb_json
-    out: [gzipped_file_list]
+    out: [gzipped_files]
   per_sample_subdir_layout:
     run: ../expressions/per_sample_subdir_layout.cwl
     label: sample_subdir_layout
     in:
       list_of_files:
-        - get_inputs_files_per_sample/evidence_bam
-        - get_inputs_files_per_sample/evidence_bai
-        - dragen_metrics_csv2json/metrics_json_gz
-        - get_inputs_files_per_sample/raw_bam
-        - get_inputs_files_per_sample/raw_bai
-        - get_inputs_files_per_sample/raw_bam_md5sum
-        - get_inputs_files_per_sample/cleaned_stitched_bam
-        - get_inputs_files_per_sample/cleaned_stitched_bai
-        - bgzip_tabix/vcf_gz
-        - make_coverage_QC/
-        - make_coverage_QC/coverage_QC
-        - get_inputs_files_per_sample/fusion_csv
-        - get_inputs_files_per_sample/mergedsmallvariantsannotated_json_gz
-        - gzip/gzipped_file_list
-        - make_coverage_metrics/target_region_coverage_metrics
-        - tsv_to_json_gz/json_gz_file
-        - csv_to_json_gz/json_gz_file
+        source:
+          - get_inputs_files_per_sample/evidence_bam
+          - get_inputs_files_per_sample/evidence_bai
+          - dragen_metrics_csv2json/metrics_json_gz
+          - get_inputs_files_per_sample/raw_bam
+          - get_inputs_files_per_sample/raw_bai
+          - get_inputs_files_per_sample/raw_bam_md5sum
+          - get_inputs_files_per_sample/cleaned_stitched_bam
+          - get_inputs_files_per_sample/cleaned_stitched_bai
+          - gzip/gzipped_files
+          - bgzip_tabix/vcf_gz
+          - make_coverage_QC/coverage_QC
+          - get_inputs_files_per_sample/fusion_csv
+          - get_inputs_files_per_sample/mergedsmallvariantsannotated_json_gz
+          - make_coverage_metrics/target_region_coverage_metrics
+          - tsv_to_json_gz/json_gz_file
+          - csv_to_json_gz/json_gz_file
+        linkMerge: merge_flattened
       sample_id: sample_id
 
     out: [sample_results]

@@ -1,0 +1,7 @@
+tso_manifest_bed:  # type "File"
+    class: File
+    path: a/file/path
+tso500_ctdna_output:  # type "Directory"
+    class: Directory
+    path: a/directory/path
+sample_id: a_string  # type "string"
