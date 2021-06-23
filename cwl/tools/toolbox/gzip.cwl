@@ -18,11 +18,6 @@ hints:
 id: gzip list of files
 label: gzip
 
-baseCommand:
-  - bash
-  - -c
-  - gzip_list_of_files.sh
-
 requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
@@ -33,11 +28,15 @@ requirements:
           for f in \${@}; do
             gzip -c \$f >\${f}.gz
           done
-      - ${inputs.files}
+      - $(inputs.files)
+
+baseCommand: [bash, gzip_list_of_files.sh]
 
 inputs:
   files:
     type: File[]
+    inputBinding:
+      position: 0
 
 outputs:
   gzipped_files:
