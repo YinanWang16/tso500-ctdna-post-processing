@@ -30,7 +30,9 @@ expression: >-
     var sv_metrics_csv_file = '';
     var time_metrics_csv_file = '';
     var fragment_length_hist_csv_file = '';
-    var json_files = [];
+    var msi_json_file = '';
+    var tmb_json_file = '';
+    var sampleanalysisresults_json_file = '';
     var cleaned_stitched_bam_file = '';
     var cleaned_stitched_bai_file = '';
     var vcf_files = [];
@@ -77,15 +79,15 @@ expression: >-
               if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
                   if (item4.basename === inputs.sample_id + ".msi.json") {
-                    json_files.push(item4);
+                    msi_json_file = item4;
                   }
                 })
               }
             })
           } else if (item2.class == "Directory" && item2.basename === "SampleAnalysisResults") {
             item2.listing.forEach(function (item3) {
-              if (item3.basename === inputs.sample_id + ".SampleAnalysisResults.json") {
-                json_files.push(item3);
+              if (item3.basename === inputs.sample_id + "_SampleAnalysisResults.json") {
+                sampleanalysisresults_json_file = item3;
               }
             })
           } else if (item2.class == "Directory" && item2.basename === "Tmb") {
@@ -93,7 +95,7 @@ expression: >-
               if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
                   if (item4.basename === inputs.sample_id + ".tmb.json") {
-                    json_files.push(item4);
+                    tmb_json_file = item4;
                   }
                 })
               }
@@ -143,7 +145,9 @@ expression: >-
       "sv_metrics_csv": sv_metrics_csv_file,
       "time_metrics_csv": time_metrics_csv_file,
       "fragment_length_hist_csv": fragment_length_hist_csv_file,
-      "json_files": json_files,
+      "msi_json": msi_json_file,
+      "tmb_json": tmb_json_file,
+      "sampleanalysisresults_json": sampleanalysisresults_json_file,
       "cleaned_stitched_bam": cleaned_stitched_bam_file,
       "cleaned_stitched_bai": cleaned_stitched_bai_file,
       "vcfs": vcf_files,
@@ -179,8 +183,12 @@ outputs:
     type: File
   fragment_length_hist_csv:
     type: File
-  json_files:
-    type: File[]
+  msi_json:
+    type: File
+  tmb_json:
+    type: File
+  sampleanalysisresults_json:
+    type: File
   cleaned_stitched_bam:
     type: File
   cleaned_stitched_bai:

@@ -41,7 +41,9 @@ steps:
       - sv_metrics_csv
       - time_metrics_csv
       - fragment_length_hist_csv
-      - json_files
+      - msi_json
+      - tmb_json
+      - sampleanalysisresults_json
       - cleaned_stitched_bam
       - cleaned_stitched_bai
       - vcfs
@@ -104,7 +106,12 @@ steps:
     run: ../tools/toolbox/gzip.cwl
     label: gzip
     in:
-      files_to_compress: get_inputs_files_per_sample/json_files
+      files_to_compress:
+        source:
+          - get_inputs_files_per_sample/msi_json
+          - get_inputs_files_per_sample/tmb_json
+          - get_inputs_files_per_sample/sampleanalysisresults_json
+        linkMerge: merge_flattened
     out: [gzipped_files]
   per_sample_subdir_layout:
     run: ../expressions/per_sample_subdir_layout.cwl
