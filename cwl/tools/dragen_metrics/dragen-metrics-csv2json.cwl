@@ -4,7 +4,7 @@ class: CommandLineTool
 cwlVersion: v1.1
 
 id: AlignCollapseFusionCaller_metrics.csv2json
-label: convert AlignCollapseFusionCaller_metrics.csv to json
+label: dragen_metrics_to_json.py
 
 requirements:
   DockerRequirement:

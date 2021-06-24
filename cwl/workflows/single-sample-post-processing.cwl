@@ -41,9 +41,7 @@ steps:
       - sv_metrics_csv
       - time_metrics_csv
       - fragment_length_hist_csv
-      - msi_json
-      - sampleanalysisresults_json
-      - tmb_json
+      - json_files
       - cleaned_stitched_bam
       - cleaned_stitched_bai
       - vcfs
@@ -106,10 +104,7 @@ steps:
     run: ../tools/toolbox/gzip.cwl
     label: gzip
     in:
-      files:
-        - get_inputs_files_per_sample/msi_json
-        - get_inputs_files_per_sample/sampleanalysisresults_json
-        - get_inputs_files_per_sample/tmb_json
+      files_to_compress: get_inputs_files_per_sample/json_files
     out: [gzipped_files]
   per_sample_subdir_layout:
     run: ../expressions/per_sample_subdir_layout.cwl
@@ -119,20 +114,20 @@ steps:
         source:
           - get_inputs_files_per_sample/evidence_bam
           - get_inputs_files_per_sample/evidence_bai
-          - dragen_metrics_csv2json/metrics_json_gz
           - get_inputs_files_per_sample/raw_bam
           - get_inputs_files_per_sample/raw_bai
           - get_inputs_files_per_sample/raw_bam_md5sum
           - get_inputs_files_per_sample/cleaned_stitched_bam
           - get_inputs_files_per_sample/cleaned_stitched_bai
-          - gzip/gzipped_files
-          - bgzip_tabix/vcf_gz
-          - make_coverage_QC/coverage_QC
           - get_inputs_files_per_sample/fusion_csv
           - get_inputs_files_per_sample/mergedsmallvariantsannotated_json_gz
+          - dragen_metrics_csv2json/metrics_json_gz
+          - bgzip_tabix/vcf_gz
+          - make_coverage_QC/coverage_QC
           - make_coverage_metrics/target_region_coverage_metrics
           - tsv_to_json_gz/json_gz_file
           - csv_to_json_gz/json_gz_file
+          - gzip/gzipped_files
         linkMerge: merge_flattened
       sample_id: sample_id
 

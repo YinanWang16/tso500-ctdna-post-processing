@@ -28,12 +28,12 @@ requirements:
           for f in \${@}; do
             gzip -c \$f >\${f}.gz
           done
-      - $(inputs.files)
+      - $(inputs.files_to_compress)
 
 baseCommand: [bash, gzip_list_of_files.sh]
 
 inputs:
-  files:
+  files_to_compress:
     type: File[]
     inputBinding:
       position: 0
