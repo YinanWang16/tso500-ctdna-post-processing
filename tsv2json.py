@@ -8,34 +8,30 @@ import json
 import os
 import logging
 import argparse
+import gzip
 
 def get_args():
     """ Get arguments for the command """
     parser = argparse.ArgumentParser(description='Covnert tsv to json')
 
     # Arguments
-    parser.add_argument('-i', '--input', required=True,
-                        help="Input tsv file")
-    parser.add_argument('-s', '--separator', required=False,
-                        help="File separator")
-
+    parser.add_argument('-i', '--input', type=argparse.FileType('r'),
+                        required=True, nargs='+',
+                        help="Input tsv/csv files, separate by space.")
     parser.add_argument('-s', '--skip-rows', required=False,
                         default=0, type=int,
                         help="Skip first n rows of the tsv file")
     return parser.parse_args()
 
-def tsv2json(tsv_file, separator, skip_rows):
+def tsv2json(tsv_file, skip_rows):
     """ make tsv data to dictionary """
-    if separator:
-        df = pd.read_csv(tsv_file, sep=separator, header=0, comment='#', skiprows=skip_rows)
-    elif tsv_file.endswith(".tsv"):
-        df = pd.read_csv(tsv_file, sep='\t', header=0, comment='#', skiprows=skip_rows)
-    elif tsv_file.endswith(".csv"):
+    if tsv_file.name.endswith(".csv"):
         df = pd.read_csv(tsv_file, sep=',', header=0, comment='#', skiprows=skip_rows)
+    else:
+        df = pd.read_csv(tsv_file, sep='\t', header=0, comment='#', skiprows=skip_rows)
     variants = []
     for i in range(len(df)):
         variants.append(dict(df.iloc[i,]))
-
     return variants
 
 def convert(o):
@@ -45,10 +41,10 @@ def convert(o):
 
 def main():
     args = get_args()
-    tsv_file = args.input
-    json_file = tsv_file.rsplit('.', 1)[0] + '.json'
-    variant_df = tsv2json(tsv_file, args.skip_rows)
-    with open(json_file, 'w') as jf:
-        json.dump(variant_df, jf, default=convert)
+    for file in args.input:
+        json_file = file.name.rsplit('.', 1)[0] + '.json.gz'
+        variant_df = tsv2json(file, args.skip_rows)
+        with gzip.open(json_file, 'wt', encoding='ascii') as jf:
+            json.dump(variant_df, jf, default=convert)
 
 main()
