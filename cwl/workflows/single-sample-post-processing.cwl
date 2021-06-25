@@ -94,7 +94,11 @@ steps:
     run: ../tools/tsv2json/tsv2json.cwl
     label: tsv2json
     in:
-      tsv_file: get_inputs_files_per_sample/tmb_trace_tsv
+      tsv_file:
+        - get_inputs_files_per_sample/tmb_trace_tsv
+        - get_inputs_files_per_sample/fragment_length_hist_csv
+        - make_coverage_QC/coverage_QC
+        - target_region_coverage_metrics/target_region_coverage_metrics
     out: [json_gz_file]
   csv_to_json_gz:
     run: ../tools/tsv2json/tsv2json.cwl
@@ -131,7 +135,6 @@ steps:
           - dragen_metrics_csv2json/metrics_json_gz
           - bgzip_tabix/vcf_gz
           - make_coverage_QC/coverage_QC
-          - make_coverage_metrics/target_region_coverage_metrics
           - tsv_to_json_gz/json_gz_file
           - csv_to_json_gz/json_gz_file
           - gzip/gzipped_files
