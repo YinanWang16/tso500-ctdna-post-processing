@@ -7,10 +7,11 @@ id: tsv2json
 label: tsv2json.py
 
 requirements:
-  DockerRequirement:
+  - class: DockerRequirement
     dockerPull: umccr/alpine_pandas:latest-cwl
-  InlineJavascriptRequirement: {}
-  InitialWorkDirRequirement:
+  - class: ShellCommandRequirement  
+  - class: InlineJavascriptRequirement
+  - class:  InitialWorkDirRequirement
     listing:
       - entryname: tsv2json.py
         entry: |
@@ -19,13 +20,9 @@ requirements:
           import pandas as pd
           import numpy as np
           import json
-          import os
-          import logging
+          from os import path
           import argparse
           import gzip
-
-          # Set logging level
-          logging.basicConfig(level=logging.DEBUG)
 
           # Get arguments
           def get_args():
@@ -33,7 +30,7 @@ requirements:
               parser = argparse.ArgumentParser(description='Covnert tsv to json')
 
               # Arguments
-              parser.add_argument('-i', '--input', required=True, type=argparse.FileType('r'),
+              parser.add_argument('-i', '--input', type=argparse.FileType('r'),
                                   required=True, nargs='+',
                                   help="Input tsv/csv files, separate by space.")
               parser.add_argument('-r', '--skip-rows', required=False,
@@ -60,7 +57,7 @@ requirements:
           def main():
               args = get_args()
               for file in args.input:
-                  json_file = file.name.rsplit('.', 1)[0] + '.json.gz'
+                  json_file = path.basename(file.name).rsplit('.', 1)[0] + '.json.gz'
                   variant_df = tsv2json(file, args.skip_rows)
                   with gzip.open(json_file, 'wt', encoding='ascii') as jf:
                       json.dump(variant_df, jf, default=convert)
@@ -71,18 +68,20 @@ baseCommand: ["python3", "tsv2json.py"]
 
 inputs:
   tsv_file:
-    type: File
+    type: File[]
     inputBinding:
       prefix: "--input"
       position: 0
+      itemSeparator: " "
+      shellQuote: false
   skiprows:
     type: int?
     inputBinding:
-      prefix: "--skiprows"
+      prefix: "--skip-rows"
       position: 1
 
 outputs:
   json_gz_file:
-    type: File
+    type: File[]
     outputBinding:
-      glob: "$(inputs.tsv_file.nameroot).json.gz"
+      glob: "*.json.gz"
