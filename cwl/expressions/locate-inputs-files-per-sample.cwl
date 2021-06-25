@@ -6,6 +6,7 @@ class: ExpressionTool
 doc:
   Given tso500-ctDNA-analysis-output-dir and Sample_ID,
   locate all the files needed for post-processing.
+label: discover_files_from_directory
 
 requirements:
   - class: InlineJavascriptRequirement

@@ -4,6 +4,7 @@ cwlVersion: v1.0
 class: ExpressionTool
 doc: |
   Transforms sample specific outputs to match the desired output
+label: per_sample_subdir_layout
 
 requirements:
   - class: InlineJavascriptRequirement

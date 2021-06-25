@@ -16,14 +16,22 @@ def get_args():
     # Arguments
     parser.add_argument('-i', '--input', required=True,
                         help="Input tsv file")
+    parser.add_argument('-s', '--separator', required=False,
+                        help="File separator")
+
     parser.add_argument('-s', '--skip-rows', required=False,
                         default=0, type=int,
                         help="Skip first n rows of the tsv file")
     return parser.parse_args()
 
-def tsv2json(tsv_file, skip_rows):
+def tsv2json(tsv_file, separator, skip_rows):
     """ make tsv data to dictionary """
-    df = pd.read_csv(tsv_file, sep='\t', header=0, comment='#', skiprows=skip_rows)
+    if separator:
+        df = pd.read_csv(tsv_file, sep=separator, header=0, comment='#', skiprows=skip_rows)
+    elif tsv_file.endswith(".tsv"):
+        df = pd.read_csv(tsv_file, sep='\t', header=0, comment='#', skiprows=skip_rows)
+    elif tsv_file.endswith(".csv"):
+        df = pd.read_csv(tsv_file, sep=',', header=0, comment='#', skiprows=skip_rows)
     variants = []
     for i in range(len(df)):
         variants.append(dict(df.iloc[i,]))

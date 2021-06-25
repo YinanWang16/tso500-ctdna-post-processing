@@ -4,7 +4,7 @@ class: CommandLineTool
 cwlVersion: v1.1
 
 id: tsv2json
-label: tsv2json
+label: tsv2json.py
 
 requirements:
   DockerRequirement:
