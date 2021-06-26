@@ -3,8 +3,8 @@ cwlVersion: v1.1
 class: CommandLineTool
 
 # Extentions
-# $namespaces:
-#   ilmn-tes: https://platform.illumina/rdf/ica/
+$namespaces:
+  ilmn-tes: https://platform.illumina/rdf/ica/
 
 # label/doc
 id: make_target_region_coverage_metrics
@@ -16,11 +16,11 @@ doc: |
 hints:
   DockerRequirement:
     dockerPull: umccr/alpine_pandas:latest-cwl
-  # ResourceRequirement:
-  #   ilmn-tes:resources:
-  #     tier: standard
-  #     type: standard
-  #     size: medium
+  ResourceRequirement:
+    ilmn-tes:resources:
+      tier: standard
+      type: standard
+      size: small
 
 requirements:
   InlineJavascriptRequirement: {}

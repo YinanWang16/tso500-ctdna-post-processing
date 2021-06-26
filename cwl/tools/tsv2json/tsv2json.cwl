@@ -3,6 +3,16 @@
 class: CommandLineTool
 cwlVersion: v1.1
 
+$namespaces:
+  ilmn-tes: http://platform.illumina.com/rdf/ica/
+
+hints:
+  - class: ResourceRequirement
+    ilmn-tes:resources:
+      tier: standard
+      type: standard
+      size: small
+
 id: tsv2json
 label: tsv2json.py
 

@@ -5,9 +5,17 @@ class: CommandLineTool
 id: bgzip-tabix-vcf
 label: bgzip-tabix
 
+$namespaces:
+  ilmn-tes: http://platform.illumina.com/rdf/ica/
+
 hints:
-  DockerRequirement:
+  - class: DockerRequirement
     dockerPull: quay.io/biocontainers/tabix:1.11--hdfd78af_0
+  - class: ResourceRequirement
+    ilmn-tes:resources:
+      tier: standard
+      type: standard
+      size: small
 
 requirements:
   - class: InlineJavascriptRequirement

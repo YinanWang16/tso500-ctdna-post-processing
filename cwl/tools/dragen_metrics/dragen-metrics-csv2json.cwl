@@ -3,8 +3,18 @@
 class: CommandLineTool
 cwlVersion: v1.1
 
+$namespaces:
+  ilmn-tes: http://platform.illumina.com/rdf/ica/
+
 id: AlignCollapseFusionCaller_metrics.csv2json
 label: dragen_metrics_to_json.py
+
+hints:
+  - class: ResourceRequirement
+    ilmn-tes:resources:
+      tier: standard
+      type: standard
+      size: small
 
 requirements:
   DockerRequirement:

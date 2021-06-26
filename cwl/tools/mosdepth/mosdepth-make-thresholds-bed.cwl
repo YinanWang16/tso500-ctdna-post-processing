@@ -2,8 +2,8 @@
 cwlVersion: v1.1
 class: CommandLineTool
 
-# $namespaces:
-#   ilmn-tes: https://platform.illumina/rdf/ica/
+$namespaces:
+  ilmn-tes: https://platform.illumina/rdf/ica/
 
 # label/doc
 id: mosdepth-thresholds-bed
@@ -13,13 +13,13 @@ doc: use mosdepth to make threshold.bed file for calculating Failed_Exon_coverag
 hints:
   DockerRequirement:
     dockerPull: quay.io/biocontainers/mosdepth:0.3.1--ha7ba039_0
-  # ResourceRequirement:
-  #   ilmn-tes:resources:
-  #     tier: standard
-  #     type: standard
-  #     size: medium
-  #     coreMin: 4
-  #     ramMin: 2048
+  ResourceRequirement:
+    ilmn-tes:resources:
+      tier: standard
+      type: standard
+      size: xlarge
+      coreMin: 4
+      ramMin: 14000
 
 requirements:
   - class: InlineJavascriptRequirement

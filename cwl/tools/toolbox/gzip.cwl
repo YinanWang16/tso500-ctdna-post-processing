@@ -3,17 +3,17 @@ cwlVersion: v1.1
 class: CommandLineTool
 
 # Extentions
-# $namespaces:
-#   ilmn-tes: https://platform.illumina/rdf/ica/
+$namespaces:
+  ilmn-tes: https://platform.illumina/rdf/ica/
 
 hints:
   - class: DockerRequirement
     dockerPull: ubuntu:latest
-  # - class: ResourceRequirement
-  #   ilmn-tes:resources:
-  #     tier: standard
-  #     type: standard
-  #     size: small
+  - class: ResourceRequirement
+    ilmn-tes:resources:
+      tier: standard
+      type: standard
+      size: small
 
 id: gzip list of files
 label: gzip
@@ -26,7 +26,7 @@ requirements:
         entry: |-
           #!/usr/bin/bash
           for f in \${@}; do
-            gzip -c \$f >\${f}.gz
+            gzip -c \${f} >\${f}.gz
           done
       - $(inputs.files_to_compress)
 

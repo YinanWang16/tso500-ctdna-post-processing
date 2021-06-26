@@ -3,19 +3,19 @@
 cwlVersion: v1.1
 class: CommandLineTool
 
-# $namespaces:
-#   ilmn-tes: https://platform.illumina/rdf/ica/
+$namespaces:
+  ilmn-tes: https://platform.illumina/rdf/ica/
 
 label: make_coverage_QC.py
 
 hints:
   DockerRequirement:
     dockerPull: umccr/alpine_pandas:latest-cwl
-  # ResourceRequirement:
-  #   ilmn-tes:resources:
-  #     tier: standard
-  #     type: standard
-  #     size: medium
+  ResourceRequirement:
+    ilmn-tes:resources:
+      tier: standard
+      type: standard
+      size: small
 
 requirements:
   InlineJavascriptRequirement: {}

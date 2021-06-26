@@ -14,6 +14,7 @@ requirements:
 inputs:
   tso500_ctdna_output_dir:
     type: Directory
+    streamable: false
   sample_id:
     type: string
 
