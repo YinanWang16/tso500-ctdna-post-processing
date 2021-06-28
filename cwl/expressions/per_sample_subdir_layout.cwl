@@ -18,7 +18,7 @@ inputs:
 expression: |
   ${
     var r = {
-      "sample_results":
+      "sample_subdir":
         { "class": "Directory",
           "basename": inputs.sample_id,
           "listing": inputs.list_of_files
