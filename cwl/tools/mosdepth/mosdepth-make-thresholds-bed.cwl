@@ -48,7 +48,7 @@ inputs:
   threads:
     type: int
     doc: |
-      number of BAM decompression threads [default: 0]
+      number of BAM decompression threads. (use 4 or fewer) [default: 0]
     default: 4
     inputBinding:
       prefix: -t

@@ -128,47 +128,6 @@
             ]
         },
         {
-            "class": "ExpressionTool",
-            "doc": "Transforms sample specific outputs to match the desired output\n",
-            "label": "per_sample_subdir_layout",
-            "requirements": [
-                {
-                    "class": "InlineJavascriptRequirement"
-                }
-            ],
-            "inputs": [
-                {
-                    "type": {
-                        "type": "array",
-                        "items": "File"
-                    },
-                    "id": "#per_sample_subdir_layout.cwl/list_of_files"
-                },
-                {
-                    "type": "string",
-                    "id": "#per_sample_subdir_layout.cwl/sample_id"
-                }
-            ],
-            "expression": "${\n  var r = {\n    \"sample_results\":\n      { \"class\": \"Directory\",\n        \"basename\": inputs.sample_id,\n        \"listing\": inputs.list_of_files\n      }\n  }\n  return r;\n}\n",
-            "outputs": [
-                {
-                    "type": "Directory",
-                    "id": "#per_sample_subdir_layout.cwl/sample_results"
-                }
-            ],
-            "id": "#per_sample_subdir_layout.cwl",
-            "hints": [
-                {
-                    "class": "LoadListingRequirement",
-                    "loadListing": "deep_listing"
-                },
-                {
-                    "class": "NetworkAccess",
-                    "networkAccess": true
-                }
-            ]
-        },
-        {
             "class": "CommandLineTool",
             "id": "#bgzip-tabix.cwl",
             "label": "bgzip-tabix",
@@ -411,7 +370,7 @@
                 },
                 {
                     "type": "int",
-                    "doc": "number of BAM decompression threads [default: 0]\n",
+                    "doc": "number of BAM decompression threads. (use 4 or fewer) [default: 0]\n",
                     "default": 4,
                     "inputBinding": {
                         "prefix": "-t",
@@ -625,7 +584,7 @@
                     "listing": [
                         {
                             "entryname": "gzip_list_of_files.sh",
-                            "entry": "#!/usr/bin/bash\nfor f in \\${@}; do\n  gzip -c \\${f} >\\${f}.gz\ndone"
+                            "entry": "#!/usr/bin/env bash\nfor f in \\${@}; do\n  gzip -c \\${f} >\\${f}.gz\ndone"
                         },
                         "$(inputs.files_to_compress)"
                     ]
@@ -657,6 +616,70 @@
                         "glob": "*.gz"
                     },
                     "id": "#gzip.cwl/gzipped_files"
+                }
+            ]
+        },
+        {
+            "class": "CommandLineTool",
+            "id": "#make_sample_subdir.cwl",
+            "label": "make-sample-subdir-results",
+            "hints": [
+                {
+                    "class": "ResourceRequirement",
+                    "https://platform.illumina/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "small"
+                    }
+                }
+            ],
+            "requirements": [
+                {
+                    "class": "InlineJavascriptRequirement"
+                },
+                {
+                    "class": "InitialWorkDirRequirement",
+                    "listing": [
+                        {
+                            "entryname": "copy_files.sh",
+                            "entry": "#!/usr/bin/env bash\n\nsample=\\$1; shift\nmkdir -p \\${sample}\n\ncp \\${@} \\${sample}"
+                        }
+                    ]
+                }
+            ],
+            "baseCommand": [
+                "bash",
+                "copy_files.sh"
+            ],
+            "inputs": [
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "doc": "files to put in sample_id subdir",
+                    "inputBinding": {
+                        "position": 1
+                    },
+                    "id": "#make_sample_subdir.cwl/file_list"
+                },
+                {
+                    "type": "string",
+                    "label": "sample_id",
+                    "inputBinding": {
+                        "position": 0
+                    },
+                    "id": "#make_sample_subdir.cwl/sample_id"
+                }
+            ],
+            "outputs": [
+                {
+                    "label": "sample-subdir",
+                    "type": "Directory",
+                    "outputBinding": {
+                        "glob": "$(inputs.sample_id)"
+                    },
+                    "id": "#make_sample_subdir.cwl/sample_subdir"
                 }
             ]
         },
@@ -768,7 +791,7 @@
             "outputs": [
                 {
                     "type": "Directory",
-                    "outputSource": "#/per_sample_subdir_layout/sample_results",
+                    "outputSource": "#/per_sample_subdir_layout/sample_subdir",
                     "id": "#results_sample_subdir"
                 }
             ],
@@ -953,7 +976,7 @@
                     "id": "#mosdepth"
                 },
                 {
-                    "run": "#per_sample_subdir_layout.cwl",
+                    "run": "#make_sample_subdir.cwl",
                     "label": "sample_subdir_layout",
                     "in": [
                         {
@@ -973,7 +996,7 @@
                                 "#/gzip/gzipped_files"
                             ],
                             "linkMerge": "merge_flattened",
-                            "id": "#per_sample_subdir_layout/list_of_files"
+                            "id": "#per_sample_subdir_layout/file_list"
                         },
                         {
                             "source": "#sample_id",
@@ -981,7 +1004,7 @@
                         }
                     ],
                     "out": [
-                        "#/per_sample_subdir_layout/sample_results"
+                        "#/per_sample_subdir_layout/sample_subdir"
                     ],
                     "id": "#per_sample_subdir_layout"
                 },

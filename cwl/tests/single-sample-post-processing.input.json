@@ -12,7 +12,7 @@
     "sample_id": "Seraseq_Comp_Mut_Mix_AF1_DNA_rep1"
   },
   "engineParameters": {
-    "outputDirectory": "gds://yncttsopostprocessing/test-single-sample-post-processing",
+    "outputDirectory": "gds://yncttsopostprocessing/test-single-sample-post-processing/Results",
     "workDirectory": "gds://yncttsopostprocessing/test-single-sample-post-processing"
   }
 }

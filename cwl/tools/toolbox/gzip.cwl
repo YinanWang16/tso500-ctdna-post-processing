@@ -24,7 +24,7 @@ requirements:
     listing:
       - entryname: gzip_list_of_files.sh
         entry: |-
-          #!/usr/bin/bash
+          #!/usr/bin/env bash
           for f in \${@}; do
             gzip -c \${f} >\${f}.gz
           done
