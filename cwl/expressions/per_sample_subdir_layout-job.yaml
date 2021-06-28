@@ -1,4 +1,4 @@
-list_of_files:
+file_list:
   - class: File
     path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1_TMB_Trace.json.gz
   - class: File

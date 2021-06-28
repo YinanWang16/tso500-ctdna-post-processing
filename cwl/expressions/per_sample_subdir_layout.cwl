@@ -10,7 +10,7 @@ requirements:
   - class: InlineJavascriptRequirement
 
 inputs:
-  list_of_files:
+  file_list:
     type: File[]
   sample_id:
     type: string
