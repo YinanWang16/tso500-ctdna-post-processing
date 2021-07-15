@@ -114,7 +114,7 @@ steps:
     run: ../expressions/per_sample_subdir_layout.cwl
     label: sample_subdir_layout
     in:
-      list_of_files:
+      file_list:
         source:
           - get_inputs_files_per_sample/evidence_bam
           - get_inputs_files_per_sample/evidence_bai
@@ -132,4 +132,4 @@ steps:
         linkMerge: merge_flattened
       sample_id: sample_id
 
-    out: [sample_results]
+    out: [sample_subdir]
