@@ -1,0 +1,110 @@
+{
+    "$graph": [
+        {
+            "class": "CommandLineTool",
+            "baseCommand": [
+                "/bin/cat"
+            ],
+            "requirements": [
+                {
+                    "class": "DockerRequirement",
+                    "dockerPull": "bash:5"
+                }
+            ],
+            "stdout": "output.txt",
+            "inputs": [
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "inputBinding": {
+                        "position": 1
+                    },
+                    "id": "#cat-tool.cwl/input_files"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "File",
+                    "id": "#cat-tool.cwl/output_file",
+                    "outputBinding": {
+                        "glob": "output.txt"
+                    }
+                }
+            ],
+            "id": "#cat-tool.cwl"
+        },
+        {
+            "class": "Workflow",
+            "requirements": [
+                {
+                    "class": "SubworkflowFeatureRequirement"
+                },
+                {
+                    "class": "MultipleInputFeatureRequirement"
+                }
+            ],
+            "inputs": [
+                {
+                    "type": "File",
+                    "id": "#main/input_file"
+                },
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "id": "#main/input_files"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "File",
+                    "outputSource": "#main/step2/output_file",
+                    "id": "#main/workflow_output_file"
+                }
+            ],
+            "steps": [
+                {
+                    "run": "#cat-tool.cwl",
+                    "in": [
+                        {
+                            "source": [
+                                "#main/input_file",
+                                "#main/input_files"
+                            ],
+                            "linkMerge": "merge_flattened",
+                            "id": "#main/step1/input_files"
+                        }
+                    ],
+                    "out": [
+                        "#main/step1/output_file"
+                    ],
+                    "id": "#main/step1"
+                },
+                {
+                    "run": "#cat-tool.cwl",
+                    "in": [
+                        {
+                            "source": [
+                                "#main/step1/output_file",
+                                "#main/input_file",
+                                "#main/input_file",
+                                "#main/input_files"
+                            ],
+                            "linkMerge": "merge_flattened",
+                            "id": "#main/step2/input_files"
+                        }
+                    ],
+                    "out": [
+                        "#main/step2/output_file"
+                    ],
+                    "id": "#main/step2"
+                }
+            ],
+            "id": "#main"
+        }
+    ],
+    "cwlVersion": "v1.0"
+}
