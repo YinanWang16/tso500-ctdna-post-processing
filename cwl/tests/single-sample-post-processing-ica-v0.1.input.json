@@ -1,5 +1,5 @@
 {
-  "name": "yn_single_sample_post_processing_v1.0",
+  "name": "yn_single_sample_post_processing_v0.1",
   "input": {
     "tso_manifest_bed": {
       "class": "File",
@@ -12,7 +12,7 @@
     "sample_id": "Seraseq_Comp_Mut_Mix_AF1_DNA_rep1"
   },
   "engineParameters": {
-    "outputDirectory": "gds://yncttsopostprocessing/test-single-sample-post-processing",
-    "workDirectory": "gds://yncttsopostprocessing/test-single-sample-post-processing"
+    "outputDirectory": "gds://yncttsopostprocessing/test-single-sample-post-processing/v0.1",
+    "workDirectory": "gds://yncttsopostprocessing/test-single-sample-post-processing/v0.1"
   }
 }

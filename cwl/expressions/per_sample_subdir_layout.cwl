@@ -18,7 +18,7 @@ inputs:
 expression: |
   ${
     var r = {
-      "outputs":
+      "sample_subdir":
         { 
           "class": "Directory",
           "basename": inputs.sample_id,
