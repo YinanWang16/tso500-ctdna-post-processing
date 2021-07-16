@@ -29,14 +29,14 @@ steps:
       sample_id:
         source: sample_id
     out:
-      - raw_bam
-      - raw_bai
-      - raw_bam_md5sum
-      - evidence_bam
-      - evidence_bai
-      - mapping_metrics_csv
-      - trimmer_metrics_csv
-      - umi_metrics_csv
+      - raw_bam 
+      - raw_bai 
+      - raw_bam_md5sum  
+      - evidence_bam  
+      - evidence_bai  
+      - mapping_metrics_csv 
+      - trimmer_metrics_csv 
+      - umi_metrics_csv 
       - wgs_coverage_metrics_csv
       - sv_metrics_csv
       - time_metrics_csv
@@ -111,24 +111,24 @@ steps:
         - get_inputs_files_per_sample/sampleanalysisresults_json
     out: [gzipped_files]
   per_sample_subdir_layout:
-    run: ../tools/toolbox/make_sample_subdir.cwl
+    run: ../expressions/per_sample_subdir_layout.cwl
     label: sample_subdir_layout
     in:
       sample_id: sample_id
       file_list:
         source:
-          - get_inputs_files_per_sample/evidence_bam
-          - get_inputs_files_per_sample/evidence_bai
-          - get_inputs_files_per_sample/raw_bam
-          - get_inputs_files_per_sample/raw_bai
-          - get_inputs_files_per_sample/raw_bam_md5sum
-          - get_inputs_files_per_sample/cleaned_stitched_bam
-          - get_inputs_files_per_sample/cleaned_stitched_bai
-          - get_inputs_files_per_sample/mergedsmallvariantsannotated_json_gz
-          - dragen_metrics_csv2json/metrics_json_gz
-          - bgzip_tabix/vcf_gz
-          - make_coverage_QC/coverage_QC
-          - tsv_to_json_gz/json_gz_file
-          - gzip/gzipped_files
+          - get_inputs_files_per_sample/evidence_bam  #1
+          - get_inputs_files_per_sample/evidence_bai  #2
+          - get_inputs_files_per_sample/raw_bam #3
+          - get_inputs_files_per_sample/raw_bai #4
+          - get_inputs_files_per_sample/raw_bam_md5sum  #5
+          - get_inputs_files_per_sample/cleaned_stitched_bam  #6
+          - get_inputs_files_per_sample/cleaned_stitched_bai  #7
+          - get_inputs_files_per_sample/mergedsmallvariantsannotated_json_gz  #8
+          - dragen_metrics_csv2json/metrics_json_gz #9
+          - bgzip_tabix/vcf_gz  #10 6f
+          - make_coverage_QC/coverage_QC  #11
+          - tsv_to_json_gz/json_gz_file #12 5f
+          - gzip/gzipped_files  #13 3f
         linkMerge: merge_flattened
     out: [sample_subdir]

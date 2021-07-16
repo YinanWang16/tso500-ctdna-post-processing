@@ -23,10 +23,10 @@ requirements:
         entry: |-
           #!/usr/bin/env bash
 
-          sample=\$1; shift
+          sample='"\$1"'; shift
           mkdir -p \${sample}
           
-          cp \${@} \${sample}
+          cp '"\${@}"' \${sample}
 
 baseCommand: ["bash", "copy_files.sh"]
 

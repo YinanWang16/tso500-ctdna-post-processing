@@ -1,8 +1,0 @@
-input_files:  # array of type "File"
-  - class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/one.txt
-  - class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/two.txt
-input_file:  # type "File"
-    class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/cwl/workflows/three.txt

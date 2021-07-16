@@ -18,14 +18,15 @@ inputs:
 expression: |
   ${
     var r = {
-      "sample_subdir":
-        { "class": "Directory",
+      "outputs":
+        { 
+          "class": "Directory",
           "basename": inputs.sample_id,
-          "listing": inputs.list_of_files
+          "listing": inputs.file_list
         }
     }
     return r;
   }
 
 outputs:
-  sample_results: Directory
+  sample_subdir: Directory
