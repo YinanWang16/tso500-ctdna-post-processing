@@ -1,7 +1,0 @@
-tso_manifest_bed:  # type "File"
-    class: File
-    path: /data/TSO500_RUO_LocalApp_v2.1.0/resources/TST500C_manifest.bed
-tso500_ctdna_output:  # type "Directory"
-    class: Directory
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis
-sample_id: Seraseq_Comp_Mut_Mix_AF1_DNA_rep1  # type "string"

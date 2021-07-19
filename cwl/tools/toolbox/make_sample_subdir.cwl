@@ -23,10 +23,10 @@ requirements:
         entry: |-
           #!/usr/bin/env bash
 
-          sample='"\$1"'; shift
+          sample="$(inputs.sample_id)"
           mkdir -p \${sample}
           
-          cp '"\${@}"' \${sample}
+          cp \${@} \${sample}
 
 baseCommand: ["bash", "copy_files.sh"]
 
@@ -34,8 +34,6 @@ inputs:
   sample_id:
     type: string
     label: sample_id
-    inputBinding:
-      position: 0
   file_list:
     type: File[]
     doc: files to put in sample_id subdir
