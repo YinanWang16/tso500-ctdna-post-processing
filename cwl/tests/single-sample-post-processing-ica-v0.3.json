@@ -621,7 +621,7 @@
         },
         {
             "class": "CommandLineTool",
-            "id": "#make_sample_subdir.2.cwl",
+            "id": "#make_sample_subdir.3.cwl",
             "label": "make-sample-subdir-results",
             "hints": [
                 {
@@ -646,7 +646,7 @@
                     "listing": [
                         {
                             "entryname": "copy_files.sh",
-                            "entry": "#!/usr/bin/env bash\n\nsample=\"$(inputs.sample_id)\"\nmkdir -p \\${sample}\n\ncp \\${@} \\${sample}"
+                            "entry": "#!/usr/bin/env bash\n\nsample=\\$1; shift\nmkdir -p \\${sample}\n\ncp \\${@} \\${sample}"
                         }
                     ]
                 }
@@ -665,12 +665,15 @@
                     "inputBinding": {
                         "position": 1
                     },
-                    "id": "#make_sample_subdir.2.cwl/file_list"
+                    "id": "#make_sample_subdir.3.cwl/file_list"
                 },
                 {
                     "type": "string",
                     "label": "sample_id",
-                    "id": "#make_sample_subdir.2.cwl/sample_id"
+                    "inputBinding": {
+                        "position": 0
+                    },
+                    "id": "#make_sample_subdir.3.cwl/sample_id"
                 }
             ],
             "outputs": [
@@ -680,7 +683,7 @@
                     "outputBinding": {
                         "glob": "$(inputs.sample_id)"
                     },
-                    "id": "#make_sample_subdir.2.cwl/sample_subdir"
+                    "id": "#make_sample_subdir.3.cwl/sample_subdir"
                 }
             ]
         },
@@ -977,7 +980,7 @@
                     "id": "#mosdepth"
                 },
                 {
-                    "run": "#make_sample_subdir.2.cwl",
+                    "run": "#make_sample_subdir.3.cwl",
                     "label": "sample_subdir_layout",
                     "in": [
                         {

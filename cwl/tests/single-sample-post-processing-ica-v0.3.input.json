@@ -1,0 +1,18 @@
+{
+  "name": "yn_single_sample_post_processing_v0.3",
+  "input": {
+    "tso_manifest_bed": {
+      "class": "File",
+      "path": "gds://yncttsopostprocessing/TST500C_manifest.bed"
+    },
+    "tso500_ctdna_output": {
+      "class": "Directory",
+      "path": "gds://tso500-ctdna-s4-demo/ANALYSIS/200212_A00807_0128_AH5CWWDSXY_singleSample_analysis/wfr.078d3af7483d4156b873ffb01be8b0cd/GatheredResults"
+    },
+    "sample_id": "Seraseq_Comp_Mut_Mix_AF1_DNA_rep1"
+  },
+  "engineParameters": {
+    "outputDirectory": "gds://yncttsopostprocessing/test-single-sample-post-processing/v0.3",
+    "workDirectory": "gds://yncttsopostprocessing/test-single-sample-post-processing/v0.3"
+  }
+}
