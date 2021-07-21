@@ -646,7 +646,7 @@
                     "listing": [
                         {
                             "entryname": "copy_files.sh",
-                            "entry": "#!/usr/bin/env bash\n\nsample=\\$1; shift\nmkdir -p \\${sample}\n\ncp \\${@} \\${sample}"
+                            "entry": "#!/usr/bin/env bash\n\nsample=\\${1}; shift\nmkdir -p \\${sample}\n\ncp \\${@} \\${sample}"
                         }
                     ]
                 }
