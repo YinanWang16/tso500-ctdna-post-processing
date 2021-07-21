@@ -625,6 +625,10 @@
             "label": "make-sample-subdir-results",
             "hints": [
                 {
+                    "class": "DockerRequirement",
+                    "dockerPull": "ubuntu:latest"
+                },
+                {
                     "class": "ResourceRequirement",
                     "https://platform.illumina/rdf/ica/resources": {
                         "tier": "standard",

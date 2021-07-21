@@ -10,6 +10,8 @@ id: make_sample_subdir
 label: make-sample-subdir-results
 
 hints:
+  - class: DockerRequirement
+    dockerPull: ubuntu:latest
   - class: ResourceRequirement
     ilmn-tes:resources:
       tier: standard
