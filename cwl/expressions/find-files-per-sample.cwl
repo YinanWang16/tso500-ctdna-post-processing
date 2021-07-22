@@ -93,7 +93,7 @@ expression: >-
               }
             })
           } else if (item2.class == "Directory" && item2.basename === "Tmb") {
-            item2.listing.forEach(function (item3) {
+           item2.listing.forEach(function (item3) {
               if (item3.class == "Directory" && item3.basename === inputs.sample_id) {
                 item3.listing.forEach(function (item4) {
                   if (item4.basename === inputs.sample_id + ".tmb.json") {
@@ -138,15 +138,15 @@ expression: >-
       "dir_backup_files": {
         "class": "Directory",
         "basename": "backup",
-        "listing":[
-          "evidence_bam": evidence_bam_file,
-          "evidence_bai": evidence_bai_file,
-          "raw_bam": raw_bam_file,
-          "raw_bai": raw_bai_file,
-          "raw_bam_md5sum": raw_bam_md5sum_file,
-          "cleaned_stitched_bam": cleaned_stitched_bam_file,
-          "cleaned_stitched_bai": cleaned_stitched_bai_file,
-          "mergedsmallvariantsannotated_json_gz": mergedsmallvariantsannotated_json_gz_file
+        "listing": [
+          evidence_bam_file,
+          evidence_bai_file,
+          raw_bam_file,
+          raw_bai_file,
+          raw_bam_md5sum_file,
+          cleaned_stitched_bam_file,
+          cleaned_stitched_bai_file,
+          mergedsmallvariantsannotated_json_gz_file
         ]
       },
       "raw_bam": raw_bam_file,
