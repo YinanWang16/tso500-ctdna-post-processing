@@ -621,13 +621,9 @@
         },
         {
             "class": "CommandLineTool",
-            "id": "#make_sample_subdir.3.cwl",
+            "id": "#make_sample_subdir.pratik.cwl",
             "label": "make-sample-subdir-results",
             "hints": [
-                {
-                    "class": "DockerRequirement",
-                    "dockerPull": "bash:5"
-                },
                 {
                     "class": "ResourceRequirement",
                     "https://platform.illumina/rdf/ica/resources": {
@@ -639,21 +635,25 @@
             ],
             "requirements": [
                 {
+                    "class": "DockerRequirement",
+                    "dockerPull": "ubuntu:latest"
+                },
+                {
                     "class": "InlineJavascriptRequirement"
                 },
                 {
                     "class": "InitialWorkDirRequirement",
                     "listing": [
                         {
-                            "entryname": "copy_files.sh",
-                            "entry": "#!/usr/bin/env bash\n\nsample=\\${1}; shift\nmkdir -p \\${sample}\n\ncp \\${@} \\${sample}"
+                            "entryname": "/data/copy_files.sh",
+                            "entry": "#!/usr/bin/env bash\nsample=\\${1}; shift\nmkdir -p \\${sample}\ncp \\${@} \\${sample}"
                         }
                     ]
                 }
             ],
             "baseCommand": [
                 "bash",
-                "copy_files.sh"
+                "/data/copy_files.sh"
             ],
             "inputs": [
                 {
@@ -665,7 +665,7 @@
                     "inputBinding": {
                         "position": 1
                     },
-                    "id": "#make_sample_subdir.3.cwl/file_list"
+                    "id": "#make_sample_subdir.pratik.cwl/file_list"
                 },
                 {
                     "type": "string",
@@ -673,7 +673,7 @@
                     "inputBinding": {
                         "position": 0
                     },
-                    "id": "#make_sample_subdir.3.cwl/sample_id"
+                    "id": "#make_sample_subdir.pratik.cwl/sample_id"
                 }
             ],
             "outputs": [
@@ -683,7 +683,7 @@
                     "outputBinding": {
                         "glob": "$(inputs.sample_id)"
                     },
-                    "id": "#make_sample_subdir.3.cwl/sample_subdir"
+                    "id": "#make_sample_subdir.pratik.cwl/sample_subdir"
                 }
             ]
         },
@@ -980,7 +980,7 @@
                     "id": "#mosdepth"
                 },
                 {
-                    "run": "#make_sample_subdir.3.cwl",
+                    "run": "#make_sample_subdir.pratik.cwl",
                     "label": "sample_subdir_layout",
                     "in": [
                         {
@@ -1045,5 +1045,5 @@
             ]
         }
     ],
-    "cwlVersion": "v1.1"
+    "cwlVersion": "v1.2"
 }
