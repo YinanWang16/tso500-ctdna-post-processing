@@ -128,47 +128,6 @@
             ]
         },
         {
-            "class": "ExpressionTool",
-            "doc": "Transforms sample specific outputs to match the desired output\n",
-            "label": "per_sample_subdir_layout",
-            "requirements": [
-                {
-                    "class": "InlineJavascriptRequirement"
-                }
-            ],
-            "inputs": [
-                {
-                    "type": {
-                        "type": "array",
-                        "items": "File"
-                    },
-                    "id": "#per_sample_subdir_layout.cwl/file_list"
-                },
-                {
-                    "type": "string",
-                    "id": "#per_sample_subdir_layout.cwl/sample_id"
-                }
-            ],
-            "expression": "${\n  var r = {\n    \"sample_subdir\":\n      { \n        \"class\": \"Directory\",\n        \"basename\": inputs.sample_id,\n        \"listing\": inputs.file_list\n      }\n  }\n  return r;\n}\n",
-            "outputs": [
-                {
-                    "type": "Directory",
-                    "id": "#per_sample_subdir_layout.cwl/sample_subdir"
-                }
-            ],
-            "id": "#per_sample_subdir_layout.cwl",
-            "hints": [
-                {
-                    "class": "LoadListingRequirement",
-                    "loadListing": "deep_listing"
-                },
-                {
-                    "class": "NetworkAccess",
-                    "networkAccess": true
-                }
-            ]
-        },
-        {
             "class": "CommandLineTool",
             "id": "#bgzip-tabix.cwl",
             "label": "bgzip-tabix",
@@ -225,14 +184,8 @@
                         "items": "File"
                     },
                     "label": "vcf.gz, vcv.gz.tbi",
-                    "secondaryFiles": [
-                        {
-                            "pattern": ".tbi",
-                            "required": null
-                        }
-                    ],
                     "outputBinding": {
-                        "glob": "*.vcf.gz"
+                        "glob": "*.vcf.gz*"
                     },
                     "id": "#bgzip-tabix.cwl/vcf_gz"
                 }
@@ -662,6 +615,71 @@
         },
         {
             "class": "CommandLineTool",
+            "id": "#make_sample_subdir.cwl",
+            "label": "make-sample-subdir-results",
+            "hints": [
+                {
+                    "class": "ResourceRequirement",
+                    "https://platform.illumina/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "small"
+                    }
+                }
+            ],
+            "requirements": [
+                {
+                    "class": "DockerRequirement",
+                    "dockerPull": "ubuntu:latest"
+                },
+                {
+                    "class": "InlineJavascriptRequirement"
+                },
+                {
+                    "class": "InitialWorkDirRequirement",
+                    "listing": [
+                        {
+                            "entryname": "/data/copy_files.sh",
+                            "entry": "#!/usr/bin/env bash\nsample=$(inputs.sample_id)\nmkdir -p \\${sample}\ncp \\${@} \\${sample}"
+                        }
+                    ]
+                }
+            ],
+            "baseCommand": [
+                "bash",
+                "/data/copy_files.sh"
+            ],
+            "inputs": [
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "doc": "files to put in sample_id subdir",
+                    "inputBinding": {
+                        "position": 1
+                    },
+                    "id": "#make_sample_subdir.cwl/file_list"
+                },
+                {
+                    "type": "string",
+                    "label": "sample_id",
+                    "id": "#make_sample_subdir.cwl/sample_id"
+                }
+            ],
+            "outputs": [
+                {
+                    "label": "sample-subdir",
+                    "type": "Directory",
+                    "outputBinding": {
+                        "glob": "$(inputs.sample_id)"
+                    },
+                    "id": "#make_sample_subdir.cwl/sample_subdir"
+                }
+            ]
+        },
+        {
+            "class": "CommandLineTool",
             "hints": [
                 {
                     "class": "ResourceRequirement",
@@ -953,7 +971,7 @@
                     "id": "#mosdepth"
                 },
                 {
-                    "run": "#per_sample_subdir_layout.cwl",
+                    "run": "#make_sample_subdir.cwl",
                     "label": "sample_subdir_layout",
                     "in": [
                         {
@@ -1018,5 +1036,5 @@
             ]
         }
     ],
-    "cwlVersion": "v1.1"
+    "cwlVersion": "v1.2"
 }

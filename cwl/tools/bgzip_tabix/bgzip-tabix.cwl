@@ -44,8 +44,6 @@ outputs:
   vcf_gz:
     type: File[]
     label: vcf.gz, vcv.gz.tbi
-    secondaryFiles: 
-      - .tbi
     outputBinding:
-      glob: "*.vcf.gz"
+      glob: "*.vcf.gz*"
       

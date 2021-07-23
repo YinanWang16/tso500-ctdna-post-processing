@@ -111,7 +111,7 @@ steps:
         - get_inputs_files_per_sample/sampleanalysisresults_json
     out: [gzipped_files]
   per_sample_subdir_layout:
-    run: ../expressions/per_sample_subdir_layout.cwl
+    run: ../tools/toolbox/make_sample_subdir.cwl
     label: sample_subdir_layout
     in:
       sample_id: sample_id
