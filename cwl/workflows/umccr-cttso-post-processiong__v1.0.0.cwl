@@ -15,7 +15,7 @@ requirements:
 
 inputs:
   tso500_outputs_by_sample:
-    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
+    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml#tso500-outputs-by-sample
     doc: |
       Directories and Files of UMCCR tso500 outpout 
   tso_manifest_bed: 

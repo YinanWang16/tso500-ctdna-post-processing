@@ -1,0 +1,60 @@
+tso_manifest_bed:  # type "File"
+    class: File
+    path: a/file/path
+tso500_outputs_by_sample:  # "tso500-outputs-by-sample" record type.
+    variant_matching_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    variant_caller_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    tmb_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    stitched_realigned_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    small_variant_filter_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    sample_name: a_string  # type "string"
+    sample_id: a_string  # type "string"
+    sample_analysis_results_json:  # type "File" (optional)
+        class: File
+        path: a/file/path
+    results_dir:  # type "Directory"
+        class: Directory
+        path: a/directory/path
+    phased_variants_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    msi_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    merged_annotation_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    max_somatic_vaf_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    dna_qc_metrics_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    dna_fusion_filtering_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    contamination_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    combined_variant_output_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    cnv_caller_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    annotation_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path
+    align_collapse_fusion_caller_dir:  # type "Directory" (optional)
+        class: Directory
+        path: a/directory/path

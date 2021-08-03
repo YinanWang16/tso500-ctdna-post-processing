@@ -16,7 +16,7 @@ requirements:
 
 inputs:
   tso500_outputs_by_sample:
-    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
+    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml#tso500-outputs-by-sample
 expression: >-
   ${
     var raw_bam_file = '';
@@ -42,78 +42,58 @@ expression: >-
     var tmb_trace_tsv_file = '';
     var sample_id = '';
     inputs.tso500_outputs_by_sample.align_collapse_fusion_caller_dir.listing.forEach(function (item) {
-      if (item.class == "Directory" && item.basename === inputs.sample_id) {
-        item.listing.forEach(function (item2) {
-          if (item2.basename === inputs.sample_id + ".bam") {
-            raw_bam_file = item2;
-          } else if (item2.basename === inputs.sample_id + ".bam.bai") {
-            raw_bai_file = item2;
-          } else if (item2.basename === inputs.sample_id + ".bam.md5sum") {
-            raw_bam_md5sum_file = item2;
-          } else if (item2.basename === "evidence." + inputs.sample_id + ".bam") {
-            evidence_bam_file = item2;
-          } else if (item2.basename === "evidence." + inputs.sample_id + ".bam.bai") {
-            evidence_bai_file = item2;
-          } else if (item2.basename === inputs.sample_id + ".mapping_metrics.csv") {
-            mapping_metrics_csv_file = item2;
-          } else if (item2.basename === inputs.sample_id + ".trimmer_metrics.csv") {
-            trimmer_metrics_csv_file = item2;
-          } else if (item2.basename === inputs.sample_id + ".umi_metrics.csv") {
-            umi_metrics_csv_file = item2;
-          } else if (item2.basename === inputs.sample_id + ".wgs_coverage_metrics.csv") {
-            wgs_coverage_metrics_csv_file = item2;
-          } else if (item2.basename === inputs.sample_id + ".sv_metrics.csv") {
-            sv_metrics_csv_file = item2;
-          } else if (item2.basename === inputs.sample_id + ".time_metrics.csv") {
-            time_metrics_csv_file = item2;
-          } else if (item2.basename === inputs.sample_id + ".fragment_length_hist.csv") {
-            fragment_length_hist_csv_file = item;
-          }
-        })
+      if (item.basename === inputs.sample_id + ".bam") {
+        raw_bam_file = item;
+      } else if (item.basename === inputs.sample_id + ".bam.bai") {
+        raw_bai_file = item;
+      } else if (item.basename === inputs.sample_id + ".bam.md5sum") {
+        raw_bam_md5sum_file = item;
+      } else if (item.basename === "evidence." + inputs.sample_id + ".bam") {
+        evidence_bam_file = item;
+      } else if (item.basename === "evidence." + inputs.sample_id + ".bam.bai") {
+        evidence_bai_file = item;
+      } else if (item.basename === inputs.sample_id + ".mapping_metrics.csv") {
+        mapping_metrics_csv_file = item;
+      } else if (item.basename === inputs.sample_id + ".trimmer_metrics.csv") {
+        trimmer_metrics_csv_file = item;
+      } else if (item.basename === inputs.sample_id + ".umi_metrics.csv") {
+        umi_metrics_csv_file = item;
+      } else if (item.basename === inputs.sample_id + ".wgs_coverage_metrics.csv") {
+        wgs_coverage_metrics_csv_file = item;
+      } else if (item.basename === inputs.sample_id + ".sv_metrics.csv") {
+        sv_metrics_csv_file = item;
+      } else if (item.basename === inputs.sample_id + ".time_metrics.csv") {
+        time_metrics_csv_file = item;
+      } else if (item.basename === inputs.sample_id + ".fragment_length_hist.csv") {
+        fragment_length_hist_csv_file = item;
       }
     });
     inputs.tso500_outputs_by_sample.msi_dir.listing.forEach(function (item) {
-      if (item.class == "Directory" && item.basename === inputs.sample_id) {
-        item.listing.forEach(function (item2) {
-          if (item2.basename === inputs.sample_id + ".msi.json") {
-            msi_json_file = item2;
-          }
-        })
+      if (item.basename === inputs.sample_id + ".msi.json") {
+        msi_json_file = item;
       }
     });
     inputs.tso500_outputs_by_sample.tmb_dir.listing.forEach(function (item) {
-      if (item.class == "Directory" && item.basename === inputs.sample_id) {
-        item.listing.forEach(function (item2) {
-          if (item2.basename === inputs.sample_id + ".tmb.json") {
-            tmb_json_file = item2;
-          }
-        })
+      if (item.basename === inputs.sample_id + ".tmb.json") {
+        tmb_json_file = item;
       }
     });
     inputs.tso500_outputs_by_sample.variant_caller_dir.listing.forEach(function (item) {
-      if (item.class == "Directory" && item.basename === inputs.sample_id) {
-        item.listing.forEach(function (item2) {
-          if (item2.basename === inputs.sample_id + ".cleaned.stitched.bam") {
-            cleaned_stitched_bam_file = item2;
-          } else if (item2.basename === inputs.sample_id + ".cleaned.stitched.bam.bai") {
-            cleaned_stitched_bai_file = item2;
-          }
-        })
+      if (item.basename === inputs.sample_id + ".cleaned.stitched.bam") {
+        cleaned_stitched_bam_file = item;
+      } else if (item.basename === inputs.sample_id + ".cleaned.stitched.bam.bai") {
+        cleaned_stitched_bai_file = item;
       }
     });
     inputs.tso500_outputs_by_sample.results_dir.listing.forEach(function (item) {
-      if (item.class == "Directory" && item.basename === inputs.sample_id) {
-        item.listing.forEach(function (item2) {
-          if (item2.basename.endsWith(".vcf")) {
-            vcf_files.push(item2);
-          } else if (item2.basename === inputs.sample_id + "_Fusions.csv"){
-            fusion_csv_file = item2;
-          } else if (item2.basename === inputs.sample_id + "_MergedSmallVariantsAnnotated.json.gz") {
-            mergedsmallvariantsannotated_json_gz_file = item2;
-          } else if (item2.basename === inputs.sample_id + "_TMB_Trace.tsv") {
-            tmb_trace_tsv_file = item2;
-          }
-        })
+      if (item.basename.endsWith(".vcf")) {
+        vcf_files.push(item);
+      } else if (item.basename === inputs.sample_id + "_Fusions.csv"){
+        fusion_csv_file = item;
+      } else if (item.basename === inputs.sample_id + "_MergedSmallVariantsAnnotated.json.gz") {
+        mergedsmallvariantsannotated_json_gz_file = item;
+      } else if (item.basename === inputs.sample_id + "_TMB_Trace.tsv") {
+        tmb_trace_tsv_file = item;
       }
     });
     return {
@@ -145,7 +125,6 @@ expression: >-
 outputs:
   raw_bam:
     type: File
-    secondaryFiles: .bai
   raw_bai:
     type: File
   raw_bam_md5sum:
