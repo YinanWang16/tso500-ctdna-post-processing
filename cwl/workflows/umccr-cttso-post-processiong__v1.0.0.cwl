@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.1
 class: Workflow
 
 id: umccr-cttso-post-processing-v1.0.0
@@ -14,35 +14,12 @@ requirements:
       - $import: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
 
 inputs:
-  sample_id:
-    type: ../schemas/so500-outputs-by-sample_1.0.0.yaml
-    doc: |
-      ID of the sample, matches the Sample_ID column in the sample sheet
-  align_collapse_fusion_caller_dir:
+  tso500_outputs_by_sample:
     type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
     doc: |
-      Intermediate output directory for align collapse fusion caller step
-  msi_dir:
-    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
-    doc: |
-      Intermediate output directory for msi step
-  tmb_dir:
-    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
-    doc: |
-      Intermediate output directory for tmb step
-  sample_analysis_results_json:
-    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
-    doc: |
-      The sample analysis results json file
-  variant_caller_dir:
-    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
-    doc: |
-      Intermediate output directory for variant caller step
-  results_dir:
-    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
-    doc: |
-      Results directory for the given sample
-  tso_manifest_bed: File
+      Directories and Files of UMCCR tso500 outpout 
+  tso_manifest_bed: 
+    type: File
     doc: |
       TST500C_manifest.bed file from TSO500 resources
 
@@ -55,20 +32,8 @@ steps:
   get_inputs_files_per_sample:
     run: ../expressions/find-files-from-tso500-ctdna-output__v1.0.0.cwl
     in:
-      align_collapse_fusion_caller_dir:
-        source: align_collapse_fusion_caller_dir
-      msi_dir:
-        source: msi_dir
-      tmb_dir:
-        source: tmb_dir
-      sample_analysis_results_json:
-        source: sample_analysis_results_json
-      variant_caller_dir:
-        source: variant_caller_dir
-      results_dir:
-        source: results_dir
-      sample_id:
-        source: sample_id
+      tso500_outputs_by_sample:
+        source: tso500_outputs_by_sample
     out:
       - raw_bam
       - raw_bai
@@ -91,6 +56,7 @@ steps:
       - fusion_csv
       - mergedsmallvariantsannotated_json_gz
       - tmb_trace_tsv
+      - sample_id
   mosdepth:
     run: ../tools/mosdepth/mosdepth-make-thresholds-bed.cwl
     label: mosdepth
@@ -100,7 +66,7 @@ steps:
       bai: get_inputs_files_per_sample/raw_bai
       threshold_bases: {default: [100, 250, 500, 750, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 8000, 10000]}
       no_per_base: {default: true}
-      output_prefix: sample_id
+      output_prefix: get_inputs_files_per_sample/sample_id
     out: [thresholds_bed_gz]
   make_coverage_QC:
     run: ../tools/mosdepth/mosdepth-thresholds-bed-to-coverage-QC-step.cwl
@@ -155,7 +121,7 @@ steps:
     run: ../tools/toolbox/make_sample_subdir.cwl
     label: sample_subdir_layout
     in:
-      sample_id: sample_id
+      sample_id: get_inputs_files_per_sample/sample_id
       file_list:
         source:
           - get_inputs_files_per_sample/evidence_bam

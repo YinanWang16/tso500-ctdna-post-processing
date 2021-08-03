@@ -1,6 +1,6 @@
 #!/usr/bin/env cwl-runner
 
-cwlVersion: v1.0
+cwlVersion: v1.1
 class: ExpressionTool
 
 doc:
@@ -10,41 +10,13 @@ label: discover_files_from_directory
 
 requirements:
   - class: InlineJavascriptRequirement
+  - class: SchemaDefRequirement
+    types:
+      - $import: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
 
 inputs:
-  align_collapse_fusion_caller_dir:
-    type: Directory
-    streamable: false
-    doc: |
-      Intermediate output directory for align collapse fusion caller step
-  msi_dir:
-    type: Directory
-    streamable: false
-    doc: |
-      Intermediate output directory for msi step
-  tmb_dir:
-    type: Directory
-    streamable: false
-    doc: |
-      Intermediate output directory for tmb step
-  sample_analysis_results_json:
-    type: File
-    doc: |
-      The sample analysis results json file
-  variant_caller_dir:
-    type: Directory
-    streamable: false
-    doc: |
-      Intermediate output directory for variant caller step
-  results_dir:
-    type: Directory
-    doc: |
-      Results directory for the given sample
-  sample_id:
-    type: string
-    doc: |
-      ID of the sample, matches the Sample_ID column in the sample sheet
-
+  tso500_outputs_by_sample:
+    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
 expression: >-
   ${
     var raw_bam_file = '';
@@ -68,7 +40,8 @@ expression: >-
     var fusion_csv_file = '';
     var mergedsmallvariantsannotated_json_gz_file = '';
     var tmb_trace_tsv_file = '';
-    inputs.align_collapse_fusion_caller_dir.listing.forEach(function (item) {
+    var sample_id = '';
+    inputs.tso500_outputs_by_sample.align_collapse_fusion_caller_dir.listing.forEach(function (item) {
       if (item.class == "Directory" && item.basename === inputs.sample_id) {
         item.listing.forEach(function (item2) {
           if (item2.basename === inputs.sample_id + ".bam") {
@@ -99,7 +72,7 @@ expression: >-
         })
       }
     });
-    inputs.msi_dir.listing.forEach(function (item) {
+    inputs.tso500_outputs_by_sample.msi_dir.listing.forEach(function (item) {
       if (item.class == "Directory" && item.basename === inputs.sample_id) {
         item.listing.forEach(function (item2) {
           if (item2.basename === inputs.sample_id + ".msi.json") {
@@ -108,7 +81,7 @@ expression: >-
         })
       }
     });
-    inputs.tmb_dir.listing.forEach(function (item) {
+    inputs.tso500_outputs_by_sample.tmb_dir.listing.forEach(function (item) {
       if (item.class == "Directory" && item.basename === inputs.sample_id) {
         item.listing.forEach(function (item2) {
           if (item2.basename === inputs.sample_id + ".tmb.json") {
@@ -117,7 +90,7 @@ expression: >-
         })
       }
     });
-    inputs.variant_caller_dir.listing.forEach(function (item) {
+    inputs.tso500_outputs_by_sample.variant_caller_dir.listing.forEach(function (item) {
       if (item.class == "Directory" && item.basename === inputs.sample_id) {
         item.listing.forEach(function (item2) {
           if (item2.basename === inputs.sample_id + ".cleaned.stitched.bam") {
@@ -128,7 +101,7 @@ expression: >-
         })
       }
     });
-    inputs.results_dir.listing.forEach(function (item) {
+    inputs.tso500_outputs_by_sample.results_dir.listing.forEach(function (item) {
       if (item.class == "Directory" && item.basename === inputs.sample_id) {
         item.listing.forEach(function (item2) {
           if (item2.basename.endsWith(".vcf")) {
@@ -158,13 +131,14 @@ expression: >-
       "fragment_length_hist_csv": fragment_length_hist_csv_file,
       "msi_json": msi_json_file,
       "tmb_json": tmb_json_file,
-      "sampleanalysisresults_json": inputs.sample_analysis_results_json,
+      "sampleanalysisresults_json": inputs.tso500_outputs_by_sample.sample_analysis_results_json,
       "cleaned_stitched_bam": cleaned_stitched_bam_file,
       "cleaned_stitched_bai": cleaned_stitched_bai_file,
       "vcfs": vcf_files,
       "fusion_csv": fusion_csv_file,
       "mergedsmallvariantsannotated_json_gz": mergedsmallvariantsannotated_json_gz_file,
-      "tmb_trace_tsv": tmb_trace_tsv_file
+      "tmb_trace_tsv": tmb_trace_tsv_file,
+      "sample_id": inputs.tso500_outputs_by_sample.sample_id
     }
   }
 
@@ -212,3 +186,5 @@ outputs:
     type: File
   tmb_trace_tsv:
     type: File
+  sample_id:
+    type: string
