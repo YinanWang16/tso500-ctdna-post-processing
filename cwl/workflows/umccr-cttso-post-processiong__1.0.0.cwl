@@ -14,12 +14,37 @@ requirements:
       - $import: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
 
 inputs:
-  tso500_ctdna_output:
-    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
-    label: tso500-ctdna-output
+  sample_id:
+    type: ../schemas/so500-outputs-by-sample_1.0.0.yaml
     doc: |
-      Output object from the tso500 UMCCR cwl workflow
+      ID of the sample, matches the Sample_ID column in the sample sheet
+  align_collapse_fusion_caller_dir:
+    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
+    doc: |
+      Intermediate output directory for align collapse fusion caller step
+  msi_dir:
+    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
+    doc: |
+      Intermediate output directory for msi step
+  tmb_dir:
+    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
+    doc: |
+      Intermediate output directory for tmb step
+  sample_analysis_results_json:
+    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
+    doc: |
+      The sample analysis results json file
+  variant_caller_dir:
+    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
+    doc: |
+      Intermediate output directory for variant caller step
+  results_dir:
+    type: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
+    doc: |
+      Results directory for the given sample
   tso_manifest_bed: File
+    doc: |
+      TST500C_manifest.bed file from TSO500 resources
 
 outputs:
   results_sample_subdir:
@@ -30,8 +55,18 @@ steps:
   get_inputs_files_per_sample:
     run: ../expressions/find-files-from-tso500-ctdna-output__v1.0.0.cwl
     in:
-      tso500_ctdna_output_dir:
-        source: tso500_ctdna_output
+      align_collapse_fusion_caller_dir:
+        source: align_collapse_fusion_caller_dir
+      msi_dir:
+        source: msi_dir
+      tmb_dir:
+        source: tmb_dir
+      sample_analysis_results_json:
+        source: sample_analysis_results_json
+      variant_caller_dir:
+        source: variant_caller_dir
+      results_dir:
+        source: results_dir
       sample_id:
         source: sample_id
     out:
