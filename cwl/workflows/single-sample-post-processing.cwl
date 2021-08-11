@@ -100,6 +100,7 @@ steps:
         - get_inputs_files_per_sample/fusion_csv
         - make_coverage_QC/coverage_QC
         - make_coverage_metrics/target_region_coverage_metrics
+      skiprows: [0, 0, 0, 1, 0]
     out: [json_gz_file]
   gzip:
     run: ../tools/toolbox/gzip.cwl
