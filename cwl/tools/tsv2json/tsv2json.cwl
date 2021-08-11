@@ -40,12 +40,12 @@ requirements:
               parser = argparse.ArgumentParser(description='Covnert tsv to json')
 
               # Arguments
-              parser.add_argument('-i', '--input', type=argparse.FileType('r'),
+              parser.add_argument('-i', '--input-file', type=argparse.FileType('r'),
                                   required=True, nargs='+',
                                   help="Input tsv/csv files, separate by space.")
               parser.add_argument('-r', '--skip-rows', required=False,
-                                  default=0, type=int,
-                                  help="Skip first n rows of the tsv file")
+                                  default=0, type=int, nargs='+',
+                                  help="Skip first n rows for each of the tsv file, separate by space")
               return parser.parse_args()
 
           def tsv2json(tsv_file, skip_rows):
@@ -54,10 +54,8 @@ requirements:
                   df = pd.read_csv(tsv_file, sep=',', header=0, comment='#', skiprows=skip_rows)
               else:
                   df = pd.read_csv(tsv_file, sep='\t', header=0, comment='#', skiprows=skip_rows)
-              variants = []
-              for i in range(len(df)):
-                  variants.append(dict(df.iloc[i,]))
-              return variants
+              
+              return df
 
           def convert(o):
               """ convert np.int64 to string """
@@ -66,11 +64,16 @@ requirements:
 
           def main():
               args = get_args()
-              for file in args.input:
-                  json_file = path.basename(file.name).rsplit('.', 1)[0] + '.json.gz'
-                  variant_df = tsv2json(file, args.skip_rows)
-                  with gzip.open(json_file, 'wt', encoding='ascii') as jf:
-                      json.dump(variant_df, jf, default=convert)
+              for i in range(len(args.input_file)):
+                  # get tsv file and number of skipped rows
+                  tsv_file = args.input_file[i]
+                  skip_rows = args.skip_rows[i]
+                
+                  
+                  json_file = path.basename(tsv_file.name).rsplit('.', 1)[0] + '.json.gz'
+                  tsv_df = tsv2json(tsv_file, args.skip_rows[i])
+
+                  tsv_df.to_json(json_file, orient="records", force_ascii=True, compression="gzip")
 
           main()
 
@@ -85,7 +88,7 @@ inputs:
       itemSeparator: " "
       shellQuote: false
   skiprows:
-    type: int?
+    type: int[]?
     inputBinding:
       prefix: "--skip-rows"
       position: 1
