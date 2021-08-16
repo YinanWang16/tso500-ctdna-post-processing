@@ -20,9 +20,3 @@ cwl/workflows/test_merge-flattened/
 # test make_sample_subdir
 cwl/tools/toolbox/test_make_sample_subdir
 
-# all yaml job file
-*.yaml
-*/*.yaml
-*/*/*.yaml
-*/*/*/*.yaml
-*/*/*/*/*.yaml
