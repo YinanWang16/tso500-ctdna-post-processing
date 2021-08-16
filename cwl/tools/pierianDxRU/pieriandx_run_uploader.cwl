@@ -82,7 +82,7 @@ inputs:
       prefix: --sequencerFileType=
       separate: false
       position: 6
-  s3_credential:
+  s3_credential_file:
     type: File
     doc: |
       ‘application.properties’ file

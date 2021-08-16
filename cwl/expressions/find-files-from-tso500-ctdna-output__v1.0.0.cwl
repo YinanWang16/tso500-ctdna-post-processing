@@ -118,7 +118,8 @@ expression: >-
       "fusion_csv": fusion_csv_file,
       "mergedsmallvariantsannotated_json_gz": mergedsmallvariantsannotated_json_gz_file,
       "tmb_trace_tsv": tmb_trace_tsv_file,
-      "sample_id": inputs.tso500_outputs_by_sample.sample_id
+      "sample_id": sample_id,
+      "dsdm_json": inputs.tso500_outputs_by_sample.dsdm_json
     }
   }
 
@@ -167,3 +168,5 @@ outputs:
     type: File
   sample_id:
     type: string
+  dsdm_json:
+    type: File

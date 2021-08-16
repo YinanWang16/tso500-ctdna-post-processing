@@ -9,6 +9,6 @@ sample_sheet:
   class: File
   path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/tso500-ctdna-small-dataset-v1-1/20200918_161844_SampleSheet.csv
 sequencer_file_type: 'TSO500 ctDNA VCF Workflow'
-s3_credential:
+s3_credential_file:
   class: File
   path: /data/staging/ywang16_test/Projects/20210607_pieriandx_run_uploader/application.properties

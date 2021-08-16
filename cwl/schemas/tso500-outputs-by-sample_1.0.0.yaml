@@ -106,3 +106,9 @@ fields:
     doc: |
       Results directory for the given sample
     type: Directory
+  # dsdm.json file in Results folder
+  dsdm_json:
+    label: dsdm.json
+    doc: |
+      dsdm.json file in Results directory
+    type: File?
