@@ -18,12 +18,14 @@ requirements:
           var n = l.length;
           for (var i = 0; i < n; i++) {
             if (l[i].class === "File") {
-              file_name_list.forEach(function (item, index) {
-                if (item === l[i].basename) {
+              var m = file_name_list.length;
+              for (var j = 0; j < m; j++) {
+                if (file_name_list[j] === l[i].basename) {
                   output_list.push(l[i]);
-                  file_name_list.splice(index, 1);
+                  file_name_list.splice(j, 1);
+                  break;
                 }
-              } )
+              }
             }
             if (file_name_list.length == 0) {
               break;
