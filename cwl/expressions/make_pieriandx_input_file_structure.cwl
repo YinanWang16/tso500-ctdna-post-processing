@@ -27,11 +27,11 @@ inputs:
   - id: mergedsmallvariants_vcf
     type: File
 
-expression: |
+expression: >-
   ${ 
     var sample_id = inputs.sample_id;
     var r = {
-      "outputs":
+      "tso500_output":
         { "class": "Directory",
           "basename": "tso500_ctDNA_output_folder",
           "listing": [

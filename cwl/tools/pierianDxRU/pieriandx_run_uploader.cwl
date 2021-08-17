@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.0
+cwlVersion: v1.2
 class: CommandLineTool
 
 # Extentions
@@ -22,6 +22,7 @@ hints:
       size: small
 
 requirements:
+  - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing: 
       - $(inputs.pieriandx_run_uploader)

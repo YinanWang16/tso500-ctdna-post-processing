@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.1
+cwlVersion: v1.2
 class: Workflow
 
 id: umccr-pieriandx-run-uploader
@@ -9,6 +9,7 @@ doc: |
 requirements:
   - class: StepInputExpressionRequirement
   - class: MultipleInputFeatureRequirement
+  - class: InlineJavascriptRequirement
   - class: SchemaDefRequirement
     types:
       - $import: ../schemas/tso500-outputs-by-sample_1.0.0.yaml
@@ -45,57 +46,89 @@ inputs:
         cgw.run.s3.secretKey=[Add your AWS secretKey given by PierianDx]
 
 outputs:
-  tso500_output: 
-    type: Directory
-    outputSource: make_input_file_structure_step/tso500_output
-#  cgw_run_uploader_log:
-#    type: File
-#    outputSource: pieriandx_run_uploader_step/cgw_run_uploader_log
+  
+  cgw_run_uploader_log:
+    type: File
+    outputSource: pieriandx_run_uploader_step/cgw_run_uploader_log
 
 steps:
-  get_inputs_files_per_sample_step:
-    run: ../expressions/find-files-from-tso500-ctdna-output__v1.0.0.cwl
+  get_msi_json_step:
+    run: ../expressions/find-files-from-dir__v1.0.0.cwl
     in:
-      tso500_outputs_by_sample: 
+      input_dir: 
         source: tso500_outputs_by_sample
-    out:
-      - msi_json
-      - tmb_json
-      - vcfs
-      - fusion_csv
-      - sample_id
-      - dsdm_json
+        valueFrom: $(self.msi_dir)
+      file_basename_list:
+        source: tso500_outputs_by_sample
+        valueFrom: |
+          ${
+            return [self.sample_id + ".msi.json"]
+          }
+    out: [output_files]
+  get_tmb_json_step:
+    run: ../expressions/find-files-from-dir__v1.0.0.cwl
+    in:
+      input_dir: 
+        source: tso500_outputs_by_sample
+        valueFrom: $(self.tmb_dir)
+      file_basename_list:
+        source: tso500_outputs_by_sample
+        valueFrom: |
+          ${
+            return [self.sample_id + ".tmb.json"]
+          }
+    out: [output_files]
+  get_results_files_step:
+    run: ../expressions/find-files-from-dir__v1.0.0.cwl
+    in:
+      input_dir: 
+        source: tso500_outputs_by_sample
+        valueFrom: $(self.results_dir)
+      file_basename_list:
+        source: tso500_outputs_by_sample
+        valueFrom: |
+          ${
+            return [self.sample_id + "_CopyNumberVariants.vcf",
+                    self.sample_id + "_Fusions.csv",
+                    self.sample_id + "_MergedSmallVariants.vcf"];
+          }
+    out: [output_files]
   make_input_file_structure_step:
     run: ../expressions/make_pieriandx_input_file_structure.cwl
     in:
-      tmb_json: get_inputs_files_per_sample_step/tmb_json
-      msi_json: get_inputs_files_per_sample_step/msi_json
-      dsdm_json: get_inputs_files_per_sample_step/dsdm_json
-      sample_id: get_inputs_files_per_sample_step/sample_id
-      fusions_csv: get_inputs_files_per_sample_step/fusion_csv
-      mergedsmallvariants_vcf: 
-        source: get_inputs_files_per_sample_step/vcfs
-        valueFrom: |
-          ${
-            return self[2];
-          }
-      copynumbervariants_vcf:
-        source: get_inputs_files_per_sample_step/vcfs
-        valueFrom: |
-          ${
-            return self[0];
-          }
+      msi_json: 
+        source: get_msi_json_step/output_files
+        valueFrom: $(self[0])
+      tmb_json:
+        source: get_tmb_json_step/output_files
+        valueFrom: $(self[0])
+      dsdm_json: 
+        source: tso500_outputs_by_sample
+        valueFrom: $(self.dsdm_json)
+      sample_id: 
+        source: tso500_outputs_by_sample
+        valueFrom: $(self.sample_id)
+      fusions_csv: 
+        source: get_results_files_step/output_files
+        valueFrom: $(self[0])
+      mergedsmallvariants_vcf:
+        source: get_results_files_step/output_files
+        valueFrom: $(self[1])
+      copynumbervariants_vcf: 
+        source: get_results_files_step/output_files
+        valueFrom: $(self[2])
     out: [tso500_output]
-#  pieriandx_run_uploader_step:
-#    run: ../tools/pierianDxRU/pieriandx_run_uploader.cwl
-#    in:
-#      pieriandx_run_uploader: pieriandx_run_uploader
-#      command_line: {default: true}
-#      run_folder: make_input_file_structure_step/tso500_output
-#      run_id: run_id
-#      sample_sheet: sample_sheet
-#      sequencer: {default: "Illumina"}
-#      sequencer_file_type: sequencer_file_type
-#      s3_credential_file: s3_credential_file
-#    output: [cgw_run_uploader_log]
+  pieriandx_run_uploader_step:
+    run: ../tools/pierianDxRU/pieriandx_run_uploader.cwl
+    in:
+      pieriandx_run_uploader: pieriandx_run_uploader
+      command_line: {default: true}
+      run_folder: make_input_file_structure_step/tso500_output
+      #  tso500_ctDNA_output_folder
+      run_id: run_id
+      sample_sheet: sample_sheet
+      sequencer: {default: "Illumina"}
+      sequencer_file_type: sequencer_file_type
+      s3_credential_file: s3_credential_file
+    out: [cgw_run_uploader_log]
       
