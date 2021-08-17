@@ -1,6 +1,8 @@
 #!/usr/bin/env cwl-runner
-cwlVersion: v1.2
+cwlVersion: v1.0
 class: CommandLineTool
+
+# Note the run upload only works under v1.0 but not v1.1+
 
 # Extentions
 $namespaces:
@@ -26,7 +28,7 @@ requirements:
   - class: InitialWorkDirRequirement
     listing: 
       - $(inputs.pieriandx_run_uploader)
-      - $(inputs.s3_credential)
+      - $(inputs.s3_credential_file)
 
 baseCommand: [java, -jar]
 arguments:
@@ -49,7 +51,7 @@ inputs:
   run_folder:
     type: Directory
     doc: |
-      "GatheredResults" directory of ICA TSO500 (solid/liquid) outputs.
+      GatheredResults directory of ICA TSO500 (solid/liquid) outputs.
     inputBinding:
       prefix: --runFolder=
       separate: false
@@ -76,9 +78,9 @@ inputs:
   sequencer_file_type:
     type: string
     doc: |
-      TSO500 DRAGEN VCF workflows: "tso500_v2_vcf"
-      TSO500 v1 and v2 HT VCF only workflow: "TSO500 HT VCF only workflow"
-      TSO500 ctDNA VCF workflow: "TSO500 ctDNA VCF Workflow"
+      TSO500 DRAGEN VCF workflows - tso500_v2_vcf
+      TSO500 v1 and v2 HT VCF only workflow - TSO500 HT VCF only workflow
+      TSO500 ctDNA VCF workflow - TSO500 ctDNA VCF Workflow
     inputBinding:
       prefix: --sequencerFileType=
       separate: false
@@ -86,8 +88,8 @@ inputs:
   s3_credential_file:
     type: File
     doc: |
-      ‘application.properties’ file
-      Update the below 3 lines in ‘application.properties’ file as described below:
+      the application.properties file
+      Update the below 3 lines in ‘application.properties’ file as described below
         cgw.run.institution=[Add your institution name as given by PierianDx]
         cgw.run.s3.accessKey=[Add your AWS accessKey given by PierianDx]
         cgw.run.s3.secretKey=[Add your AWS secretKey given by PierianDx]
