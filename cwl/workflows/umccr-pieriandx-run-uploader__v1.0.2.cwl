@@ -102,7 +102,7 @@ steps:
         valueFrom: ${return [self.sample_id + "_MergedSmallVariants.vcf"]}
     out: [output_files]
   pieriandx_run_uploader_step:
-    run: ../tools/pierianDxRU/umccr_pieriandx_run_uploader__v1.0.1.cwl
+    run: ../tools/pierianDxRU/umccr_pieriandx_run_uploader__v1.0.2.cwl
     in:
       pieriandx_run_uploader: pieriandx_run_uploader
       command_line: {default: true}
