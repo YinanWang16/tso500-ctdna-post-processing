@@ -20,12 +20,8 @@ inputs:
     type: File
   - id: tmb_json
     type: File
-  - id: copynumbervariants_vcf
-    type: File
-  - id: fusions_csv
-    type: File
-  - id: mergedsmallvariants_vcf
-    type: File
+  - id: results_file_list
+    type: File[]
 
 expression: >-
   ${ 
@@ -33,7 +29,7 @@ expression: >-
     var r = {
       "tso500_output":
         { "class": "Directory",
-          "basename": "tso500_ctDNA_output_folder",
+          "basename": "TSO500_ctDNA_output",
           "listing": [
             { "class": "Directory",
               "basename": "Logs_Intermediates",
@@ -58,10 +54,7 @@ expression: >-
                 inputs.dsdm_json,
                 { "class": "Directory",
                   "basename": sample_id,
-                  "listing": [
-                    inputs.copynumbervariants_vcf,
-                    inputs.fusions_csv,
-                    inputs.mergedsmallvariants_vcf ] } ] } ] } };
+                  "listing": inputs.results_file_list } ] } ] } };
       return r;
     }
 

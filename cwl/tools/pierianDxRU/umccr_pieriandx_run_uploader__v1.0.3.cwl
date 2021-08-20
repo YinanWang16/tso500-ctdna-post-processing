@@ -59,53 +59,27 @@ inputs:
     type: File
     doc: |
       RunUploader-1.13.jar (CGW Run uploader)
-    inputBinding:
-      position: 0
-      valueFrom: $(self.basename)
   command_line:
     type: boolean
     default: true
-    inputBinding:
-      prefix: --commandLine
-      position: 1
   run_folder:
     type: string
     doc: |
       GatheredResults directory of ICA TSO500 (solid/liquid) outputs.
     default: TSO500_ctDNA_output
-    inputBinding:
-      prefix: --runFolder=
-      separate: false
-      position: 2
   run_id:
     type: string
-    inputBinding:
-      prefix: --runId=
-      separate: false
-      position: 3
   sample_sheet:
     type: File
-    inputBinding:
-      prefix: --sampleSheet=
-      separate: false
-      position: 4
   sequencer:
     type: string
     default: "Illumina"
-    inputBinding:
-      prefix: --sequencer=
-      separate: false
-      position: 5
   sequencer_file_type:
     type: string
     doc: |
       TSO500 DRAGEN VCF workflows - tso500_v2_vcf
       TSO500 v1 and v2 HT VCF only workflow - TSO500 HT VCF only workflow
       TSO500 ctDNA VCF workflow - TSO500 ctDNA VCF Workflow
-    inputBinding:
-      prefix: --sequencerFileType=
-      separate: false
-      position: 6
   s3_credential_file:
     type: File
     doc: |

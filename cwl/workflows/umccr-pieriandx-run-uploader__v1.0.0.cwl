@@ -5,6 +5,7 @@ class: Workflow
 id: umccr-pieriandx-run-uploader
 doc: |
   This is a pieriandx run uploader for UMCCR tso500 ctDNA output
+  This worklfow use expression to reorganize tso500 output file structure
 
 requirements:
   - class: StepInputExpressionRequirement
@@ -46,7 +47,6 @@ inputs:
         cgw.run.s3.secretKey=[Add your AWS secretKey given by PierianDx]
 
 outputs:
-  
   cgw_run_uploader_log:
     type: File
     outputSource: pieriandx_run_uploader_step/cgw_run_uploader_log
@@ -108,15 +108,8 @@ steps:
       sample_id: 
         source: tso500_outputs_by_sample
         valueFrom: $(self.sample_id)
-      fusions_csv: 
+      results_file_list: 
         source: get_results_files_step/output_files
-        valueFrom: $(self[0])
-      mergedsmallvariants_vcf:
-        source: get_results_files_step/output_files
-        valueFrom: $(self[1])
-      copynumbervariants_vcf: 
-        source: get_results_files_step/output_files
-        valueFrom: $(self[2])
     out: [tso500_output]
   pieriandx_run_uploader_step:
     run: ../tools/pierianDxRU/pieriandx_run_uploader.cwl
