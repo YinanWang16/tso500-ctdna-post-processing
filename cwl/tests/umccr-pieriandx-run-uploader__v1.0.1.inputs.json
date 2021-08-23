@@ -14,7 +14,7 @@
       },
       "msi_dir": {
         "class": "Directory",
-        "path": "gds://yncttsopostprocessing/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/analysis_outputs/Tmb/PTC_HrznRefStd5pc_L2100337"
+        "path": "gds://yncttsopostprocessing/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/analysis_outputs/Msi/PTC_HrznRefStd5pc_L2100337"
       },
       "dsdm_json": {
         "class": "File",

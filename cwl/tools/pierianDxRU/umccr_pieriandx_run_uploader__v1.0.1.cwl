@@ -2,7 +2,8 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-# Note the run upload only works under v1.0 but not compatible with v1.1+
+# umccr_pieriandx_run_uploader__v1.0.1.cwl
+# Note the run uploader only works under v1.0 but not compatible with v1.1+
 
 # Extentions
 $namespaces:

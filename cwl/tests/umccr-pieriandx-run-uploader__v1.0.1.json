@@ -46,7 +46,7 @@
         },
         {
             "class": "CommandLineTool",
-            "id": "#umccr_pieriandx_run_uploader.cwl",
+            "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl",
             "label": "PierianDx_Run_Uploader",
             "doc": "This is a PierianDx Run Uploader for TSO500\n",
             "hints": [
@@ -122,27 +122,27 @@
                         "prefix": "--commandLine",
                         "position": 1
                     },
-                    "id": "#umccr_pieriandx_run_uploader.cwl/command_line"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/command_line"
                 },
                 {
                     "type": "File",
-                    "id": "#umccr_pieriandx_run_uploader.cwl/copynumbervariants_vcf"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/copynumbervariants_vcf"
                 },
                 {
                     "type": "File",
-                    "id": "#umccr_pieriandx_run_uploader.cwl/dsdm_json"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/dsdm_json"
                 },
                 {
                     "type": "File",
-                    "id": "#umccr_pieriandx_run_uploader.cwl/fusions_csv"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/fusions_csv"
                 },
                 {
                     "type": "File",
-                    "id": "#umccr_pieriandx_run_uploader.cwl/mergedsmallvariants_vcf"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/mergedsmallvariants_vcf"
                 },
                 {
                     "type": "File",
-                    "id": "#umccr_pieriandx_run_uploader.cwl/msi_json"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/msi_json"
                 },
                 {
                     "type": "File",
@@ -151,7 +151,7 @@
                         "position": 0,
                         "valueFrom": "$(self.basename)"
                     },
-                    "id": "#umccr_pieriandx_run_uploader.cwl/pieriandx_run_uploader"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/pieriandx_run_uploader"
                 },
                 {
                     "type": "string",
@@ -162,7 +162,7 @@
                         "separate": false,
                         "position": 2
                     },
-                    "id": "#umccr_pieriandx_run_uploader.cwl/run_folder"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/run_folder"
                 },
                 {
                     "type": "string",
@@ -171,16 +171,16 @@
                         "separate": false,
                         "position": 3
                     },
-                    "id": "#umccr_pieriandx_run_uploader.cwl/run_id"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/run_id"
                 },
                 {
                     "type": "File",
                     "doc": "the application.properties file\nUpdate the below 3 lines in \u2018application.properties\u2019 file as described below\n  cgw.run.institution=[Add your institution name as given by PierianDx]\n  cgw.run.s3.accessKey=[Add your AWS accessKey given by PierianDx]\n  cgw.run.s3.secretKey=[Add your AWS secretKey given by PierianDx]\n",
-                    "id": "#umccr_pieriandx_run_uploader.cwl/s3_credential_file"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/s3_credential_file"
                 },
                 {
                     "type": "string",
-                    "id": "#umccr_pieriandx_run_uploader.cwl/sample_id"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/sample_id"
                 },
                 {
                     "type": "File",
@@ -189,7 +189,7 @@
                         "separate": false,
                         "position": 4
                     },
-                    "id": "#umccr_pieriandx_run_uploader.cwl/sample_sheet"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/sample_sheet"
                 },
                 {
                     "type": "string",
@@ -199,7 +199,7 @@
                         "separate": false,
                         "position": 5
                     },
-                    "id": "#umccr_pieriandx_run_uploader.cwl/sequencer"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/sequencer"
                 },
                 {
                     "type": "string",
@@ -209,11 +209,11 @@
                         "separate": false,
                         "position": 6
                     },
-                    "id": "#umccr_pieriandx_run_uploader.cwl/sequencer_file_type"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/sequencer_file_type"
                 },
                 {
                     "type": "File",
-                    "id": "#umccr_pieriandx_run_uploader.cwl/tmb_json"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/tmb_json"
                 }
             ],
             "outputs": [
@@ -222,7 +222,7 @@
                     "outputBinding": {
                         "glob": "cgwRunUploader.log"
                     },
-                    "id": "#umccr_pieriandx_run_uploader.cwl/cgw_run_uploader_log"
+                    "id": "#umccr_pieriandx_run_uploader__v1.0.1.cwl/cgw_run_uploader_log"
                 }
             ],
             "s:codeRepository": "https://github.com/YinanWang16/tso500-ctdna-post-processing"
@@ -447,7 +447,7 @@
                 },
                 {
                     "type": "File",
-                    "doc": "\u2018application.properties\u2019 file\nUpdate the below 3 lines in \u2018application.properties\u2019 file as described below:\n  cgw.run.institution=[Add your institution name as given by PierianDx]\n  cgw.run.s3.accessKey=[Add your AWS accessKey given by PierianDx]\n  cgw.run.s3.secretKey=[Add your AWS secretKey given by PierianDx]\n",
+                    "doc": "\u2018application.properties\u2019 file\nUpdate the below 3 lines in \u2018application.properties\u2019 file as described below\n  cgw.run.institution=[Add your institution name as given by PierianDx]\n  cgw.run.s3.accessKey=[Add your AWS accessKey given by PierianDx]\n  cgw.run.s3.secretKey=[Add your AWS secretKey given by PierianDx]\n",
                     "id": "#s3_credential_file"
                 },
                 {
@@ -456,7 +456,7 @@
                 },
                 {
                     "type": "string",
-                    "doc": "TSO500 DRAGEN VCF workflows: \"tso500_v2_vcf\"\nTSO500 v1 and v2 HT VCF only workflow: \"TSO500 HT VCF only workflow\"\nTSO500 ctDNA VCF workflow: \"TSO500 ctDNA VCF Workflow\"\n",
+                    "doc": "TSO500 DRAGEN VCF workflow - \"tso500_v2_vcf\"\nTSO500 v1 and v2 HT VCF only workflow - \"TSO500 HT VCF only workflow\"\nTSO500 ctDNA VCF workflow - \"TSO500 ctDNA VCF Workflow\"\n",
                     "id": "#sequencer_file_type"
                 },
                 {
@@ -569,7 +569,7 @@
                     "id": "#get_tmb_json_step"
                 },
                 {
-                    "run": "#umccr_pieriandx_run_uploader.cwl",
+                    "run": "#umccr_pieriandx_run_uploader__v1.0.1.cwl",
                     "in": [
                         {
                             "default": true,

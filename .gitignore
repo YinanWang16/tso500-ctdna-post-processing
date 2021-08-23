@@ -20,3 +20,5 @@ cwl/workflows/test_merge-flattened/
 # test make_sample_subdir
 cwl/tools/toolbox/test_make_sample_subdir
 
+# test umccr-pieriandx-run-uploader
+cwl/workflows/test_umccr-pieriandx-run-uploader

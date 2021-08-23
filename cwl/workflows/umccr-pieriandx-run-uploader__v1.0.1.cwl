@@ -33,14 +33,14 @@ inputs:
   sequencer_file_type:
     type: string
     doc: |
-      TSO500 DRAGEN VCF workflows: "tso500_v2_vcf"
-      TSO500 v1 and v2 HT VCF only workflow: "TSO500 HT VCF only workflow"
-      TSO500 ctDNA VCF workflow: "TSO500 ctDNA VCF Workflow"
+      TSO500 DRAGEN VCF workflow - "tso500_v2_vcf"
+      TSO500 v1 and v2 HT VCF only workflow - "TSO500 HT VCF only workflow"
+      TSO500 ctDNA VCF workflow - "TSO500 ctDNA VCF Workflow"
   s3_credential_file:
     type: File
     doc: |
       ‘application.properties’ file
-      Update the below 3 lines in ‘application.properties’ file as described below:
+      Update the below 3 lines in ‘application.properties’ file as described below
         cgw.run.institution=[Add your institution name as given by PierianDx]
         cgw.run.s3.accessKey=[Add your AWS accessKey given by PierianDx]
         cgw.run.s3.secretKey=[Add your AWS secretKey given by PierianDx]
