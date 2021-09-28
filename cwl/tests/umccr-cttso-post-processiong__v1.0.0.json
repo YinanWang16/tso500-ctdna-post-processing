@@ -1,0 +1,1236 @@
+{
+    "$graph": [
+        {
+            "class": "ExpressionTool",
+            "doc": "Given tso500-ctDNA-analysis-output-dir and Sample_ID, locate all the files needed for post-processing.",
+            "label": "discover_files_from_directory",
+            "requirements": [
+                {
+                    "class": "InlineJavascriptRequirement"
+                },
+                {
+                    "class": "SchemaDefRequirement",
+                    "types": [
+                        {
+                            "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample",
+                            "type": "record",
+                            "fields": [
+                                {
+                                    "label": "align collapse fusion caller dir",
+                                    "doc": "Intermediate output directory for align collapse fusion caller step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/align_collapse_fusion_caller_dir"
+                                },
+                                {
+                                    "label": "annotation dir",
+                                    "doc": "Intermediate output directory for annotation step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/annotation_dir"
+                                },
+                                {
+                                    "label": "cnv caller dir",
+                                    "doc": "Intermediate output directory for cnv caller step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/cnv_caller_dir"
+                                },
+                                {
+                                    "label": "combined variant output dir",
+                                    "doc": "Intermediate output directory for combined variant output dir\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/combined_variant_output_dir"
+                                },
+                                {
+                                    "label": "contamination dir",
+                                    "doc": "Intermediate output directory for contamination step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/contamination_dir"
+                                },
+                                {
+                                    "label": "dna fusion filtering dir",
+                                    "doc": "Intermediate output directory for dna fusion filtering step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/dna_fusion_filtering_dir"
+                                },
+                                {
+                                    "label": "dna qc metrics dir",
+                                    "doc": "Intermediate output directory for dna qc metrics step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/dna_qc_metrics_dir"
+                                },
+                                {
+                                    "label": "dsdm.json",
+                                    "doc": "dsdm.json file in Results directory\n",
+                                    "type": [
+                                        "null",
+                                        "File"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/dsdm_json"
+                                },
+                                {
+                                    "label": "max somatic vaf dir",
+                                    "doc": "Intermediate output directory for max somatic vaf step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/max_somatic_vaf_dir"
+                                },
+                                {
+                                    "label": "merged annotation dir",
+                                    "doc": "Intermediate output directory for merged annotation step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/merged_annotation_dir"
+                                },
+                                {
+                                    "label": "msi dir",
+                                    "doc": "Intermediate output directory for msi step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/msi_dir"
+                                },
+                                {
+                                    "label": "phased variants dir",
+                                    "doc": "Intermediate output directory for phased variants step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/phased_variants_dir"
+                                },
+                                {
+                                    "label": "results_dir",
+                                    "doc": "Results directory for the given sample\n",
+                                    "type": "Directory",
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/results_dir"
+                                },
+                                {
+                                    "label": "sample analysis results json",
+                                    "doc": "The sample analysis results json file\n",
+                                    "type": [
+                                        "null",
+                                        "File"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/sample_analysis_results_json"
+                                },
+                                {
+                                    "label": "sample id",
+                                    "doc": "ID of the sample, matches the Sample_ID column in the sample sheet\n",
+                                    "type": "string",
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/sample_id"
+                                },
+                                {
+                                    "label": "sample name",
+                                    "doc": "Name of the sample, matches the rgsm value of the fastq list row\n",
+                                    "type": "string",
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/sample_name"
+                                },
+                                {
+                                    "label": "small variant filter dir",
+                                    "doc": "Intermediate output directory for small variants filter step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/small_variant_filter_dir"
+                                },
+                                {
+                                    "label": "stitched realigned dir",
+                                    "doc": "Intermediate output directory for stitched realigned step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/stitched_realigned_dir"
+                                },
+                                {
+                                    "label": "tmb dir",
+                                    "doc": "Intermediate output directory for tmb step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/tmb_dir"
+                                },
+                                {
+                                    "label": "variant caller dir",
+                                    "doc": "Intermediate output directory for variant caller step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/variant_caller_dir"
+                                },
+                                {
+                                    "label": "variant matching dir",
+                                    "doc": "Intermediate output directory for variant matching step\n",
+                                    "type": [
+                                        "null",
+                                        "Directory"
+                                    ],
+                                    "name": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample/variant_matching_dir"
+                                }
+                            ],
+                            "id": "#tso500-outputs-by-sample_1.0.0.yaml"
+                        }
+                    ]
+                }
+            ],
+            "inputs": [
+                {
+                    "type": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/tso500_outputs_by_sample"
+                }
+            ],
+            "expression": "${\n  var raw_bam_file = '';\n  var raw_bai_file = '';\n  var raw_bam_md5sum_file = '';\n  var evidence_bam_file = '';\n  var evidence_bai_file = '';\n  var mapping_metrics_csv_file = '';\n  var trimmer_metrics_csv_file = '';\n  var umi_metrics_csv_file = '';\n  var wgs_coverage_metrics_csv_file = '';\n  var sv_metrics_csv_file = '';\n  var time_metrics_csv_file = '';\n  var fragment_length_hist_csv_file = '';\n  var msi_json_file = '';\n  var tmb_json_file = '';\n  var sampleanalysisresults_json_file = '';\n  var cleaned_stitched_bam_file = '';\n  var cleaned_stitched_bai_file = '';\n  var vcf_files = [];\n  var fusion_csv_file = '';\n  var mergedsmallvariantsannotated_json_gz_file = '';\n  var tmb_trace_tsv_file = '';\n  var sample_id = inputs.tso500_outputs_by_sample.sample_id;\n  inputs.tso500_outputs_by_sample.align_collapse_fusion_caller_dir.listing.forEach(function (item) {\n    if (item.basename === sample_id + \".bam\") {\n      raw_bam_file = item;\n    } else if (item.basename === sample_id + \".bam.bai\") {\n      raw_bai_file = item;\n    } else if (item.basename === sample_id + \".bam.md5sum\") {\n      raw_bam_md5sum_file = item;\n    } else if (item.basename === \"evidence.\" + sample_id + \".bam\") {\n      evidence_bam_file = item;\n    } else if (item.basename === \"evidence.\" + sample_id + \".bam.bai\") {\n      evidence_bai_file = item;\n    } else if (item.basename === sample_id + \".mapping_metrics.csv\") {\n      mapping_metrics_csv_file = item;\n    } else if (item.basename === sample_id + \".trimmer_metrics.csv\") {\n      trimmer_metrics_csv_file = item;\n    } else if (item.basename === sample_id + \".umi_metrics.csv\") {\n      umi_metrics_csv_file = item;\n    } else if (item.basename === sample_id + \".wgs_coverage_metrics.csv\") {\n      wgs_coverage_metrics_csv_file = item;\n    } else if (item.basename === sample_id + \".sv_metrics.csv\") {\n      sv_metrics_csv_file = item;\n    } else if (item.basename === sample_id + \".time_metrics.csv\") {\n      time_metrics_csv_file = item;\n    } else if (item.basename === sample_id + \".fragment_length_hist.csv\") {\n      fragment_length_hist_csv_file = item;\n    }\n  });\n  inputs.tso500_outputs_by_sample.msi_dir.listing.forEach(function (item) {\n    if (item.basename === sample_id + \".msi.json\") {\n      msi_json_file = item;\n    }\n  });\n  inputs.tso500_outputs_by_sample.tmb_dir.listing.forEach(function (item) {\n    if (item.basename === sample_id + \".tmb.json\") {\n      tmb_json_file = item;\n    }\n  });\n  inputs.tso500_outputs_by_sample.variant_caller_dir.listing.forEach(function (item) {\n    if (item.basename === sample_id + \".cleaned.stitched.bam\") {\n      cleaned_stitched_bam_file = item;\n    } else if (item.basename === sample_id + \".cleaned.stitched.bam.bai\") {\n      cleaned_stitched_bai_file = item;\n    }\n  });\n  inputs.tso500_outputs_by_sample.results_dir.listing.forEach(function (item) {\n    if (item.basename.endsWith(\".vcf\")) {\n      vcf_files.push(item);\n    } else if (item.basename === sample_id + \"_Fusions.csv\"){\n      fusion_csv_file = item;\n    } else if (item.basename === sample_id + \"_MergedSmallVariantsAnnotated.json.gz\") {\n      mergedsmallvariantsannotated_json_gz_file = item;\n    } else if (item.basename === sample_id + \"_TMB_Trace.tsv\") {\n      tmb_trace_tsv_file = item;\n    }\n  });\n  return {\n    \"raw_bam\": raw_bam_file,\n    \"raw_bai\": raw_bai_file,\n    \"raw_bam_md5sum\": raw_bam_md5sum_file,\n    \"evidence_bam\": evidence_bam_file,\n    \"evidence_bai\": evidence_bai_file,\n    \"mapping_metrics_csv\": mapping_metrics_csv_file,\n    \"trimmer_metrics_csv\": trimmer_metrics_csv_file,\n    \"umi_metrics_csv\": umi_metrics_csv_file,\n    \"wgs_coverage_metrics_csv\": wgs_coverage_metrics_csv_file,\n    \"sv_metrics_csv\": sv_metrics_csv_file,\n    \"time_metrics_csv\": time_metrics_csv_file,\n    \"fragment_length_hist_csv\": fragment_length_hist_csv_file,\n    \"msi_json\": msi_json_file,\n    \"tmb_json\": tmb_json_file,\n    \"sampleanalysisresults_json\": inputs.tso500_outputs_by_sample.sample_analysis_results_json,\n    \"cleaned_stitched_bam\": cleaned_stitched_bam_file,\n    \"cleaned_stitched_bai\": cleaned_stitched_bai_file,\n    \"vcfs\": vcf_files,\n    \"fusion_csv\": fusion_csv_file,\n    \"mergedsmallvariantsannotated_json_gz\": mergedsmallvariantsannotated_json_gz_file,\n    \"tmb_trace_tsv\": tmb_trace_tsv_file,\n    \"sample_id\": sample_id,\n    \"dsdm_json\": inputs.tso500_outputs_by_sample.dsdm_json\n  }\n}",
+            "outputs": [
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/cleaned_stitched_bai"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/cleaned_stitched_bam"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/dsdm_json"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/evidence_bai"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/evidence_bam"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/fragment_length_hist_csv"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/fusion_csv"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/mapping_metrics_csv"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/mergedsmallvariantsannotated_json_gz"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/msi_json"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/raw_bai"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/raw_bam"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/raw_bam_md5sum"
+                },
+                {
+                    "type": "string",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/sample_id"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/sampleanalysisresults_json"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/sv_metrics_csv"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/time_metrics_csv"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/tmb_json"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/tmb_trace_tsv"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/trimmer_metrics_csv"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/umi_metrics_csv"
+                },
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/vcfs"
+                },
+                {
+                    "type": "File",
+                    "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl/wgs_coverage_metrics_csv"
+                }
+            ],
+            "id": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl",
+            "hints": [
+                {
+                    "class": "LoadListingRequirement",
+                    "loadListing": "deep_listing"
+                },
+                {
+                    "class": "NetworkAccess",
+                    "networkAccess": true
+                }
+            ]
+        },
+        {
+            "class": "CommandLineTool",
+            "id": "#bgzip-tabix.cwl",
+            "label": "bgzip-tabix",
+            "hints": [
+                {
+                    "class": "DockerRequirement",
+                    "dockerPull": "quay.io/biocontainers/tabix:1.11--hdfd78af_0"
+                },
+                {
+                    "class": "ResourceRequirement",
+                    "http://platform.illumina.com/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "small"
+                    }
+                }
+            ],
+            "requirements": [
+                {
+                    "class": "InlineJavascriptRequirement"
+                },
+                {
+                    "class": "InitialWorkDirRequirement",
+                    "listing": [
+                        {
+                            "entryname": "bgzip-tabix-vcf.sh",
+                            "entry": "#!/usr/bin/bash\n\n# vcf file list\nfor vcf in \\${@}; do\n    bgzip -c \\${vcf} >\\${vcf}.gz\n    tabix -p vcf \\${vcf}.gz \ndone"
+                        },
+                        "$(inputs.vcf)"
+                    ]
+                }
+            ],
+            "baseCommand": [
+                "bash",
+                "bgzip-tabix-vcf.sh"
+            ],
+            "inputs": [
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "label": "vcf",
+                    "inputBinding": {
+                        "position": 0
+                    },
+                    "id": "#bgzip-tabix.cwl/vcf"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "label": "vcf.gz, vcv.gz.tbi",
+                    "outputBinding": {
+                        "glob": "*.vcf.gz*"
+                    },
+                    "id": "#bgzip-tabix.cwl/vcf_gz"
+                }
+            ]
+        },
+        {
+            "class": "CommandLineTool",
+            "id": "#dragen-metrics-csv2json.cwl",
+            "label": "dragen_metrics_to_json.py",
+            "hints": [
+                {
+                    "class": "ResourceRequirement",
+                    "http://platform.illumina.com/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "small"
+                    }
+                }
+            ],
+            "requirements": [
+                {
+                    "dockerPull": "umccr/alpine_pandas:latest-cwl",
+                    "class": "DockerRequirement"
+                },
+                {
+                    "listing": [
+                        {
+                            "entryname": "AlignCollapseFusionCaller_metrics.csv2json.py",
+                            "entry": "#!/usr/bin/ev python3\n\nimport pandas as pd\nimport json\nimport csv\nimport re\nfrom os import path\nimport argparse\nimport gzip\n\ndef get_args():\n    \"\"\" Get arguments for the command \"\"\"\n    parser = argparse.ArgumentParser(description='Convert AlignCollapseFusionCaller/*metrics.csv to json')\n\n    # add Arguments\n    parser.add_argument('--mapping-metrics', required=True,\n                        help='Sample_ID.mapping_metrics.csv')\n    parser.add_argument('--trimmer-metrics', required=True,\n                        help='Sample_ID.trimmer_metrics.csv')\n    parser.add_argument('--umi-metrics', required=True,\n                        help='Sample_ID.umi_metrics.csv')\n    parser.add_argument('--sv-metrics', required=True,\n                        help='Sample_ID.sv_metrics.csv')\n    parser.add_argument('--wgs-coverage-metrics', required=True,\n                        help='Sample_ID.wgs_metrics.csv')\n    parser.add_argument('--time-metrics', required=True,\n                        help='Sample_ID.time_metrics.csv')\n    parser.add_argument('--sample-id', required=False,\n                        help='Sample_ID')\n\n    return parser.parse_args()\n\ndef string_or_list(value):\n    \"\"\" return a string or list of a value\"\"\"\n    if re.match(r'^{.*}$', value):\n        value = re.sub('{|}', '', value)\n        list = [int(s) for s in value.split('|')]\n        return (list)\n    else:\n        try:\n            return float(value)\n        except:\n            return value\n\ndef append_row_to_metrics_data(row, metrics_data):\n    if len(row) == 5:\n        # has percentage column\n        metrics_data.append({\n                            'name': row[2],\n                            'value': string_or_list(row[3]),\n                            'percent': float(row[4]),\n                            })\n    else:\n        # Doesn't have percentage\n        metrics_data.append({\n                            'name': row[2],\n                            'value': string_or_list(row[3]),\n                            })\n    return(metrics_data)\n\ndef make_metrics_dic(file):\n    \"\"\" read in data of file and convert to dictionary \"\"\"\n    with open(file, 'r') as csvfile:\n        csv_reader = csv.reader(csvfile, delimiter=',')\n        metrics_data = []\n        metrics_name = ''\n        metrics_dic = {}\n        for row in csv_reader:\n            if row[0] == metrics_name:     # the same metrics data type\n                metrics_data = append_row_to_metrics_data(row, metrics_data)\n            elif not metrics_name:         # first line, metrics data is empty\n                metrics_name = row[0]\n                metrics_data = append_row_to_metrics_data(row, metrics_data)\n            elif metrics_name != row[0]:   # a new metrics data type\n                metrics_name_formatted = re.sub(' |/', '', metrics_name.title())\n                metrics_dic[metrics_name_formatted] = metrics_data\n                # initiate a new metrics data type\n                metrics_name = row[0]\n                metrics_data = []\n        metrics_name_formatted = re.sub(' |/', '', metrics_name.title())\n        metrics_dic[metrics_name_formatted] = metrics_data\n        return metrics_dic\n\ndef make_metrics_json(file_list, sample_id):\n    \"\"\" output json file \"\"\"\n    # make the metrics dictonary.\n    metrics_dic = {}\n    for file in file_list:\n        metrics_dic.update(make_metrics_dic(file))\n    return metrics_dic\n\ndef main():\n    args = get_args()\n    metrics_file_list = [\n                          args.mapping_metrics,\n                          args.trimmer_metrics,\n                          args.umi_metrics,\n                          args.wgs_coverage_metrics,\n                          args.sv_metrics,\n                          args.time_metrics,\n                        ]\n\n    # define output file prefix\n    if not args.sample_id:\n        sample_id = path.basename(args.mapping_metrics).split('.')[0]\n    else:\n        sample_id = args.sample_id\n\n    sample_dic = make_metrics_json(metrics_file_list, sample_id)\n    output_json = sample_id + '.AlignCollapseFusionCaller_metrics.json'\n    output_gz = output_json + '.gz'\n    with gzip.open(output_gz, 'wt', encoding='ascii') as zipfile:\n        json.dump(sample_dic, zipfile)\n\nmain()\n"
+                        }
+                    ],
+                    "class": "InitialWorkDirRequirement"
+                }
+            ],
+            "baseCommand": [
+                "python3",
+                "AlignCollapseFusionCaller_metrics.csv2json.py"
+            ],
+            "inputs": [
+                {
+                    "type": "File",
+                    "inputBinding": {
+                        "prefix": "--mapping-metrics"
+                    },
+                    "id": "#dragen-metrics-csv2json.cwl/mapping_metrics_csv"
+                },
+                {
+                    "type": "File",
+                    "inputBinding": {
+                        "prefix": "--sv-metrics"
+                    },
+                    "id": "#dragen-metrics-csv2json.cwl/sv_metrics_csv"
+                },
+                {
+                    "type": "File",
+                    "inputBinding": {
+                        "prefix": "--time-metrics"
+                    },
+                    "id": "#dragen-metrics-csv2json.cwl/time_metrics_csv"
+                },
+                {
+                    "type": "File",
+                    "inputBinding": {
+                        "prefix": "--trimmer-metrics"
+                    },
+                    "id": "#dragen-metrics-csv2json.cwl/trimmer_metrics_csv"
+                },
+                {
+                    "type": "File",
+                    "inputBinding": {
+                        "prefix": "--umi-metrics"
+                    },
+                    "id": "#dragen-metrics-csv2json.cwl/umi_metrics_csv"
+                },
+                {
+                    "type": "File",
+                    "inputBinding": {
+                        "prefix": "--wgs-coverage-metrics"
+                    },
+                    "id": "#dragen-metrics-csv2json.cwl/wgs_coverage_metrics_csv"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "File",
+                    "outputBinding": {
+                        "glob": "*.AlignCollapseFusionCaller_metrics.json.gz"
+                    },
+                    "id": "#dragen-metrics-csv2json.cwl/metrics_json_gz"
+                }
+            ]
+        },
+        {
+            "class": "CommandLineTool",
+            "id": "#mosdepth-make-thresholds-bed.cwl",
+            "label": "mosdepth",
+            "doc": "use mosdepth to make threshold.bed file for calculating Failed_Exon_coverage_QC.txt",
+            "hints": [
+                {
+                    "dockerPull": "quay.io/biocontainers/mosdepth:0.3.1--ha7ba039_0",
+                    "class": "DockerRequirement"
+                },
+                {
+                    "class": "ResourceRequirement",
+                    "https://platform.illumina/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "xlarge",
+                        "coreMin": 4,
+                        "ramMin": 14000
+                    }
+                }
+            ],
+            "requirements": [
+                {
+                    "class": "InlineJavascriptRequirement",
+                    "expressionLib": [
+                        "var get_output_prefix = function(){ /* Get inputs.output_prefix value, fall back to inputs.bam_or_cram nameroot */ if (inputs.output_prefix !== null) { return inputs.output_prefix; } return inputs.bam_or_cram.nameroot; }"
+                    ]
+                },
+                {
+                    "class": "InitialWorkDirRequirement",
+                    "listing": [
+                        "$(inputs.bai)",
+                        "$(inputs.bam_or_cram)"
+                    ]
+                }
+            ],
+            "baseCommand": [
+                "mosdepth"
+            ],
+            "arguments": [
+                {
+                    "valueFrom": "$(get_output_prefix())",
+                    "position": 4
+                }
+            ],
+            "inputs": [
+                {
+                    "type": "File",
+                    "id": "#mosdepth-make-thresholds-bed.cwl/bai"
+                },
+                {
+                    "type": "File",
+                    "doc": "the alignment file for which to calculate depth.",
+                    "inputBinding": {
+                        "position": 5
+                    },
+                    "id": "#mosdepth-make-thresholds-bed.cwl/bam_or_cram"
+                },
+                {
+                    "type": "boolean",
+                    "doc": "don't output per-base depth. skipping this output will speed execution\nsubstantially. prefer quantized or thresholded values if possible.\n",
+                    "default": true,
+                    "inputBinding": {
+                        "prefix": "-n",
+                        "position": 3
+                    },
+                    "id": "#mosdepth-make-thresholds-bed.cwl/no_per_base"
+                },
+                {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "id": "#mosdepth-make-thresholds-bed.cwl/output_prefix"
+                },
+                {
+                    "type": "File",
+                    "doc": "TSO manifest bed file",
+                    "inputBinding": {
+                        "prefix": "-b",
+                        "position": 1
+                    },
+                    "id": "#mosdepth-make-thresholds-bed.cwl/target_region_bed"
+                },
+                {
+                    "type": "int",
+                    "doc": "number of BAM decompression threads. (use 4 or fewer) [default: 0]\n",
+                    "default": 4,
+                    "inputBinding": {
+                        "prefix": "-t",
+                        "position": 0
+                    },
+                    "id": "#mosdepth-make-thresholds-bed.cwl/threads"
+                },
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "int"
+                    },
+                    "doc": "for each interval in --by, write number of bases covered by at\nleast threshold bases.\n",
+                    "default": [
+                        100,
+                        250,
+                        500,
+                        750,
+                        1000,
+                        1500,
+                        2000,
+                        2500,
+                        3000,
+                        4000,
+                        5000,
+                        8000,
+                        10000
+                    ],
+                    "inputBinding": {
+                        "prefix": "-T",
+                        "itemSeparator": ",",
+                        "position": 2
+                    },
+                    "id": "#mosdepth-make-thresholds-bed.cwl/threshold_bases"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "File",
+                    "outputBinding": {
+                        "glob": "$(inputs.bam_or_cram.nameroot).thresholds.bed.gz"
+                    },
+                    "id": "#mosdepth-make-thresholds-bed.cwl/thresholds_bed_gz"
+                }
+            ]
+        },
+        {
+            "class": "CommandLineTool",
+            "label": "make_coverage_QC.py",
+            "hints": [
+                {
+                    "dockerPull": "umccr/alpine_pandas:latest-cwl",
+                    "class": "DockerRequirement"
+                },
+                {
+                    "class": "ResourceRequirement",
+                    "https://platform.illumina/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "small"
+                    }
+                }
+            ],
+            "requirements": [
+                {
+                    "listing": [
+                        {
+                            "entryname": "thresholds-bed-to-coverage-QC.py",
+                            "entry": "#!/usr/bin/env python3\n\nimport pandas as pd\nimport re\nimport argparse\nimport gzip\nfrom os import path\n\ndef get_args():\n    \"\"\" Get arguments for the command \"\"\"\n    parser = argparse.ArgumentParser(description='From mosdepth output \"shreshold.bed\" to generate \"Failed_Exon_coverage_QC.txt\" for PierianDx CGW')\n\n    parser.add_argument('-i', '--input-bed', required=True,\n                        help='Mosdepth output file \"threshold.bed.gz\"')\n    parser.add_argument('-s', '--sample-id', required=False,\n                        help='Sample_ID')\n    return parser.parse_args()\n\ndef main():\n    \"\"\" Generate Failed_Exon_coverage_QC.txt \"\"\"\n    args = get_args()\n    if not args.sample_id:\n        sample_id = path.basename(args.input_bed).split('.')[0]\n    else:\n        sample_id = args.sample_id\n    coverage_csv = sample_id + '_Failed_Exon_coverage_QC.txt'\n    with gzip.open(args.input_bed) as b:\n        data = pd.read_csv(b, sep='\\t', header=0)\n    # define header of the file\n    header = 'Level 2: 100x coverage for > 50% of positions was not achieved for the targeted exon regions listed below:\\n'\n    header += 'index\\tgene\\ttranscript_acc\\texon_id\\tGE100\\tGE250\\n'\n    with open(coverage_csv, 'w') as o:\n        o.write(header)\n        for i in range(len(data)):\n            exon_length = data.loc[i, 'end'] - data.loc[i, 'start']\n            PCT100 = data.loc[i, '100X'] / exon_length * 100\n            index = data.loc[i, 'region']\n            name = index.split('_')\n            if (len(name) < 3): # regions other than exons\n                continue\n            gene, exon_id, transcript_acc = index.split('_')\n            if PCT100 < 50 and re.match('^NM', transcript_acc):\n                PCT250 = data.loc[i, '250X'] / exon_length * 100\n                try:\n                    exon_id = int(re.sub('Exon', '', exon_id))\n                except:\n                    exon_id = int(re.sub('Intron', '', exon_id))\n                o.write('%s\\t%s\\t%s\\t%d\\t%.1f\\t%.1f\\n' % (index, gene, transcript_acc, exon_id, PCT100, PCT250))\nmain()\n"
+                        }
+                    ],
+                    "class": "InitialWorkDirRequirement"
+                },
+                {
+                    "class": "InlineJavascriptRequirement"
+                }
+            ],
+            "baseCommand": [
+                "python3",
+                "thresholds-bed-to-coverage-QC.py"
+            ],
+            "inputs": [
+                {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "label": "Sample_ID",
+                    "inputBinding": {
+                        "prefix": "-s",
+                        "position": 1
+                    },
+                    "id": "#mosdepth-thresholds-bed-to-coverage-QC-step.cwl/sample_id"
+                },
+                {
+                    "type": "File",
+                    "label": "thresholds.bed.gz",
+                    "doc": "mosdepth output thresholds.bed.gz",
+                    "inputBinding": {
+                        "prefix": "-i",
+                        "position": 0
+                    },
+                    "id": "#mosdepth-thresholds-bed-to-coverage-QC-step.cwl/thresholds_bed"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "File",
+                    "outputBinding": {
+                        "glob": "$(inputs.thresholds_bed.nameroot.split('.')[0])_Failed_Exon_coverage_QC.txt"
+                    },
+                    "id": "#mosdepth-thresholds-bed-to-coverage-QC-step.cwl/coverage_QC"
+                }
+            ],
+            "id": "#mosdepth-thresholds-bed-to-coverage-QC-step.cwl"
+        },
+        {
+            "class": "CommandLineTool",
+            "id": "#mosdepth-thresholds-bed-to-target-region-coverage.cwl",
+            "label": "target_region_coverage_metrics.py",
+            "doc": "from mosdepth output 'thresholds.bed.gz' to make consensus reads coverage metrics\non target regions.\n",
+            "hints": [
+                {
+                    "dockerPull": "umccr/alpine_pandas:latest-cwl",
+                    "class": "DockerRequirement"
+                },
+                {
+                    "class": "ResourceRequirement",
+                    "https://platform.illumina/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "small"
+                    }
+                }
+            ],
+            "requirements": [
+                {
+                    "listing": [
+                        {
+                            "entryname": "target_region_coverage_metrics.py",
+                            "entry": "#!/usr/bin/env python3\n\nimport pandas as pd\nfrom os import path\nimport argparse\nimport gzip\n\ndef get_args():\n    \"\"\" Get arguments for the command \"\"\"\n    parser = argparse.ArgumentParser(description='From mosdepth threshold.bed to make consensus reads coverage on target region (TargetRegionCoverage.tsv)')\n\n    # add arguments\n    parser.add_argument('-i', '--input-bed', required=True,\n                        help='Mosdepth output file \"threshold.bed.gz\"')\n\n    parser.add_argument('-p', '--prefix', required=False,\n                        help='prefix of output TargetRegionCoverage.tsv')\n    return parser.parse_args()\n\ndef main():\n    \"\"\" Calculate consensus reads coverage metrics \"\"\"\n    args = get_args()\n    # thresholds_bed = args.input_bed\n    # sample_id = path.basename(thresholds_bed).split('.')[0]\n    if args.prefix:\n        output_tsv = args.prefix + '.TargetRegionCoverage.tsv'\n    else:\n        output_tsv = path.basename(args.input_bed).split('.')[0] + '.TargetRegionCoverage.tsv'\n\n    # open threshold.bed file and load to dataframe\n    with gzip.open(args.input_bed, 'rt') as i:\n        data = pd.read_csv(i, sep='\\t', header=0)\n    # calculate total legnth of targeted region\n    length_sum = pd.DataFrame.sum(data['end'] - data['start'])\n    # write results to file\n    with open(output_tsv, 'w') as o:\n        o.write('ConsensusReadDepth\\tBasePair\\tPercentage\\n')\n        o.write('TargetRegion\\t' + str(length_sum) + '\\t100%\\n')\n        for col in data.columns[4:]:\n            threshold_pass_nt = pd.DataFrame.sum(data[col])\n            percentage = format(threshold_pass_nt * 100 / length_sum, '.2f')\n            o.write(col + '\\t' + str(threshold_pass_nt) + '\\t' +  str(percentage) + '%' + '\\n')\nmain()\n"
+                        }
+                    ],
+                    "class": "InitialWorkDirRequirement"
+                },
+                {
+                    "class": "InlineJavascriptRequirement"
+                }
+            ],
+            "baseCommand": [
+                "python3",
+                "target_region_coverage_metrics.py"
+            ],
+            "inputs": [
+                {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "inputBinding": {
+                        "prefix": "-p",
+                        "position": 1
+                    },
+                    "id": "#mosdepth-thresholds-bed-to-target-region-coverage.cwl/sample_id"
+                },
+                {
+                    "type": "File",
+                    "label": "thresholds.bed.gz",
+                    "doc": "mosdepth output thresholds.bed.gz",
+                    "inputBinding": {
+                        "prefix": "-i",
+                        "position": 0
+                    },
+                    "id": "#mosdepth-thresholds-bed-to-target-region-coverage.cwl/thresholds_bed"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "File",
+                    "outputBinding": {
+                        "glob": "$(inputs.thresholds_bed.nameroot.split('.')[0]).TargetRegionCoverage.tsv"
+                    },
+                    "id": "#mosdepth-thresholds-bed-to-target-region-coverage.cwl/target_region_coverage_metrics"
+                }
+            ]
+        },
+        {
+            "class": "CommandLineTool",
+            "hints": [
+                {
+                    "class": "DockerRequirement",
+                    "dockerPull": "ubuntu:latest"
+                },
+                {
+                    "class": "ResourceRequirement",
+                    "https://platform.illumina/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "small"
+                    }
+                }
+            ],
+            "id": "#gzip.cwl",
+            "label": "gzip",
+            "requirements": [
+                {
+                    "class": "InlineJavascriptRequirement"
+                },
+                {
+                    "class": "InitialWorkDirRequirement",
+                    "listing": [
+                        {
+                            "entryname": "gzip_list_of_files.sh",
+                            "entry": "#!/usr/bin/env bash\nfor f in \\${@}; do\n  gzip -c \\${f} >\\${f}.gz\ndone"
+                        },
+                        "$(inputs.files_to_compress)"
+                    ]
+                }
+            ],
+            "baseCommand": [
+                "bash",
+                "gzip_list_of_files.sh"
+            ],
+            "inputs": [
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "inputBinding": {
+                        "position": 0
+                    },
+                    "id": "#gzip.cwl/files_to_compress"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "outputBinding": {
+                        "glob": "*.gz"
+                    },
+                    "id": "#gzip.cwl/gzipped_files"
+                }
+            ]
+        },
+        {
+            "class": "CommandLineTool",
+            "id": "#make_sample_subdir.cwl",
+            "label": "make-sample-subdir-results",
+            "hints": [
+                {
+                    "class": "ResourceRequirement",
+                    "https://platform.illumina/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "small"
+                    }
+                }
+            ],
+            "requirements": [
+                {
+                    "class": "DockerRequirement",
+                    "dockerPull": "ubuntu:latest"
+                },
+                {
+                    "class": "InlineJavascriptRequirement"
+                },
+                {
+                    "class": "InitialWorkDirRequirement",
+                    "listing": [
+                        {
+                            "entryname": "/data/copy_files.sh",
+                            "entry": "#!/usr/bin/env bash\nsample=$(inputs.sample_id)\nmkdir -p \\${sample}\ncp \\${@} \\${sample}"
+                        }
+                    ]
+                }
+            ],
+            "baseCommand": [
+                "bash",
+                "/data/copy_files.sh"
+            ],
+            "inputs": [
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "doc": "files to put in sample_id subdir",
+                    "inputBinding": {
+                        "position": 1
+                    },
+                    "id": "#make_sample_subdir.cwl/file_list"
+                },
+                {
+                    "type": "string",
+                    "label": "sample_id",
+                    "id": "#make_sample_subdir.cwl/sample_id"
+                }
+            ],
+            "outputs": [
+                {
+                    "label": "sample-subdir",
+                    "type": "Directory",
+                    "outputBinding": {
+                        "glob": "$(inputs.sample_id)"
+                    },
+                    "id": "#make_sample_subdir.cwl/sample_subdir"
+                }
+            ]
+        },
+        {
+            "class": "CommandLineTool",
+            "hints": [
+                {
+                    "class": "ResourceRequirement",
+                    "http://platform.illumina.com/rdf/ica/resources": {
+                        "tier": "standard",
+                        "type": "standard",
+                        "size": "small"
+                    }
+                }
+            ],
+            "id": "#tsv2json.cwl",
+            "label": "tsv2json.py",
+            "requirements": [
+                {
+                    "class": "DockerRequirement",
+                    "dockerPull": "umccr/alpine_pandas:latest-cwl"
+                },
+                {
+                    "class": "ShellCommandRequirement"
+                },
+                {
+                    "class": "InlineJavascriptRequirement"
+                },
+                {
+                    "class": "InitialWorkDirRequirement",
+                    "listing": [
+                        {
+                            "entryname": "tsv2json.py",
+                            "entry": "#!/usr/bin/env python3\n\nimport pandas as pd\nimport numpy as np\nimport json\nfrom os import path\nimport argparse\nimport gzip\n\n# Get arguments\ndef get_args():\n    \"\"\" Get arguments for the command \"\"\"\n    parser = argparse.ArgumentParser(description='Covnert tsv to json')\n\n    # Arguments\n    parser.add_argument('-i', '--input-file', type=argparse.FileType('r'),\n                        required=True, nargs='+',\n                        help=\"Input tsv/csv files, separate by space.\")\n    parser.add_argument('-r', '--skip-rows', required=False,\n                        default=0, type=int, nargs='+',\n                        help=\"Skip first n rows for each of the tsv file, separate by space\")\n    return parser.parse_args()\n\ndef tsv2json(tsv_file, skip_rows):\n    \"\"\" make tsv data to dictionary \"\"\"\n    if tsv_file.name.endswith(\".csv\"):\n        df = pd.read_csv(tsv_file, sep=',', header=0, comment='#', skiprows=skip_rows)\n    else:\n        df = pd.read_csv(tsv_file, sep='\\t', header=0, comment='#', skiprows=skip_rows)\n    \n    return df\n\ndef convert(o):\n    \"\"\" convert np.int64 to string \"\"\"\n    if isinstance(o, np.generic): return o.item()\n    raise TypeError\n\ndef main():\n    args = get_args()\n    for i in range(len(args.input_file)):\n        # get tsv file and number of skipped rows\n        tsv_file = args.input_file[i]\n        skip_rows = args.skip_rows[i]\n      \n        \n        json_file = path.basename(tsv_file.name).rsplit('.', 1)[0] + '.json.gz'\n        tsv_df = tsv2json(tsv_file, args.skip_rows[i])\n\n        tsv_df.to_json(json_file, orient=\"records\", force_ascii=True, compression=\"gzip\")\n\nmain()\n"
+                        }
+                    ]
+                }
+            ],
+            "baseCommand": [
+                "python3",
+                "tsv2json.py"
+            ],
+            "inputs": [
+                {
+                    "type": [
+                        "null",
+                        {
+                            "type": "array",
+                            "items": "int"
+                        }
+                    ],
+                    "inputBinding": {
+                        "prefix": "--skip-rows",
+                        "position": 1
+                    },
+                    "id": "#tsv2json.cwl/skiprows"
+                },
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "inputBinding": {
+                        "prefix": "--input",
+                        "position": 0,
+                        "itemSeparator": " ",
+                        "shellQuote": false
+                    },
+                    "id": "#tsv2json.cwl/tsv_file"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": {
+                        "type": "array",
+                        "items": "File"
+                    },
+                    "outputBinding": {
+                        "glob": "*.json.gz"
+                    },
+                    "id": "#tsv2json.cwl/json_gz_file"
+                }
+            ]
+        },
+        {
+            "class": "Workflow",
+            "id": "#main",
+            "label": "umccr-cttso--post-processing",
+            "doc": "tso500 ctdDNA post-processing for single sample of UMCCR output",
+            "requirements": [
+                {
+                    "class": "StepInputExpressionRequirement"
+                },
+                {
+                    "class": "MultipleInputFeatureRequirement"
+                },
+                {
+                    "class": "SchemaDefRequirement",
+                    "types": [
+                        {
+                            "$import": "#tso500-outputs-by-sample_1.0.0.yaml"
+                        }
+                    ]
+                }
+            ],
+            "inputs": [
+                {
+                    "type": "#tso500-outputs-by-sample_1.0.0.yaml/tso500-outputs-by-sample",
+                    "doc": "Directories and Files of UMCCR tso500 outpout \n",
+                    "id": "#tso500_outputs_by_sample"
+                },
+                {
+                    "type": "File",
+                    "doc": "TST500C_manifest.bed file from TSO500 resources\n",
+                    "id": "#tso_manifest_bed"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "Directory",
+                    "outputSource": "#/per_sample_subdir_layout/sample_subdir",
+                    "id": "#results_sample_subdir"
+                }
+            ],
+            "steps": [
+                {
+                    "run": "#bgzip-tabix.cwl",
+                    "label": "bgzip-tabix",
+                    "in": [
+                        {
+                            "source": "#/get_inputs_files_per_sample/vcfs",
+                            "id": "#bgzip_tabix/vcf"
+                        }
+                    ],
+                    "out": [
+                        "#/bgzip_tabix/vcf_gz"
+                    ],
+                    "id": "#bgzip_tabix"
+                },
+                {
+                    "run": "#dragen-metrics-csv2json.cwl",
+                    "label": "dragen_metrics_csv2json",
+                    "in": [
+                        {
+                            "source": "#/get_inputs_files_per_sample/mapping_metrics_csv",
+                            "id": "#dragen_metrics_csv2json/mapping_metrics_csv"
+                        },
+                        {
+                            "source": "#/get_inputs_files_per_sample/sv_metrics_csv",
+                            "id": "#dragen_metrics_csv2json/sv_metrics_csv"
+                        },
+                        {
+                            "source": "#/get_inputs_files_per_sample/time_metrics_csv",
+                            "id": "#dragen_metrics_csv2json/time_metrics_csv"
+                        },
+                        {
+                            "source": "#/get_inputs_files_per_sample/trimmer_metrics_csv",
+                            "id": "#dragen_metrics_csv2json/trimmer_metrics_csv"
+                        },
+                        {
+                            "source": "#/get_inputs_files_per_sample/umi_metrics_csv",
+                            "id": "#dragen_metrics_csv2json/umi_metrics_csv"
+                        },
+                        {
+                            "source": "#/get_inputs_files_per_sample/wgs_coverage_metrics_csv",
+                            "id": "#dragen_metrics_csv2json/wgs_coverage_metrics_csv"
+                        }
+                    ],
+                    "out": [
+                        "#/dragen_metrics_csv2json/metrics_json_gz"
+                    ],
+                    "id": "#dragen_metrics_csv2json"
+                },
+                {
+                    "run": "#find-files-from-tso500-ctdna-output__v1.0.0.cwl",
+                    "in": [
+                        {
+                            "source": "#tso500_outputs_by_sample",
+                            "id": "#get_inputs_files_per_sample/tso500_outputs_by_sample"
+                        }
+                    ],
+                    "out": [
+                        "#/get_inputs_files_per_sample/raw_bam",
+                        "#/get_inputs_files_per_sample/raw_bai",
+                        "#/get_inputs_files_per_sample/raw_bam_md5sum",
+                        "#/get_inputs_files_per_sample/evidence_bam",
+                        "#/get_inputs_files_per_sample/evidence_bai",
+                        "#/get_inputs_files_per_sample/mapping_metrics_csv",
+                        "#/get_inputs_files_per_sample/trimmer_metrics_csv",
+                        "#/get_inputs_files_per_sample/umi_metrics_csv",
+                        "#/get_inputs_files_per_sample/wgs_coverage_metrics_csv",
+                        "#/get_inputs_files_per_sample/sv_metrics_csv",
+                        "#/get_inputs_files_per_sample/time_metrics_csv",
+                        "#/get_inputs_files_per_sample/fragment_length_hist_csv",
+                        "#/get_inputs_files_per_sample/msi_json",
+                        "#/get_inputs_files_per_sample/tmb_json",
+                        "#/get_inputs_files_per_sample/sampleanalysisresults_json",
+                        "#/get_inputs_files_per_sample/cleaned_stitched_bam",
+                        "#/get_inputs_files_per_sample/cleaned_stitched_bai",
+                        "#/get_inputs_files_per_sample/vcfs",
+                        "#/get_inputs_files_per_sample/fusion_csv",
+                        "#/get_inputs_files_per_sample/mergedsmallvariantsannotated_json_gz",
+                        "#/get_inputs_files_per_sample/tmb_trace_tsv",
+                        "#/get_inputs_files_per_sample/sample_id"
+                    ],
+                    "id": "#get_inputs_files_per_sample"
+                },
+                {
+                    "run": "#gzip.cwl",
+                    "label": "gzip",
+                    "in": [
+                        {
+                            "source": [
+                                "#/get_inputs_files_per_sample/msi_json",
+                                "#/get_inputs_files_per_sample/tmb_json",
+                                "#/get_inputs_files_per_sample/sampleanalysisresults_json"
+                            ],
+                            "id": "#gzip/files_to_compress"
+                        }
+                    ],
+                    "out": [
+                        "#/gzip/gzipped_files"
+                    ],
+                    "id": "#gzip"
+                },
+                {
+                    "run": "#mosdepth-thresholds-bed-to-coverage-QC-step.cwl",
+                    "label": "make_coverage_QC.py",
+                    "in": [
+                        {
+                            "source": "#/mosdepth/thresholds_bed_gz",
+                            "id": "#make_coverage_QC/thresholds_bed"
+                        }
+                    ],
+                    "out": [
+                        "#/make_coverage_QC/coverage_QC"
+                    ],
+                    "id": "#make_coverage_QC"
+                },
+                {
+                    "run": "#mosdepth-thresholds-bed-to-target-region-coverage.cwl",
+                    "label": "target_region_coverage_metrics.py",
+                    "in": [
+                        {
+                            "source": "#/mosdepth/thresholds_bed_gz",
+                            "id": "#make_coverage_metrics/thresholds_bed"
+                        }
+                    ],
+                    "out": [
+                        "#/make_coverage_metrics/target_region_coverage_metrics"
+                    ],
+                    "id": "#make_coverage_metrics"
+                },
+                {
+                    "run": "#mosdepth-make-thresholds-bed.cwl",
+                    "label": "mosdepth",
+                    "in": [
+                        {
+                            "source": "#/get_inputs_files_per_sample/raw_bai",
+                            "id": "#mosdepth/bai"
+                        },
+                        {
+                            "source": "#/get_inputs_files_per_sample/raw_bam",
+                            "id": "#mosdepth/bam_or_cram"
+                        },
+                        {
+                            "default": true,
+                            "id": "#mosdepth/no_per_base"
+                        },
+                        {
+                            "source": "#/get_inputs_files_per_sample/sample_id",
+                            "id": "#mosdepth/output_prefix"
+                        },
+                        {
+                            "source": "#tso_manifest_bed",
+                            "id": "#mosdepth/target_region_bed"
+                        },
+                        {
+                            "default": [
+                                100,
+                                250,
+                                500,
+                                750,
+                                1000,
+                                1500,
+                                2000,
+                                2500,
+                                3000,
+                                4000,
+                                5000,
+                                8000,
+                                10000
+                            ],
+                            "id": "#mosdepth/threshold_bases"
+                        }
+                    ],
+                    "out": [
+                        "#/mosdepth/thresholds_bed_gz"
+                    ],
+                    "id": "#mosdepth"
+                },
+                {
+                    "run": "#make_sample_subdir.cwl",
+                    "label": "sample_subdir_layout",
+                    "in": [
+                        {
+                            "source": [
+                                "#/get_inputs_files_per_sample/evidence_bam",
+                                "#/get_inputs_files_per_sample/evidence_bai",
+                                "#/get_inputs_files_per_sample/raw_bam",
+                                "#/get_inputs_files_per_sample/raw_bai",
+                                "#/get_inputs_files_per_sample/raw_bam_md5sum",
+                                "#/get_inputs_files_per_sample/cleaned_stitched_bam",
+                                "#/get_inputs_files_per_sample/cleaned_stitched_bai",
+                                "#/get_inputs_files_per_sample/mergedsmallvariantsannotated_json_gz",
+                                "#/dragen_metrics_csv2json/metrics_json_gz",
+                                "#/bgzip_tabix/vcf_gz",
+                                "#/make_coverage_QC/coverage_QC",
+                                "#/tsv_to_json_gz/json_gz_file",
+                                "#/gzip/gzipped_files"
+                            ],
+                            "linkMerge": "merge_flattened",
+                            "id": "#per_sample_subdir_layout/file_list"
+                        },
+                        {
+                            "source": "#/get_inputs_files_per_sample/sample_id",
+                            "id": "#per_sample_subdir_layout/sample_id"
+                        }
+                    ],
+                    "out": [
+                        "#/per_sample_subdir_layout/sample_subdir"
+                    ],
+                    "id": "#per_sample_subdir_layout"
+                },
+                {
+                    "run": "#tsv2json.cwl",
+                    "label": "tsv2json",
+                    "in": [
+                        {
+                            "default": [
+                                0,
+                                0,
+                                0,
+                                1,
+                                0
+                            ],
+                            "id": "#tsv_to_json_gz/skiprows"
+                        },
+                        {
+                            "source": [
+                                "#/get_inputs_files_per_sample/tmb_trace_tsv",
+                                "#/get_inputs_files_per_sample/fragment_length_hist_csv",
+                                "#/get_inputs_files_per_sample/fusion_csv",
+                                "#/make_coverage_QC/coverage_QC",
+                                "#/make_coverage_metrics/target_region_coverage_metrics"
+                            ],
+                            "id": "#tsv_to_json_gz/tsv_file"
+                        }
+                    ],
+                    "out": [
+                        "#/tsv_to_json_gz/json_gz_file"
+                    ],
+                    "id": "#tsv_to_json_gz"
+                }
+            ]
+        }
+    ],
+    "cwlVersion": "v1.2"
+}

@@ -1,0 +1,31 @@
+tmb_json:  # type "File"
+    - class: File
+      path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/analysis_outputs/Tmb/PTC_HrznRefStd5pc_L2100337/PTC_HrznRefStd5pc_L2100337.tmb.json
+sequencer_file_type: 'TSO500 ctDNA VCF Workflow'  # type "string"
+sequencer: "Illumina"  # default value of type "string".
+sample_sheet:  # type "File"
+    class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/demux_outputs/SamplesheetValidation/SampleSheet_Intermediate.csv
+sample_id: "PTC_HrznRefStd5pc_L2100337"  # type "string"
+s3_credential_file:  # type "File"
+    class: File
+    path: /data/staging/ywang16_test/Projects/20210607_pieriandx_run_uploader/application.properties
+run_id: "PTC_HrznRefStd5pc_L2100337"  # type "string"
+run_folder: TSO500_ctDNA_output  # default value of type "Directory".
+pieriandx_run_uploader:  # type "File"
+    class: File
+    path: /data/staging/ywang16_test/Projects/20210607_pieriandx_run_uploader/RunUploader-1.13.jar
+msi_json:  # type "File"
+    - class: File
+      path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/analysis_outputs/Msi/PTC_HrznRefStd5pc_L2100337/PTC_HrznRefStd5pc_L2100337.msi.json
+results_file_list:  # type "File"
+    - class: File
+      path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/results/PTC_HrznRefStd5pc_L2100337/PTC_HrznRefStd5pc_L2100337_MergedSmallVariants.vcf
+    - class: File
+      path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/results/PTC_HrznRefStd5pc_L2100337/PTC_HrznRefStd5pc_L2100337_Fusions.csv
+    - class: File
+      path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/results/PTC_HrznRefStd5pc_L2100337/PTC_HrznRefStd5pc_L2100337_CopyNumberVariants.vcf
+dsdm_json:  # type "File"
+    class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/results/dsdm.json
+command_line: true  # default value of type "boolean".

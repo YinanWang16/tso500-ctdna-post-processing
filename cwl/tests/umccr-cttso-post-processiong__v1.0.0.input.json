@@ -1,0 +1,42 @@
+{
+  "name": "yn-umccr-cttso-post-processing.v1.0.0",
+  "input": {
+    "tso_manifest_bed": {
+      "class": "File",
+      "path": "gds://yncttsopostprocessing/TST500C_manifest.bed"
+    },
+    "tso500_outputs_by_sample": {
+      "tmb_dir": {
+        "class": "Directory",
+        "path": "gds://yncttsopostprocessing/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/analysis_outputs/Tmb/PTC_HrznRefStd5pc_L2100337"
+      },
+      "variant_caller_dir": {
+        "class": "Directory",
+        "path": "gds://yncttsopostprocessing/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/analysis_outputs/VariantCaller/PTC_HrznRefStd5pc_L2100337"
+      },
+      "sample_name": "PTC_HrznRefStd5pc_L2100337",
+      "sample_id": "PTC_HrznRefStd5pc_L2100337",
+      "sample_analysis_results_json": {
+        "class": "File",
+        "path": "gds://yncttsopostprocessing/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/reporting_outputs/SampleAnalysisResults/PTC_HrznRefStd5pc_L2100337_SampleAnalysisResults.json"
+      },
+      "results_dir": {
+        "class": "Directory",
+        "path": "gds://yncttsopostprocessing/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/results/PTC_HrznRefStd5pc_L2100337"
+      },
+      "msi_dir": {
+        "class": "Directory",
+        "path": "gds://yncttsopostprocessing/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/analysis_outputs/Msi/PTC_HrznRefStd5pc_L2100337"
+      },
+      "align_collapse_fusion_caller_dir": {
+        "class": "Directory",
+        "path": "gds://yncttsopostprocessing/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/analysis_outputs/AlignCollapseFusionCaller/PTC_HrznRefStd5pc_L2100337"
+      }
+    }
+  },
+  "engineParameters": {
+    "outputDirectory": "gds://yncttsopostprocessing/test-umccr-cttso-post-processing/v1.0.0",
+    "workDirectory": "gds://yncttsopostprocessing/test-umccr-cttso-post-processing/v1.0.0"
+  }
+
+}

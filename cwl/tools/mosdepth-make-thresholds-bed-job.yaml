@@ -1,7 +1,0 @@
-target_region_bed:
-  class: File
-  path: /data/TSO500_RUO_LocalApp_v2.1.0/resources/TST500C_manifest.bed
-output_prefix: Seraseq_Comp_Mut_Mix_AF1_DNA_rep1
-bam_or_cram:
-  class: File
-  path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/AlignCollapseFusionCaller/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.bam

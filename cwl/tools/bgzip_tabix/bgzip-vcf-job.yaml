@@ -1,0 +1,3 @@
+vcf:
+  class: File
+  path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/tso500-ctdna-small-dataset-v1-1/Results/FusionMix_DNA_1pct_rep1/FusionMix_DNA_1pct_rep1_CopyNumberVariants.vcf

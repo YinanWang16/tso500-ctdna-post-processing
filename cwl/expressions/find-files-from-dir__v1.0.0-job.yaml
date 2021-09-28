@@ -1,0 +1,8 @@
+input_dir:  # type "Directory"
+    class: Directory
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/tso500-ctdna-small-dataset-v1-1/Results/FusionMix_DNA_1pct_rep1      
+file_basename_list:  # array of type "string"
+  -  FusionMix_DNA_1pct_rep1.msi.json
+  -  dsdm.json
+  -  FusionMix_DNA_1pct_rep1_Fusions.csv
+  -  FusionMix_DNA_1pct_rep1_MergedSmallVariantsAnnotated.json.gz

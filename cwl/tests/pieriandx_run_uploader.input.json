@@ -1,0 +1,29 @@
+{
+  "name": "yn_peiriandx_run_uploader_test",
+  "input": {
+    "sequencer_file_type": "TSO500 ctDNA VCF Workflow",
+    "sequencer": "Illumina",
+    "sample_sheet": {
+      "class": "File",
+      "path": "gds://yncttsopostprocessing/test-pieriandx-run-uploader/tso500-ctdna-small-dataset-v1-1/20200918_161844_SampleSheet.csv"
+    },
+    "s3_credential": {
+      "class": "File",
+      "path": "gds://pieriandx-run-uploader/PierianDx-Run_Uploader-v1.13_US/CGWRunUploader/application.properties"
+    },
+    "run_id": "tso500-ctdna-small-dataset-v1-1",
+    "run_folder": {
+      "class": "Directory",
+      "path": "gds://yncttsopostprocessing/test-pieriandx-run-uploader/tso500-ctdna-small-dataset-v1-1"
+    },
+    "pieriandx_run_uploader": {
+      "class": "File",
+      "path": "gds://pieriandx-run-uploader/PierianDx-Run_Uploader-v1.13_US/CGWRunUploader/RunUploader-1.13.jar"
+    },
+    "command_line": true
+  },
+  "engineParameters": {
+    "outputDirectory": "gds://yncttsopostprocessing/test-pieriandx-run-uploader/PieriandxRU",
+    "workDirectory": "gds://yncttsopostprocessing/test-pieriandx-run-uploader/PieriandxRU"
+  }
+}

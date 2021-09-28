@@ -1,0 +1,8 @@
+file_list:
+  - class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1_TMB_Trace.json.gz
+  - class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/Tmb/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.tmb.json
+  - class: File
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/200212_A00807_0128_AH5CWWDSXY_analysis/Logs_Intermediates/Msi/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1/Seraseq_Comp_Mut_Mix_AF1_DNA_rep1.msi.json
+sample_id: Seraseq_Comp_Mut_Mix_AF1_DNA_rep1
