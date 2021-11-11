@@ -75,6 +75,21 @@ steps:
     in:
       thresholds_bed: gunzip/unzipped_file
     out: [coverage_QC]
+<<<<<<< HEAD:cwl/workflows/mosdepth_to_coverage_QC.cwl
+
+  cat:
+    run: ../tools/cat.cwl
+    in:
+      files:
+        - echo/header_file
+        - coverage_QC/coverage_QC
+      outfile_name:
+        valueFrom: $(inputs.files[1].nameroot)_Failed_Exon_coverage_QC.txt
+    out: [output_file]
+    label: cat
+
+=======
+>>>>>>> main:cwl/workflows/testing-wf/mosdepth_to_coverage_QC.cwlv1.2.cwl
   coverage_metrics:
     run: ../tools/mosdepth-thresholds-bed-to-target-region-coverage.cwl
     label: target_region_coverage_metrics.py
