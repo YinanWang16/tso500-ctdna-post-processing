@@ -5,12 +5,12 @@ sequencer_file_type: 'TSO500 ctDNA VCF Workflow'  # type "string"
 sequencer: "Illumina"  # default value of type "string".
 sample_sheet:  # type "File"
     class: File
-    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/demux_outputs/SamplesheetValidation/SampleSheet_Intermediate.csv
+    path: /data/staging/ywang16_test/Projects/tso500-ctdna-post-processing/example_data/umccr_cttso_output/PTC_HrznRefStd5pc_L2100337/demux_outputs/SamplesheetValidation/SampleSheet_4pierian.csv
 sample_id: "PTC_HrznRefStd5pc_L2100337"  # type "string"
 s3_credential_file:  # type "File"
     class: File
     path: /data/staging/ywang16_test/Projects/20210607_pieriandx_run_uploader/application.properties
-run_id: "PTC_HrznRefStd5pc_L2100337"  # type "string"
+run_id: "SBJ00661_L2100337"  # type "string"
 run_folder: TSO500_ctDNA_output  # default value of type "Directory".
 pieriandx_run_uploader:  # type "File"
     class: File
