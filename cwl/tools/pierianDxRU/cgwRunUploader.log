@@ -1,0 +1,56 @@
+2021-10-13 03:09:17.236  INFO 16 --- [main] c.p.commandLine.ApplicationCommandLine   : Starting ApplicationCommandLine v1.13 on f97d1aa9d8ef with PID 16 (/FprTgu/RunUploader-1.13.jar started by ? in /FprTgu)
+2021-10-13 03:09:17.240  INFO 16 --- [main] c.p.commandLine.ApplicationCommandLine   : No active profile set, falling back to default profiles: default
+2021-10-13 03:09:17.298  INFO 16 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@6f2b958e: startup date [Wed Oct 13 03:09:17 UTC 2021]; root of context hierarchy
+2021-10-13 03:09:18.549  INFO 16 --- [main] com.pdx.service.UploadService            : Initialized AWS transferManager for upload to melbourne in bucket pdx-xfer
+2021-10-13 03:09:18.871  INFO 16 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2021-10-13 03:09:18.895  INFO 16 --- [main] com.pdx.service.SequncerService          : Run Type is Illumina
+2021-10-13 03:09:18.896  INFO 16 --- [main] com.pdx.service.SequncerService          : Sequence File Type is TSO500 ctDNA VCF Workflow
+2021-10-13 03:09:18.896  INFO 16 --- [main] com.pdx.service.SequncerService          : Run folder path TSO500_ctDNA_output
+2021-10-13 03:09:18.897  INFO 16 --- [main] com.pdx.service.SequncerService          : Reading sample sheet from path /FprTgu/SampleSheet.csv
+2021-10-13 03:09:18.902  INFO 16 --- [main] com.pdx.service.SequncerService          : Sample line info is [PTC_HrznRefStd5pc_L2100337, TTAATCAG, CTTCGCCT, DNA, 1]
+2021-10-13 03:09:18.907  INFO 16 --- [main] com.pdx.service.SequncerService          : The following samples that have PASSED all steps of analysis will be uploaded. Those that have FAILED will not be uploaded.
+
+
+2021-10-13 03:09:18.907  INFO 16 --- [main] com.pdx.service.SequncerService          : PTC_HrznRefStd5pc_L2100337: PASSED
+
+2021-10-13 03:09:20.391  INFO 16 --- [main] com.pdx.service.UploadService            : Uploading sample sheet.
+2021-10-13 03:09:20.401  INFO 16 --- [main] com.pdx.service.UploadService            : Transfer upload:  Uploading to pdx-xfer/melbourne/SBJ00661_L2100337/SampleSheet.csv
+2021-10-13 03:09:20.401  INFO 16 --- [main] com.pdx.service.UploadService            :   - State: Waiting
+2021-10-13 03:09:20.402  INFO 16 --- [main] com.pdx.service.UploadService            :   - Progress: 0
+2021-10-13 03:09:20.402  INFO 16 --- [main] com.pdx.service.UploadService            :   - Percent transferred: 0.0
+2021-10-13 03:09:25.402  INFO 16 --- [main] com.pdx.service.UploadService            : Uploading all sample files that completed analysis steps.
+2021-10-13 03:09:25.417  INFO 16 --- [main] com.pdx.service.UploadService            : Transfer upload:  Uploading etc
+2021-10-13 03:09:25.420  INFO 16 --- [main] com.pdx.service.UploadService            :   - State: InProgress
+2021-10-13 03:09:25.420  INFO 16 --- [main] com.pdx.service.UploadService            :   - Progress: 0
+2021-10-13 03:09:25.420  INFO 16 --- [main] com.pdx.service.UploadService            :   - Percent transferred: 0.0
+2021-10-13 03:09:30.424  INFO 16 --- [main] com.pdx.service.UploadService            : Transfer upload:  Uploading etc
+2021-10-13 03:09:30.425  INFO 16 --- [main] com.pdx.service.UploadService            :   - State: InProgress
+2021-10-13 03:09:30.426  INFO 16 --- [main] com.pdx.service.UploadService            :   - Progress: 0
+2021-10-13 03:09:30.426  INFO 16 --- [main] com.pdx.service.UploadService            :   - Percent transferred: 0.0
+2021-10-13 03:09:35.427  INFO 16 --- [main] com.pdx.service.UploadService            : Transfer upload:  Uploading etc
+2021-10-13 03:09:35.427  INFO 16 --- [main] com.pdx.service.UploadService            :   - State: InProgress
+2021-10-13 03:09:35.428  INFO 16 --- [main] com.pdx.service.UploadService            :   - Progress: 23157293
+2021-10-13 03:09:35.428  INFO 16 --- [main] com.pdx.service.UploadService            :   - Percent transferred: 100.0
+2021-10-13 03:09:40.429  INFO 16 --- [main] com.pdx.service.UploadService            : Transfer upload:  Uploading etc
+2021-10-13 03:09:40.430  INFO 16 --- [main] com.pdx.service.UploadService            :   - State: InProgress
+2021-10-13 03:09:40.430  INFO 16 --- [main] com.pdx.service.UploadService            :   - Progress: 0
+2021-10-13 03:09:40.430  INFO 16 --- [main] com.pdx.service.UploadService            :   - Percent transferred: 0.0
+2021-10-13 03:09:45.431  INFO 16 --- [main] com.pdx.service.UploadService            : Putting VcfWorkflow.txt file now in tempFolder: tempFolder
+2021-10-13 03:09:45.433  INFO 16 --- [main] com.pdx.service.UploadService            : Transfer upload:  Uploading etc
+2021-10-13 03:09:45.434  INFO 16 --- [main] com.pdx.service.UploadService            :   - State: InProgress
+2021-10-13 03:09:45.436  INFO 16 --- [main] com.pdx.service.UploadService            :   - Progress: 0
+2021-10-13 03:09:45.436  INFO 16 --- [main] com.pdx.service.UploadService            :   - Percent transferred: NaN
+2021-10-13 03:09:50.437  INFO 16 --- [main] com.pdx.service.UploadService            : VcfWorkflow.txt successfully uploaded.
+2021-10-13 03:09:50.438  INFO 16 --- [main] com.pdx.service.UploadService            : Putting done.txt file now in tempFolder: tempFolder
+2021-10-13 03:09:50.439  INFO 16 --- [main] com.pdx.service.UploadService            : Transfer upload:  Uploading etc
+2021-10-13 03:09:50.439  INFO 16 --- [main] com.pdx.service.UploadService            :   - State: InProgress
+2021-10-13 03:09:50.439  INFO 16 --- [main] com.pdx.service.UploadService            :   - Progress: 0
+2021-10-13 03:09:50.440  INFO 16 --- [main] com.pdx.service.UploadService            :   - Percent transferred: NaN
+2021-10-13 03:09:55.440  INFO 16 --- [main] com.pdx.service.UploadService            : Done.txt successfully uploaded.
+2021-10-13 03:09:55.443  INFO 16 --- [main] com.pdx.service.SequncerService          : temp folder deleted.
+2021-10-13 03:09:55.443  INFO 16 --- [main] com.pdx.service.SequncerService          : Upload completed.
+2021-10-13 03:09:55.444  INFO 16 --- [main] com.pdx.service.SequncerService          : Time taken (Seconds): 36.548
+2021-10-13 03:09:55.445  INFO 16 --- [main] com.pdx.service.SequncerService          : *********upload completed***************
+2021-10-13 03:09:55.445  INFO 16 --- [main] c.p.commandLine.ApplicationCommandLine   : Upload completed.
+2021-10-13 03:09:55.447  INFO 16 --- [Thread-2] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@6f2b958e: startup date [Wed Oct 13 03:09:17 UTC 2021]; root of context hierarchy
+2021-10-13 03:09:55.451  INFO 16 --- [Thread-2] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
