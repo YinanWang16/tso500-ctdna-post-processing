@@ -1,0 +1,2 @@
+presigned_url: https://stratus-gds-aps1.s3.ap-southeast-1.amazonaws.com/8d072386-e1da-49dd-d99d-08d983bfded6/json/cwl.tar.gz?X-Amz-Expires=604800&response-content-disposition=filename%3D%22cwl.tar.gz%22&response-content-type=application%2Fgzip&x-userId=c8bb8b46-655b-3bb0-9fb0-aa8b3232bec8&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARFCPI2IGTDHE4NOT/20211111/ap-southeast-1/s3/aws4_request&X-Amz-Date=20211111T025624Z&X-Amz-SignedHeaders=host&X-Amz-Signature=91d4e009e54b52397b06c3228674eb4fbe7fca81e3d4b5f327cdba7ffec47104
+file_name: cwl.tar.gz  # type "string"
